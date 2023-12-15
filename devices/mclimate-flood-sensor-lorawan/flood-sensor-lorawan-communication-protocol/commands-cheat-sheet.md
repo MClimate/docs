@@ -1,0 +1,9 @@
+# Commands cheat sheet
+
+{% hint style="info" %}
+NOTE: Commands 06 to 1D are available for firmware version 1.5 or later.
+{% endhint %}
+
+<table><thead><tr><th width="125.47863453172121">Command code, [hex]</th><th width="390.6985172981878">Command name</th><th>Sent from</th></tr></thead><tbody><tr><td>00</td><td>Keep-alive</td><td>End device</td></tr><tr><td>01</td><td>Read device parameters</td><td>Server/ End device</td></tr><tr><td>02</td><td>LED control</td><td>Server</td></tr><tr><td>03</td><td>Buzzer control</td><td>Server</td></tr><tr><td>04</td><td>Set Acoustic and LED Alarm duration</td><td>Server</td></tr><tr><td>05</td><td>Set keep-alive period</td><td>Server</td></tr><tr><td>06</td><td>Get Acoustic and LED Alarm duration</td><td>Server/ End device</td></tr><tr><td>07</td><td>Read device hardware and firmware version</td><td>Server/ End device</td></tr><tr><td>08</td><td>Set Alarm uplink periodicity</td><td>Server</td></tr><tr><td>09</td><td>Get Alarm uplink periodicity</td><td>Server/ End device</td></tr><tr><td>10</td><td>Set network join retry period</td><td>Server</td></tr><tr><td>11</td><td>Set periodic uplink messages type</td><td>Server</td></tr><tr><td>12</td><td>Get keep-alive period</td><td>Server/ End device</td></tr><tr><td>13</td><td>Set Flood event uplink messages type</td><td>Server</td></tr><tr><td>14</td><td>Get Flood event uplink messages type</td><td>Server/ End device</td></tr><tr><td>19</td><td>Get network join retry period</td><td>Server/ End device</td></tr><tr><td>1B</td><td>Get uplink messages type</td><td>Server/ End device</td></tr><tr><td>1C</td><td>Set device radio communication watch-dog parameters</td><td>Server</td></tr><tr><td>1D</td><td>Get device radio communication watch-dog parameters</td><td>Server/ End device</td></tr></tbody></table>
+
+_Table 1._

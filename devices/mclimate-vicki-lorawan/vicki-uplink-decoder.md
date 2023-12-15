@@ -1,0 +1,1749 @@
+# ⬆ Vicki Uplink Decoder
+
+
+
+Use the following code to decode Vicki LoRaWAN's payload into human-friendly format.&#x20;
+
+You'll be able to retrieve:
+
+* Target Temperature
+* Measured temperature and humidity
+* motorPosition and motorRange
+* openWindow detection
+* ChildLock
+* High and Low Motor Consumption warning bytes
+* Temp and humidity sensor status byte - is it functional or broken
+* Battery voltage
+
+## Recommended decoder (JavaScript ES6)
+
+```
+let deviceData = {};
+function Decoder (hexData) {
+    const toBool = value => value == '1';
+    let decbin = (number) => {
+        if (number < 0) {
+            number = 0xFFFFFFFF + number + 1
+        }
+        return parseInt(number, 10).toString(2)
+    }
+
+    const handleKeepAliveData = (byteArray) => {
+        let tmp = ("0" + byteArray[6].toString(16)).substr(-2);
+        let motorRange1 = tmp[1];
+        let motorRange2 = ("0" + byteArray[5].toString(16)).substr(-2);
+        let motorRange = parseInt(`0x${motorRange1}${motorRange2}`, 16);
+    
+        let motorPos2 = ("0" + byteArray[4].toString(16)).substr(-2);
+        let motorPos1 = tmp[0];
+        let motorPosition = parseInt(`0x${motorPos1}${motorPos2}`, 16);
+    
+        let batteryTmp = ("0" + byteArray[7].toString(16)).substr(-2)[0];
+        let batteryVoltageCalculated = 2 + parseInt(`0x${batteryTmp}`, 16) * 0.1;
+    
+        let byteBin = decbin(byteArray[7]);
+        let openWindow = byteBin.charAt(4);
+        let highMotorConsumption = byteBin.charAt(5);
+        let lowMotorConsumption = byteBin.charAt(6);
+        let brokenSensor = byteBin.charAt(7);
+        let childLockBin = decbin(byteArray[8]);
+        let childLock = childLockBin.charAt(0);
+    
+        let sensorTemp;
+        if(byteArray[0] == 1){
+            sensorTemp = (byteArray[2] * 165) / 256 - 40;
+        }
+        if(byteArray[0] == 129){
+            sensorTemp = (byteArray[2] - 28.33333) / 5.66666;
+        } 
+    
+        let keepaliveData = {
+            reason: byteArray[0],
+            targetTemperature: byteArray[1],
+            sensorTemperature: sensorTemp,
+            relativeHumidity: (byteArray[3] * 100) / 256,
+            motorRange: motorRange,
+            motorPosition: motorPosition,
+            batteryVoltage: batteryVoltageCalculated,
+            openWindow: toBool(openWindow),
+            childLock: toBool(childLock),
+            highMotorConsumption: toBool(highMotorConsumption),
+            lowMotorConsumption: toBool(lowMotorConsumption),
+            brokenSensor: toBool(brokenSensor)
+        }
+        
+        Object.assign(deviceData, { ...deviceData }, { ...keepaliveData })
+    }
+
+    if (hexData) {
+        let byteArray = hexData.match(/.{1,2}/g).map(byte => { return parseInt(byte, 16) })
+        if (byteArray[0] == 1 || byteArray[0] == 129) {
+            // its a keeapalive
+            handleKeepAliveData(byteArray);
+        } else {
+            let resultToPass = {};
+            let data = hexData.slice(0, -18);
+            let commands = data.match(/.{1,2}/g);
+            let command_len = 0;
+            // console.log(data)
+            
+            commands.map((command, i) => {
+                switch (command) {
+                    case '04':
+                        {
+                            command_len = 2;
+                            let data = { deviceVersions: { hardware: Number(commands[i + 1]), software: Number(commands[i + 2]) } };
+                            Object.assign(resultToPass, { ...resultToPass }, { ...data });
+                        }
+                    break;
+                    case '12':
+                        {
+                            command_len = 1;
+                            let data = { keepAliveTime: parseInt(commands[i + 1], 16)};
+                            Object.assign(resultToPass, { ...resultToPass }, { ...data });
+                        }
+                    break;
+                    case '13':
+                        {
+                            command_len = 4;
+                            let enabled = toBool(parseInt(commands[i + 1], 16));
+                            let duration = parseInt(commands[i + 2], 16) * 5;
+                            let tmp = ("0" + commands[i + 4].toString(16)).substr(-2);
+                            let motorPos2 = ("0" + commands[i + 3].toString(16)).substr(-2);
+                            let motorPos1 = tmp[0];
+                            let motorPosition = parseInt(`0x${motorPos1}${motorPos2}`, 16);
+                            let delta = Number(tmp[1]);
+
+                            let data = { openWindowParams: { enabled: enabled, duration: duration, motorPosition: motorPosition, delta: delta} };
+                            Object.assign(resultToPass, { ...resultToPass }, { ...data });
+
+                        }
+                    break;
+                    case '14':
+                        {
+                            command_len = 1;
+                            let data = { childLock: toBool(parseInt(commands[i + 1], 16)) };
+                            Object.assign(resultToPass, { ...resultToPass }, { ...data });
+                        }
+                    break;
+                    case '15':
+                        {   
+                            command_len = 2;
+                            let data = { temperatureRangeSettings: { min: parseInt(commands[i + 1], 16) , max: parseInt(commands[i + 2], 16)} };
+                            Object.assign(resultToPass, { ...resultToPass }, { ...data });
+                        }
+                    break;
+                    case '16':
+                        {
+                            command_len = 2;
+                            let data = { internalAlgoParams: {period: parseInt(commands[i + 1], 16), pFirstLast: parseInt(commands[i + 2], 16), pNext: parseInt(commands[i + 3], 16)} };
+                            Object.assign(resultToPass, { ...resultToPass }, { ...data });
+                        }
+                    break;
+                    case '17':
+                        {
+                            command_len = 2;
+                            let data = { internalAlgoTdiffParams: {warm: parseInt(commands[i + 1], 16), cold: parseInt(commands[i + 2], 16)} };
+                            Object.assign(resultToPass, { ...resultToPass }, { ...data });
+                        }
+                    break;
+                    case '18':
+                        {
+                            command_len = 1;
+                            let data = { operationalMode: (commands[i + 1]).toString() };
+                            Object.assign(resultToPass, { ...resultToPass }, { ...data });
+                        }
+                    break;
+                    case '19':
+                        {
+                            command_len = 1;
+                            let commandResponse = parseInt(commands[i + 1], 16);
+                            let periodInMinutes = (commandResponse * 5) / 60;
+                            let data = { joinRetryPeriod: periodInMinutes };
+                            Object.assign(resultToPass, { ...resultToPass }, { ...data });
+                        }
+                    break;
+                    case '1b':
+                        {
+                            command_len = 1;
+                            let data = { uplinkType: commands[i + 1] };
+                            Object.assign(resultToPass, { ...resultToPass }, { ...data });
+                        }
+                    break;
+                    case '1d':
+                        {
+                            command_len = 2;
+                            let deviceKeepAlive = deviceData.keepAliveTime ? deviceData.keepAliveTime : 5;
+                            let wdpC = commands[i + 1] == '00' ? false : (commands[i + 1] * deviceKeepAlive) + 7;
+                            let wdpUc = commands[i + 2] == '00' ? false : parseInt(commands[i + 2], 16);
+                            let data = { watchDogParams: { wdpC, wdpUc } };
+                            Object.assign(resultToPass, { ...resultToPass }, { ...data });
+                        }
+                    break;
+                    case '1f':
+                        {
+                            command_len = 1;
+                            let data = {  primaryOperationalMode: commands[i + 1] };
+                            Object.assign(resultToPass, { ...resultToPass }, { ...data });
+                        }
+                    break;
+                    case '21':
+                        {
+                            command_len = 6;
+                            let data = {batteryRangesBoundaries:{ 
+                                Boundary1: parseInt(`${commands[i + 1]}${commands[i + 2]}`, 16), 
+                                Boundary2: parseInt(`${commands[i + 3]}${commands[i + 4]}`, 16), 
+                                Boundary3: parseInt(`${commands[i + 5]}${commands[i + 6]}`, 16), 
+                            
+                            }};
+                            Object.assign(resultToPass, { ...resultToPass }, { ...data });
+                        }
+                    break;
+                    case '23':
+                        {
+                            command_len = 4;
+                            let data = {batteryRangesOverVoltage:{ 
+                                Range1: parseInt(commands[i + 2], 16), 
+                                Range2: parseInt(commands[i + 3], 16), 
+                                Range3: parseInt(commands[i + 4], 16), 
+                            }};
+                            Object.assign(resultToPass, { ...resultToPass }, { ...data });
+                        }
+                    break;
+                    case '27':
+                        {
+                            command_len = 1;
+                            let data = {OVAC: parseInt(commands[i + 1], 16)};
+                            Object.assign(resultToPass, { ...resultToPass }, { ...data });
+                        }
+                    break;
+                    case '28':
+                        {
+                            command_len = 1;
+                            let data = { manualTargetTemperatureUpdate: parseInt(commands[i + 1], 16) };
+                            Object.assign(resultToPass, { ...resultToPass }, { ...data });
+                        }
+                    break;
+                    
+                }
+                commands.splice(i,command_len);
+            })
+
+            Object.assign(deviceData, { ...deviceData }, { ...resultToPass });
+
+            // get only keepalive from device response
+            let keepaliveData = hexData.slice(-18);
+            let dataToPass = keepaliveData.match(/.{1,2}/g).map(byte => { return parseInt(byte, 16) });
+
+            handleKeepAliveData(dataToPass);
+        }
+        return deviceData;
+    }
+
+}
+```
+
+## TTN V3 Decoder (JavaScript ES5):
+
+```
+function decodeUplink(input) {
+    var bytes = input.bytes;
+    var data = {};
+    var resultToPass = {};
+    toBool = function (value) { return value == '1' };
+
+    function merge_obj(obj1, obj2) {
+        var obj3 = {};
+        for (var attrname in obj1) { obj3[attrname] = obj1[attrname]; }
+        for (var attrname2 in obj2) { obj3[attrname2] = obj2[attrname2]; }
+        return obj3;
+    }
+
+    function handleKeepalive(bytes, data){
+        tmp = ("0" + bytes[6].toString(16)).substr(-2);
+        motorRange1 = tmp[1];
+        motorRange2 = ("0" + bytes[5].toString(16)).substr(-2);
+        motorRange = parseInt("0x" + motorRange1 + motorRange2, 16);
+
+        motorPos2 = ("0" + bytes[4].toString(16)).substr(-2);
+        motorPos1 = tmp[0];
+        motorPosition = parseInt("0x" + motorPos1 + motorPos2, 16);
+
+        batteryTmp = ("0" + bytes[7].toString(16)).substr(-2)[0];
+        batteryVoltageCalculated = 2 + parseInt("0x" + batteryTmp, 16) * 0.1;
+
+        let decbin = (number) => {
+            if (number < 0) {
+                number = 0xFFFFFFFF + number + 1
+            }
+            number = number.toString(2);
+            return "00000000".substr(number.length) + number;
+        }
+        byte7Bin = decbin(bytes[8]);
+        openWindow = byte7Bin[4];
+        highMotorConsumption = byte7Bin[5];
+        lowMotorConsumption = byte7Bin[6];
+        brokenSensor = byte7Bin[7];
+        byte8Bin = decbin(bytes[8]);
+        childLock = byte8Bin[0];
+        calibrationFailed = byte8Bin[1];
+        attachedBackplate = byte8Bin[2];
+        perceiveAsOnline = byte8Bin[3];
+
+        var sensorTemp = 0;
+        if (Number(bytes[0].toString(16))  == 1) {
+            sensorTemp = (bytes[2] * 165) / 256 - 40;
+        }
+
+        if (Number(bytes[0].toString(16)) == 81) {
+            sensorTemp = (bytes[2] - 28.33333) / 5.66666;
+        }
+        data.reason = Number(bytes[0].toString(16));
+        data.targetTemperature = Number(bytes[1]);
+        data.sensorTemperature = Number(sensorTemp.toFixed(2));
+        data.relativeHumidity = Number(((bytes[3] * 100) / 256).toFixed(2));
+        data.motorRange = motorRange;
+        data.motorPosition = motorPosition;
+        data.batteryVoltage = Number(batteryVoltageCalculated.toFixed(2));
+        data.openWindow = toBool(openWindow);
+        data.highMotorConsumption = toBool(highMotorConsumption);
+        data.lowMotorConsumption = toBool(lowMotorConsumption);
+        data.brokenSensor = toBool(brokenSensor);
+        data.childLock = toBool(childLock);
+        data.calibrationFailed = toBool(calibrationFailed);
+        data.attachedBackplate = toBool(attachedBackplate);
+        data.perceiveAsOnline = toBool(perceiveAsOnline);
+
+
+        return data;
+    }
+   
+    function handleResponse(bytes, data){
+        var commands = bytes.map(function(byte, i){
+        	return ("0" + byte.toString(16)).substr(-2); 
+        });
+        commands = commands.slice(0,-9);
+        var command_len = 0;
+
+        commands.map(function (command, i) {
+            switch (command) {
+                case '04':
+                    {
+                        command_len = 2;
+                        var hardwareVersion = commands[i + 1];
+                        var softwareVersion = commands[i + 2];
+                        var dataK = { deviceVersions: { hardware: Number(hardwareVersion), software: Number(softwareVersion) } };
+                        resultToPass = merge_obj(resultToPass, dataK);
+                    }
+                break;
+                case '12':
+                    {
+                        command_len = 1;
+                        var dataC = { keepAliveTime: parseInt(commands[i + 1], 16) };
+                        resultToPass = merge_obj(resultToPass, dataC);
+                    }
+                break;
+                case '13':
+                    {
+                        command_len = 4;
+                        var enabled = toBool(parseInt(commands[i + 1], 16));
+                        var duration = parseInt(commands[i + 2], 16) * 5;
+                        var tmp = ("0" + commands[i + 4].toString(16)).substr(-2);
+                        var motorPos2 = ("0" + commands[i + 3].toString(16)).substr(-2);
+                        var motorPos1 = tmp[0];
+                        var motorPosition = parseInt('0x' + motorPos1 + motorPos2, 16);
+                        var delta = Number(tmp[1]);
+
+                        var dataD = { openWindowParams: { enabled: enabled, duration: duration, motorPosition: motorPosition, delta: delta } };
+                        resultToPass = merge_obj(resultToPass, dataD);
+                    }
+                break;
+                case '14':
+                    {
+                        command_len = 1;
+                        var dataB = { childLock: toBool(parseInt(commands[i + 1], 16)) };
+                        resultToPass = merge_obj(resultToPass, dataB);
+                    }
+                break;
+                case '15':
+                    {
+                        command_len = 2;
+                        var dataA = { temperatureRangeSettings: { min: parseInt(commands[i + 1], 16), max: parseInt(commands[i + 2], 16) } };
+                        resultToPass = merge_obj(resultToPass, dataA);
+                    }
+                break;
+                case '16':
+                    {
+                        command_len = 2;
+                        var data = { internalAlgoParams: { period: parseInt(commands[i + 1], 16), pFirstLast: parseInt(commands[i + 2], 16), pNext: parseInt(commands[i + 3], 16) } };
+                        resultToPass = merge_obj(resultToPass, data);
+                    }
+                break;
+                case '17':
+                    {
+                        command_len = 2;
+                        var dataF = { internalAlgoTdiffParams: { warm: parseInt(commands[i + 1], 16), cold: parseInt(commands[i + 2], 16) } };
+                        resultToPass = merge_obj(resultToPass, dataF);
+                    }
+                break;
+                case '18':
+                    {
+                        command_len = 1;
+                        var dataE = { operationalMode: parseInt(commands[i + 1], 16) };
+                        resultToPass = merge_obj(resultToPass, dataE);
+                    }
+                break;
+                case '19':
+                    {
+                        command_len = 1;
+                        var commandResponse = parseInt(commands[i + 1], 16);
+                        var periodInMinutes = commandResponse * 5 / 60;
+                        var dataH = { joinRetryPeriod: periodInMinutes };
+                        resultToPass = merge_obj(resultToPass, dataH);
+                    }
+                break;
+                case '1b':
+                    {
+                        command_len = 1;
+                        var dataG = { uplinkType: parseInt(commands[i + 1], 16) };
+                        resultToPass = merge_obj(resultToPass, dataG);
+                    }
+                break;
+                case '1d':
+                    {
+                        // get default keepalive if it is not available in data
+                        command_len = 2;
+                        var deviceKeepAlive = 5;
+                        var wdpC = commands[i + 1] == '00' ? false : commands[i + 1] * deviceKeepAlive + 7;
+                        var wdpUc = commands[i + 2] == '00' ? false : parseInt(commands[i + 2], 16);
+                        var dataJ = { watchDogParams: { wdpC: wdpC, wdpUc: wdpUc } };
+                        resultToPass = merge_obj(resultToPass, dataJ);
+                    }
+                break;
+                case '1f':
+                    {
+                        command_len = 1;
+                        var data = {  primaryOperationalMode: commands[i + 1] };
+                        resultToPass = merge_obj(resultToPass, data);
+                    }
+                break;
+                case '21':
+                    {
+                        command_len = 6;
+                        var data = {batteryRangesBoundaries:{ 
+                            Boundary1: parseInt(commands[i + 1] + commands[i + 2], 16), 
+                            Boundary2: parseInt(commands[i + 3] + commands[i + 4], 16), 
+                            Boundary3: parseInt(commands[i + 5] + commands[i + 6], 16), 
+                        }};
+                        resultToPass = merge_obj(resultToPass, data);
+                    }
+                break;
+                case '23':
+                    {
+                        command_len = 4;
+                        var data = {batteryRangesOverVoltage:{ 
+                            Range1: parseInt(commands[i + 2], 16), 
+                            Range2: parseInt(commands[i + 3], 16), 
+                            Range3: parseInt(commands[i + 4], 16), 
+                        }};
+                        resultToPass = merge_obj(resultToPass, data);
+                    }
+                break;
+                case '27':
+                    {
+                        command_len = 1;
+                        var data = {OVAC: parseInt(commands[i + 1], 16)};
+                        resultToPass = merge_obj(resultToPass, data);
+                    }
+                break;
+                case '28':
+                    {
+                        command_len = 1;
+                        var data = { manualTargetTemperatureUpdate: parseInt(commands[i + 1], 16) };
+                        resultToPass = merge_obj(resultToPass, data);
+
+                    }
+                break;
+                case '29':
+                    {
+                        command_len = 2;
+                        var data = { proportionalAlgoParams: { coefficient: parseInt(commands[i + 1], 16), period: parseInt(commands[i + 2], 16) } };
+                        resultToPass = merge_obj(resultToPass, data);
+
+                    }
+                break;
+                case '2b':
+                    {
+                        command_len = 1;
+                        var data = { algoType: commands[i + 1] };
+                        resultToPass = merge_obj(resultToPass, data);
+                    }
+                break;
+                case '34':
+                    {
+                        command_len = 1;
+                        var dataB = { childLockBehavior: toBool(parseInt(commands[i + 1], 16)) };
+                        resultToPass = merge_obj(resultToPass, dataB);
+                    }
+                break;
+                case '36':
+                    {
+                        command_len = 3;
+                        var kp = parseInt(`${commands[i + 1]}${commands[i + 2]}${commands[i + 3]}`, 16) / 131072;
+                        var data = { proportionalGain: Number(kp).toFixed(5) };
+                        resultToPass = merge_obj(resultToPass, data);
+                    }
+                break;
+                case '3d':
+                    {
+                        command_len = 3;
+                        var ki = parseInt(`${commands[i + 1]}${commands[i + 2]}${commands[i + 3]}`, 16) / 131072;
+                        var data = { integralGain: Number(ki).toFixed(5) };
+                        resultToPass = merge_obj(resultToPass, data);
+                    }
+                break;
+                case '3f':
+                    {
+                        command_len = 2;
+                        var data = { integralValue : (parseInt(`${commands[i + 1]}${commands[i + 2]}`, 16))/10 };
+                        resultToPass = merge_obj(resultToPass, data);
+                    }
+                break;
+                case '40':
+                    {
+                        command_len = 1;
+                        var data = { piRunPeriod : parseInt(commands[i + 1], 16) };
+                        resultToPass = merge_obj(resultToPass, data);
+                    }
+                break;
+                case '42':
+                    {
+                        command_len = 1;
+                        var data = { tempHysteresis : parseInt(commands[i + 1], 16) };
+                        resultToPass = merge_obj(resultToPass, data);
+                    }
+                break;
+                case '44':
+                    {
+                        command_len = 2;
+                        var data = { extSensorTemperature : (parseInt(`${commands[i + 1]}${commands[i + 2]}`, 16))/10 };
+                        resultToPass = merge_obj(resultToPass, data);
+                    }
+                break;
+                case '46':
+                    {
+                        command_len = 3;
+                        var enabled = toBool(parseInt(commands[i + 1], 16));
+                        var duration = parseInt(commands[i + 2], 16) * 5;
+                        var delta = parseInt(commands[i + 3], 16) /10;
+
+                        var data = { openWindowParams: { enabled: enabled, duration: duration, delta: delta } };
+                        resultToPass = merge_obj(resultToPass, data);
+                    }
+                break;
+                case '48':
+                    {
+                        command_len = 1;
+                        var data = { forceAttach : parseInt(commands[i + 1], 16) };
+                        resultToPass = merge_obj(resultToPass, data);
+                    }
+                break;
+                default:
+                    break;
+            }
+            commands.splice(i,command_len);
+        });
+        return resultToPass;
+    }
+    
+    if (bytes[0].toString(16) == 1 || bytes[0].toString(16) == 129) {
+        data = merge_obj(data, handleKeepalive(bytes, data));
+    }else{
+        data = merge_obj(data, handleResponse(bytes, data));
+        bytes = bytes.slice(-9);
+        data = merge_obj(data, handleKeepalive(bytes, data));
+    }
+
+    return {
+        data: data
+    };
+}
+```
+
+## Helium Decoder:
+
+```
+function Decoder(bytes, port, uplink_info) {
+    var data = {};
+    var resultToPass = {};
+    toBool = function (value) { return value == '1' };
+
+    function merge_obj(obj1, obj2) {
+        var obj3 = {};
+        for (var attrname in obj1) { obj3[attrname] = obj1[attrname]; }
+        for (var attrname2 in obj2) { obj3[attrname2] = obj2[attrname2]; }
+        return obj3;
+    }
+
+    function handleKeepalive(bytes, data){
+        tmp = ("0" + bytes[6].toString(16)).substr(-2);
+        motorRange1 = tmp[1];
+        motorRange2 = ("0" + bytes[5].toString(16)).substr(-2);
+        motorRange = parseInt("0x" + motorRange1 + motorRange2, 16);
+
+        motorPos2 = ("0" + bytes[4].toString(16)).substr(-2);
+        motorPos1 = tmp[0];
+        motorPosition = parseInt("0x" + motorPos1 + motorPos2, 16);
+
+        batteryTmp = ("0" + bytes[7].toString(16)).substr(-2)[0];
+        batteryVoltageCalculated = 2 + parseInt("0x" + batteryTmp, 16) * 0.1;
+
+        decbin = function (number) {
+            if (number < 0) {
+                number = 0xFFFFFFFF + number + 1;
+            }
+            return parseInt(number, 10).toString(2);
+        };
+        byteBin = decbin(bytes[7].toString(16));
+        openWindow = byteBin.charAt(4);
+        highMotorConsumption = byteBin.charAt(5);
+        lowMotorConsumption = byteBin.charAt(6);
+        brokenSensor = byteBin.charAt(7);
+        childLockBin = decbin(bytes[8].toString(16));
+        childLock = childLockBin.charAt(0);
+        var sensorTemp = 0;
+        if (Number(bytes[0].toString(16))  == 1) {
+            sensorTemp = (bytes[2] * 165) / 256 - 40;
+        }
+
+        if (Number(bytes[0].toString(16)) == 81) {
+            sensorTemp = (bytes[2] - 28.33333) / 5.66666;
+        }
+        data.reason = Number(bytes[0].toString(16));
+        data.targetTemperature = Number(bytes[1]);
+        data.sensorTemperature = Number(sensorTemp.toFixed(2));
+        data.relativeHumidity = Number(((bytes[3] * 100) / 256).toFixed(2));
+        data.motorRange = motorRange;
+        data.motorPosition = motorPosition;
+        data.batteryVoltage = Number(batteryVoltageCalculated.toFixed(2));
+        data.openWindow = toBool(openWindow);
+        data.childLock = toBool(childLock);
+        data.highMotorConsumption = toBool(highMotorConsumption);
+        data.lowMotorConsumption = toBool(lowMotorConsumption);
+        data.brokenSensor = toBool(brokenSensor);
+
+        return data;
+    }
+   
+    function handleResponse(bytes, data){
+        var commands = bytes.map(function(byte, i){
+        	return ("0" + byte.toString(16)).substr(-2); 
+        });
+        commands = commands.slice(0,-9);
+        var command_len = 0;
+
+        commands.map(function (command, i) {
+            switch (command) {
+                case '04':
+                    {
+                        command_len = 2;
+                        var hardwareVersion = commands[i + 1];
+                        var softwareVersion = commands[i + 2];
+                        var dataK = { deviceVersions: { hardware: Number(hardwareVersion), software: Number(softwareVersion) } };
+                        resultToPass = merge_obj(resultToPass, dataK);
+                    }
+                break;
+                case '12':
+                    {
+                        command_len = 1;
+                        var dataC = { keepAliveTime: parseInt(commands[i + 1], 16) };
+                        resultToPass = merge_obj(resultToPass, dataC);
+                    }
+                break;
+                case '13':
+                    {
+                        command_len = 4;
+                        var enabled = toBool(parseInt(commands[i + 1], 16));
+                        var duration = parseInt(commands[i + 2], 16) * 5;
+                        var tmp = ("0" + commands[i + 4].toString(16)).substr(-2);
+                        var motorPos2 = ("0" + commands[i + 3].toString(16)).substr(-2);
+                        var motorPos1 = tmp[0];
+                        var motorPosition = parseInt('0x' + motorPos1 + motorPos2, 16);
+                        var delta = Number(tmp[1]);
+
+                        var dataD = { openWindowParams: { enabled: enabled, duration: duration, motorPosition: motorPosition, delta: delta } };
+                        resultToPass = merge_obj(resultToPass, dataD);
+                    }
+                break;
+                case '14':
+                    {
+                        command_len = 1;
+                        var dataB = { childLock: toBool(parseInt(commands[i + 1], 16)) };
+                        resultToPass = merge_obj(resultToPass, dataB);
+                    }
+                break;
+                case '15':
+                    {
+                        command_len = 2;
+                        var dataA = { temperatureRangeSettings: { min: parseInt(commands[i + 1], 16), max: parseInt(commands[i + 2], 16) } };
+                        resultToPass = merge_obj(resultToPass, dataA);
+                    }
+                break;
+                case '16':
+                    {
+                        command_len = 2;
+                        var data = { internalAlgoParams: { period: parseInt(commands[i + 1], 16), pFirstLast: parseInt(commands[i + 2], 16), pNext: parseInt(commands[i + 3], 16) } };
+                        resultToPass = merge_obj(resultToPass, data);
+                    }
+                break;
+                case '17':
+                    {
+                        command_len = 2;
+                        var dataF = { internalAlgoTdiffParams: { warm: parseInt(commands[i + 1], 16), cold: parseInt(commands[i + 2], 16) } };
+                        resultToPass = merge_obj(resultToPass, dataF);
+                    }
+                break;
+                case '18':
+                    {
+                        command_len = 1;
+                        var dataE = { operationalMode: parseInt(commands[i + 1], 16) };
+                        resultToPass = merge_obj(resultToPass, dataE);
+                    }
+                break;
+                case '19':
+                    {
+                        command_len = 1;
+                        var commandResponse = parseInt(commands[i + 1], 16);
+                        var periodInMinutes = commandResponse * 5 / 60;
+                        var dataH = { joinRetryPeriod: periodInMinutes };
+                        resultToPass = merge_obj(resultToPass, dataH);
+                    }
+                break;
+                case '1b':
+                    {
+                        command_len = 1;
+                        var dataG = { uplinkType: parseInt(commands[i + 1], 16) };
+                        resultToPass = merge_obj(resultToPass, dataG);
+                    }
+                break;
+                case '1d':
+                    {
+                        // get default keepalive if it is not available in data
+                        command_len = 2;
+                        var deviceKeepAlive = 5;
+                        var wdpC = commands[i + 1] == '00' ? false : commands[i + 1] * deviceKeepAlive + 7;
+                        var wdpUc = commands[i + 2] == '00' ? false : parseInt(commands[i + 2], 16);
+                        var dataJ = { watchDogParams: { wdpC: wdpC, wdpUc: wdpUc } };
+                        resultToPass = merge_obj(resultToPass, dataJ);
+                    }
+                break;
+                case '1f':
+                    {
+                        command_len = 1;
+                        var data = {  primaryOperationalMode: commands[i + 1] };
+                        resultToPass = merge_obj(resultToPass, data);
+                    }
+                break;
+                case '21':
+                    {
+                        command_len = 6;
+                        var data = {batteryRangesBoundaries:{ 
+                            Boundary1: parseInt(commands[i + 1] + commands[i + 2], 16), 
+                            Boundary2: parseInt(commands[i + 3] + commands[i + 4], 16), 
+                            Boundary3: parseInt(commands[i + 5] + commands[i + 6], 16), 
+                        }};
+                        resultToPass = merge_obj(resultToPass, data);
+                    }
+                break;
+                case '23':
+                    {
+                        command_len = 4;
+                        var data = {batteryRangesOverVoltage:{ 
+                            Range1: parseInt(commands[i + 2], 16), 
+                            Range2: parseInt(commands[i + 3], 16), 
+                            Range3: parseInt(commands[i + 4], 16), 
+                        }};
+                        resultToPass = merge_obj(resultToPass, data);
+                    }
+                break;
+                case '27':
+                    {
+                        command_len = 1;
+                        var data = {OVAC: parseInt(commands[i + 1], 16)};
+                        resultToPass = merge_obj(resultToPass, data);
+                    }
+                break;
+                case '28':
+                    {
+                        command_len = 1;
+                        var data = { manualTargetTemperatureUpdate: parseInt(commands[i + 1], 16) };
+                        resultToPass = merge_obj(resultToPass, data);
+
+                    }
+                break;
+                case '29':
+                    {
+                        command_len = 2;
+                        var data = { proportionalAlgoParams: { coefficient: parseInt(commands[i + 1], 16), period: parseInt(commands[i + 2], 16) } };
+                        resultToPass = merge_obj(resultToPass, data);
+
+                    }
+                break;
+                case '2b':
+                    {
+                        command_len = 1;
+                        var data = { algoType: commands[i + 1] };
+                        resultToPass = merge_obj(resultToPass, data);
+                    }
+                break;
+                default:
+                    break;
+            }
+            commands.splice(i,command_len);
+        });
+        return resultToPass;
+    }
+    
+    if (bytes[0].toString(16) == 1 || bytes[0].toString(16) == 129) {
+        data = merge_obj(data, handleKeepalive(bytes, data));
+    }else{
+        data = merge_obj(data, handleResponse(bytes, data));
+        bytes = bytes.slice(-9);
+        data = merge_obj(data, handleKeepalive(bytes, data));
+    }
+
+    return data;
+}
+```
+
+## Tektelic Decoder (JavaScript ES5):
+
+```
+arr = [];
+for (var i = 0; i < bytes.length; ++i)
+    arr.push(bytes[i]);
+function toHexString(arr) {
+    var s = '';
+    arr.forEach(function(byte) {
+        s += ('0' + (byte & 0xFF).toString(16)).slice(-2);
+    });
+    return s;
+}   
+
+var hexData = toHexString(arr);
+var bytes = hexData.match(/.{1,2}/g).map(function (byte){ 
+        return parseInt(byte,16);
+    }
+);
+
+
+var deviceData;
+function merge_obj(obj1,obj2){
+    var obj3 = {};
+    for (var attrname in obj1) { obj3[attrname] = obj1[attrname]; }
+    for (attrname in obj2) { obj3[attrname] = obj2[attrname]; }
+    return obj3;
+}
+function toBool(value) { return value == '1'}
+function handleKeepAliveData(bytes){
+    tmp = ("0" + bytes[6].toString(16)).substr(-2);
+    motorRange1 = tmp[1];
+    motorRange2 = ("0" + bytes[5].toString(16)).substr(-2);
+    motorRange = parseInt("0x"+ motorRange1 + motorRange2, 16);
+
+    motorPos2 = ("0" + bytes[4].toString(16)).substr(-2);
+    motorPos1 = tmp[0];
+    motorPosition = parseInt("0x"+ motorPos1 + motorPos2, 16);
+
+    batteryTmp = ("0" + bytes[7].toString(16)).substr(-2)[0];
+    batteryVoltageCalculated = 2 + parseInt("0x"+ batteryTmp , 16) * 0.1;
+    function decbin(number) {
+       if (number < 0) {
+           number = 0xFFFFFFFF + number + 1;
+       }
+       return parseInt(number, 10).toString(2);
+    }
+
+    byteBin = decbin(bytes[7].toString(16));
+    openWindow = byteBin.charAt(4);
+    highMotorConsumption = byteBin.charAt(5);
+    lowMotorConsumption = byteBin.charAt(6);
+    brokenSensor = byteBin.charAt(7);
+    childLockBin = decbin(bytes[8].toString(16));
+    childLock = childLockBin.charAt(0);
+    
+    var sensorTemp;
+    
+    if(bytes[0] == 1){
+        sensorTemp = (bytes[2] * 165) / 256 - 40;
+    }
+    
+    if(bytes[0] == 81){
+        sensorTemp = (bytes[2] - 28.33333) / 5.66666;
+    }
+    
+   return {
+       hex: hexData,
+       reason: bytes[0],
+       targetTemperature: bytes[1],
+       sensorTemperature: sensorTemp,
+       relativeHumidity: bytes[3]/ 256 ,
+       motorRange: motorRange,
+       motorPosition: motorPosition,
+       batteryVoltage: batteryVoltageCalculated,
+       openWindow: toBool(openWindow),
+       childLock: toBool(childLock),
+       highMotorConsumption: toBool(highMotorConsumption),
+       lowMotorConsumption: toBool(lowMotorConsumption),
+       brokenSensor: toBool(brokenSensor),
+       port: port,
+       "payload length": bytes.length
+   };
+}
+if (bytes[0] == 1 || bytes[0] == 81) {
+    deviceData = merge_obj(deviceData, handleKeepAliveData(bytes));
+    return deviceData;  
+} else {
+   
+   if(bytes.length<3)
+   return { "hex": toHexString(arr), "port": port , "payload length": bytes.length};
+    // parse command answers
+    var data = commandsReadingHelper(deviceData, String(hexData).split(",").join(""), 18);
+    deviceData = merge_obj(deviceData,data);
+
+    // get only keepalive from device response
+    var keepaliveData = String(hexData).split(",").join("").slice(-18);
+    var dataToPass = keepaliveData.match(/.{1,2}/g).map(function (byte) { return parseInt(byte, 16) });
+
+    deviceData = merge_obj(deviceData, handleKeepAliveData(dataToPass));
+    return deviceData;
+}
+
+function commandsReadingHelper(deviceData, hexData, payloadLength) {
+var resultToPass = {};
+var data = hexData.slice(0, -payloadLength);
+var commands = data.match(/.{1,2}/g);
+var command_len = 0;
+
+commands.map(function (command, i) {
+    switch (command) {
+        case '04':
+            {
+                try {
+                    command_len = 2;
+                    var hardwareVersion = commands[i + 1];
+                    var softwareVersion = commands[i + 2];
+                    data = { deviceVersions: { hardware: Number(hardwareVersion), software: Number(softwareVersion) } };
+                    
+                    resultToPass = merge_obj(resultToPass,data);
+
+                } catch (e) {
+                    // console.log(e)
+                }
+            }
+        break;
+        case '12':
+            {
+                try {
+                    command_len = 1;
+                    data = { keepAliveTime: parseInt(commands[i + 1], 16) };
+                    resultToPass = merge_obj(resultToPass,data);
+                } catch (e) {
+                    // console.log(e)
+                }
+            }
+        break;
+        case '13':
+            {
+                try {
+                    command_len = 4;
+                    var enabled = toBool(parseInt(commands[i + 1], 16));
+                    var duration = parseInt(commands[i + 2], 16) * 5;
+                    var tmp = ("0" + commands[i + 4].toString(16)).substr(-2);
+                    var motorPos2 = ("0" + commands[i + 3].toString(16)).substr(-2);
+                    var motorPos1 = tmp[0];
+                    var motorPosition = parseInt('0x' + motorPos1 + motorPos2, 16);
+                    var delta = Number(tmp[1]);
+
+                    data = { openWindowParams: { enabled: enabled, duration: duration, motorPosition: motorPosition, delta: delta } };
+                    resultToPass = merge_obj(resultToPass,data);
+                } catch (e) {
+                    // console.log(e)
+                }
+            }
+        break;
+        case '14':
+            {
+                try {
+                    command_len = 1;
+                    data = { childLock: toBool(parseInt(commands[i + 1], 16)) };
+                    resultToPass = merge_obj(resultToPass,data);
+                } catch (e) {
+                    // console.log(e)
+                }
+            }
+        break;
+        case '15':
+            {
+                try {
+                    command_len = 2;
+                    data = { temperatureRangeSettings: { min: parseInt(commands[i + 1], 16), max: parseInt(commands[i + 2], 16) } };
+                    resultToPass = merge_obj(resultToPass,data);
+                } catch (e) {
+                    // console.log(e)
+                }
+            }
+        break;
+        case '16':
+            {
+                try {
+                    command_len = 3;
+                    data = { internalAlgoParams: { period: parseInt(commands[i + 1], 16), pFirstLast: parseInt(commands[i + 2], 16), pNext: parseInt(commands[i + 3], 16) } };
+                    resultToPass = merge_obj(resultToPass,data);
+                } catch (e) {
+                    // console.log(e)
+                }
+            }
+        break;   
+        case '17':
+            {
+                try {
+                    command_len = 2;
+                    data = { internalAlgoTdiffParams: { warm: parseInt(commands[i + 1], 16), cold: parseInt(commands[i + 2], 16) } };
+                    resultToPass = merge_obj(resultToPass,data);
+                } catch (e) {
+                    // console.log(e)
+                }
+            }
+        break;
+        case '18':
+            {
+                try {
+                    command_len = 1;
+                    data = { operationalMode: commands[i + 1].toString() };
+                    resultToPass = merge_obj(resultToPass,data);
+                } catch (e) {
+                    // console.log(e)
+                }
+            }
+        break;
+        case '19':
+            {
+                try {
+                    command_len = 1;
+                    var commandResponse = parseInt(commands[i + 1], 16);
+                    var periodInMinutes = commandResponse * 5 / 60;
+                    data = { joinRetryPeriod: periodInMinutes };
+                    resultToPass = merge_obj(resultToPass,data);
+                } catch (e) {
+                    // console.log(e)
+                }
+            }
+        break;
+        case '1b':
+            {
+                try {
+                    command_len = 2;
+                    data = { uplinkType: commands[i + 1] };
+                    resultToPass = merge_obj(resultToPass,data);
+                } catch (e) {
+                    // console.log(e)
+                }
+            }
+        break;
+        case '1d':
+            {
+                try {
+                    // get default keepalive if it is not available in data
+                    command_len = 2;
+                    var deviceKeepAlive = deviceData.keepAliveTime ? deviceData.keepAliveTime : 5;
+                    var wdpC = commands[i + 1] == '00' ? false : commands[i + 1] * deviceKeepAlive + 7;
+                    var wdpUc = commands[i + 2] == '00' ? false : parseInt(commands[i + 2], 16);
+                    data = { watchDogParams: { wdpC: wdpC, wdpUc: wdpUc } };
+                    resultToPass = merge_obj(resultToPass,data);
+                } catch (e) {
+                    // console.log(e)
+                }
+            }
+        break;
+        case '1f':
+            {
+                try {
+                    command_len = 1;
+                    data = {  primaryOperationalMode: commands[i + 1] };
+                    resultToPass = merge_obj(resultToPass, data);
+                } catch (e) {
+                    // console.log(e)
+                }
+            }
+        break;
+        case '21':
+            {
+                try {
+                    command_len = 6;
+                    data = {batteryRangesBoundaries:{ 
+                        Boundary1: parseInt(commands[i + 1] + commands[i + 2], 16), 
+                        Boundary2: parseInt(commands[i + 3] + commands[i + 4], 16), 
+                        Boundary3: parseInt(commands[i + 5] + commands[i + 6], 16), 
+                    }};
+                    resultToPass = merge_obj(resultToPass, data);
+                } catch (e) {
+                    // console.log(e)
+                }
+            }
+        break;
+        case '23':
+            {
+                try {
+                    command_len = 4;
+                    data = {batteryRangesOverVoltage:{ 
+                        Range1: parseInt(commands[i + 2], 16), 
+                        Range2: parseInt(commands[i + 3], 16), 
+                        Range3: parseInt(commands[i + 4], 16), 
+                    }};
+                    resultToPass = merge_obj(resultToPass, data);
+                } catch (e) {
+                    // console.log(e)
+                }
+            }
+        break;
+        case '27':
+            {
+                try {
+                    command_len = 1;
+                    data = {OVAC: parseInt(commands[i + 1], 16)};
+                    resultToPass = merge_obj(resultToPass, data);
+                } catch (e) {
+                    // console.log(e)
+                }
+            }
+        break;
+        case '28':
+            {
+                try {
+                    command_len = 1;
+                    data = { manualTargetTemperatureUpdate: parseInt(commands[i + 1], 16) };
+                    resultToPass = merge_obj(resultToPass, data);
+                } catch (e) {
+                    // console.log(e)
+                }
+            }
+        break;
+
+        default:
+            break;
+    }
+    commands.splice(i,command_len);
+});
+
+return resultToPass;
+};    
+```
+
+## Chirpstack Decoder (JavaScript ES5):
+
+```
+function Decode(fPort, bytes, variables) {
+    var data = {};
+    var resultToPass = {};
+
+    var rawHex = bytes.map(function(byte, i){
+       return ("0" + byte.toString(16)).substr(-2); 
+    });
+
+    toBool = function (value) { return value == '1' };
+
+    function merge_obj(obj1, obj2) {
+        var obj3 = {};
+        for (var attrname in obj1) { obj3[attrname] = obj1[attrname]; }
+        for (var attrname2 in obj2) { obj3[attrname2] = obj2[attrname2]; }
+        return obj3;
+    }
+
+    function handleKeepalive(bytes, data){
+        tmp = ("0" + bytes[6].toString(16)).substr(-2);
+        motorRange1 = tmp[1];
+        motorRange2 = ("0" + bytes[5].toString(16)).substr(-2);
+        motorRange = parseInt("0x" + motorRange1 + motorRange2, 16);
+
+        motorPos2 = ("0" + bytes[4].toString(16)).substr(-2);
+        motorPos1 = tmp[0];
+        motorPosition = parseInt("0x" + motorPos1 + motorPos2, 16);
+
+        batteryTmp = ("0" + bytes[7].toString(16)).substr(-2)[0];
+        batteryVoltageCalculated = 2 + parseInt("0x" + batteryTmp, 16) * 0.1;
+
+        decbin = function (number) {
+            if (number < 0) {
+                number = 0xFFFFFFFF + number + 1;
+            }
+            return parseInt(number, 10).toString(2);
+        };
+
+        byteBin = decbin(bytes[7].toString(16));
+        openWindow = byteBin.substr(4, 1);
+        childLockBin = decbin(bytes[8].toString(16));
+        childLock = childLockBin.charAt(0);
+        highMotorConsumption = byteBin.substr(-2, 1);
+        lowMotorConsumption = byteBin.substr(-3, 1);
+        brokenSensor = byteBin.substr(-4, 1);
+
+        var sensorTemp = 0;
+        if (Number(bytes[0].toString(16))  == 1) {
+            sensorTemp = (bytes[2] * 165) / 256 - 40;
+        }
+
+        console.log(bytes[0].toString(16))
+        if (Number(bytes[0].toString(16)) == 81) {
+            sensorTemp = (bytes[2] - 28.33333) / 5.66666;
+        }
+
+
+        data.reason = Number(bytes[0].toString(16));
+        data.targetTemperature = Number(bytes[1]);
+        data.sensorTemperature = Number(sensorTemp.toFixed(2));
+        data.relativeHumidity = Number(((bytes[3] * 100) / 256).toFixed(2));
+        data.motorRange = motorRange;
+        data.motorPosition = motorPosition;
+        data.batteryVoltage = Number(batteryVoltageCalculated.toFixed(2));
+        data.openWindow = toBool(openWindow);
+        data.childLock = toBool(childLock);
+        data.highMotorConsumption = toBool(highMotorConsumption);
+        data.lowMotorConsumption = toBool(lowMotorConsumption);
+        data.brokenSensor = toBool(brokenSensor);
+
+        return data;
+    }
+   
+    function handleResponse(bytes, data){
+        var commands = bytes.map(function(byte, i){
+        	return ("0" + byte.toString(16)).substr(-2); 
+        });
+        commands = commands.slice(0,-9);
+        var command_len = 0;
+
+        commands.map(function (command, i) {
+            switch (command) {
+                case '04':
+                    {
+                        command_len = 2;
+                        var hardwareVersion = commands[i + 1];
+                        var softwareVersion = commands[i + 2];
+                        var dataK = { deviceVersions: { hardware: Number(hardwareVersion), software: Number(softwareVersion) } };
+                        resultToPass = merge_obj(resultToPass, dataK);
+                    }
+                break;
+                case '12':
+                    {
+                        command_len = 1;
+                        var dataC = { keepAliveTime: parseInt(commands[i + 1], 16) };
+                        resultToPass = merge_obj(resultToPass, dataC);
+                    }
+                break;
+                case '13':
+                    {
+                        command_len = 4;
+                        var enabled = toBool(parseInt(commands[i + 1], 16));
+                        var duration = parseInt(commands[i + 2], 16) * 5;
+                        var tmp = ("0" + commands[i + 4].toString(16)).substr(-2);
+                        var motorPos2 = ("0" + commands[i + 3].toString(16)).substr(-2);
+                        var motorPos1 = tmp[0];
+                        var motorPosition = parseInt('0x' + motorPos1 + motorPos2, 16);
+                        var delta = Number(tmp[1]);
+
+                        var dataD = { openWindowParams: { enabled: enabled, duration: duration, motorPosition: motorPosition, delta: delta } };
+                        resultToPass = merge_obj(resultToPass, dataD);
+                    }
+                break;
+                case '14':
+                    {
+                        command_len = 1;
+                        var dataB = { childLock: toBool(parseInt(commands[i + 1], 16)) };
+                        resultToPass = merge_obj(resultToPass, dataB);
+                    }
+                break;
+                case '15':
+                    {
+                        command_len = 2;
+                        var dataA = { temperatureRangeSettings: { min: parseInt(commands[i + 1], 16), max: parseInt(commands[i + 2], 16) } };
+                        resultToPass = merge_obj(resultToPass, dataA);
+                    }
+                break;
+                case '16':
+                    {
+                        command_len = 3;
+                        var data = { internalAlgoParams: { period: parseInt(commands[i + 1], 16), pFirstLast: parseInt(commands[i + 2], 16), pNext: parseInt(commands[i + 3], 16) } };
+                        resultToPass = merge_obj(resultToPass, data);
+                    }
+                break;
+                case '17':
+                    {
+                        command_len = 2;
+                        var dataF = { internalAlgoTdiffParams: { warm: parseInt(commands[i + 1], 16), cold: parseInt(commands[i + 2], 16) } };
+                        resultToPass = merge_obj(resultToPass, dataF);
+                    }
+                break;
+                case '18':
+                    {
+                        command_len = 1;
+                        var dataE = { operationalMode: parseInt(commands[i + 1], 16) };
+                        resultToPass = merge_obj(resultToPass, dataE);
+                    }
+                break;
+                case '19':
+                    {
+                        command_len = 1;
+                        var commandResponse = parseInt(commands[i + 1], 16);
+                        var periodInMinutes = commandResponse * 5 / 60;
+                        var dataH = { joinRetryPeriod: periodInMinutes };
+                        resultToPass = merge_obj(resultToPass, dataH);
+                    }
+                break;
+                case '1b':
+                    {
+                        command_len = 1;
+                        var dataG = { uplinkType: parseInt(commands[i + 1], 16) };
+                        resultToPass = merge_obj(resultToPass, dataG);
+                    }
+                break;
+                case '1d':
+                    {
+                        // get default keepalive if it is not available in data
+                        command_len = 2;
+                        var deviceKeepAlive = 5;
+                        var wdpC = commands[i + 1] == '00' ? false : commands[i + 1] * deviceKeepAlive + 7;
+                        var wdpUc = commands[i + 2] == '00' ? false : parseInt(commands[i + 2], 16);
+                        var dataJ = { watchDogParams: { wdpC: wdpC, wdpUc: wdpUc } };
+                        resultToPass = merge_obj(resultToPass, dataJ);
+                    }
+                break;
+                case '1f':
+                    {
+                        command_len = 1;
+                        var data = {  primaryOperationalMode: commands[i + 1] };
+                        resultToPass = merge_obj(resultToPass, data);
+                    }
+                break;
+                case '21':
+                    {
+                        command_len = 6;
+                        var data = {batteryRangesBoundaries:{ 
+                            Boundary1: parseInt(commands[i + 1] + commands[i + 2], 16), 
+                            Boundary2: parseInt(commands[i + 3] + commands[i + 4], 16), 
+                            Boundary3: parseInt(commands[i + 5] + commands[i + 6], 16), 
+                        }};
+                        resultToPass = merge_obj(resultToPass, data);
+                    }
+                break;
+                case '23':
+                    {
+                        command_len = 4;
+                        var data = {batteryRangesOverVoltage:{ 
+                            Range1: parseInt(commands[i + 2], 16), 
+                            Range2: parseInt(commands[i + 3], 16), 
+                            Range3: parseInt(commands[i + 4], 16), 
+                        }};
+                        resultToPass = merge_obj(resultToPass, data);
+                    }
+                break;
+                case '27':
+                    {
+                        command_len = 1;
+                        var data = {OVAC: parseInt(commands[i + 1], 16)};
+                        resultToPass = merge_obj(resultToPass, data);
+                    }
+                break;
+                case '28':
+                    {
+                        command_len = 1;
+                        var data = { manualTargetTemperatureUpdate: parseInt(commands[i + 1], 16) };
+                        resultToPass = merge_obj(resultToPass, data);
+
+                    }
+                break;
+                case '29':
+                    {
+                        command_len = 2;
+                        var data = { proportionalAlgoParams: { coefficient: parseInt(commands[i + 1], 16), period: parseInt(commands[i + 2], 16) } };
+                        resultToPass = merge_obj(resultToPass, data);
+
+                    }
+                break;
+                case '2b':
+                    {
+                        command_len = 1;
+                        var data = { algoType: commands[i + 1] };
+                        resultToPass = merge_obj(resultToPass, data);
+                    }
+                break;
+                case '36':
+                    {
+                        command_len = 3;
+                        var kp = parseInt(`${commands[i + 1]}${commands[i + 2]}${commands[i + 3]}`, 16) / 131072;
+                        var data = { proportionalGain: Number(kp).toFixed(5) };
+                        resultToPass = merge_obj(resultToPass, data);
+                    }
+                break;
+                case '3d':
+                    {
+                        command_len = 3;
+                        var ki = parseInt(`${commands[i + 1]}${commands[i + 2]}${commands[i + 3]}`, 16) / 131072;
+                        var data = { integralGain: Number(ki).toFixed(5) };
+                        resultToPass = merge_obj(resultToPass, data);
+                    }
+                break;
+                case '3f':
+                    {
+                        command_len = 2;
+                        var data = { integralValue : (parseInt(`${commands[i + 1]}${commands[i + 2]}`, 16))/10 };
+                        resultToPass = merge_obj(resultToPass, data);
+                    }
+                break;
+                case '40':
+                    {
+                        command_len = 1;
+                        var data = { piRunPeriod : parseInt(commands[i + 1], 16) };
+                        resultToPass = merge_obj(resultToPass, data);
+                    }
+                break;
+                case '42':
+                    {
+                        command_len = 1;
+                        var data = { tempHysteresis : parseInt(commands[i + 1], 16) };
+                        resultToPass = merge_obj(resultToPass, data);
+                    }
+                break;
+                case '44':
+                    {
+                        command_len = 2;
+                        var data = { extSensorTemperature : (parseInt(`${commands[i + 1]}${commands[i + 2]}`, 16))/10 };
+                        resultToPass = merge_obj(resultToPass, data);
+                    }
+                break;
+                case '46':
+                    {
+                        command_len = 3;
+                        var enabled = toBool(parseInt(commands[i + 1], 16));
+                        var duration = parseInt(commands[i + 2], 16) * 5;
+                        var delta = parseInt(commands[i + 3], 16) /10;
+
+                        var data = { openWindowParams: { enabled: enabled, duration: duration, delta: delta } };
+                        resultToPass = merge_obj(resultToPass, data);
+                    }
+                break;
+                case '48':
+                    {
+                        command_len = 1;
+                        var data = { forceAttach : parseInt(commands[i + 1], 16) };
+                        resultToPass = merge_obj(resultToPass, data);
+                    }
+                break;
+                default:
+                    break;
+            }
+            commands.splice(i,command_len);
+        });
+        return resultToPass;
+    }
+    
+    if (bytes[0].toString(16) == 1 || bytes[0].toString(16) == 129) {
+        data = merge_obj(data, handleKeepalive(bytes, data));
+    }else{
+        data = merge_obj(data, handleResponse(bytes, data));
+        bytes = bytes.slice(-9);
+        data = merge_obj(data, handleKeepalive(bytes, data));
+    }
+
+    return data
+}
+```
+
+## DataCake Decoder
+
+```
+function decodeUplink(input) {
+    var bytes = input.bytes;
+    var data = {};
+    var resultToPass = {};
+    toBool = function (value) { return value == '1' };
+
+    function merge_obj(obj1, obj2) {
+        var obj3 = {};
+        for (var attrname in obj1) { obj3[attrname] = obj1[attrname]; }
+        for (var attrname2 in obj2) { obj3[attrname2] = obj2[attrname2]; }
+        return obj3;
+    }
+
+    function handleKeepalive(bytes, data){
+        tmp = ("0" + bytes[6].toString(16)).substr(-2);
+        motorRange1 = tmp[1];
+        motorRange2 = ("0" + bytes[5].toString(16)).substr(-2);
+        motorRange = parseInt("0x" + motorRange1 + motorRange2, 16);
+
+        motorPos2 = ("0" + bytes[4].toString(16)).substr(-2);
+        motorPos1 = tmp[0];
+        motorPosition = parseInt("0x" + motorPos1 + motorPos2, 16);
+
+        batteryTmp = ("0" + bytes[7].toString(16)).substr(-2)[0];
+        batteryVoltageCalculated = 2 + parseInt("0x" + batteryTmp, 16) * 0.1;
+
+        decbin = function (number) {
+            if (number < 0) {
+                number = 0xFFFFFFFF + number + 1
+            }
+            number = number.toString(2);
+            return "00000000".substr(number.length) + number;
+        }
+        byte7Bin = decbin(bytes[8]);
+        openWindow = byte7Bin[4];
+        highMotorConsumption = byte7Bin[5];
+        lowMotorConsumption = byte7Bin[6];
+        brokenSensor = byte7Bin[7];
+        byte8Bin = decbin(bytes[8]);
+        childLock = byte8Bin[0];
+        calibrationFailed = byte8Bin[1];
+        attachedBackplate = byte8Bin[2];
+        perceiveAsOnline = byte8Bin[3];
+
+        var sensorTemp = 0;
+        if (Number(bytes[0].toString(16))  == 1) {
+            sensorTemp = (bytes[2] * 165) / 256 - 40;
+        }
+
+        if (Number(bytes[0].toString(16)) == 81) {
+            sensorTemp = (bytes[2] - 28.33333) / 5.66666;
+        }
+        data.reason = Number(bytes[0].toString(16));
+        data.targetTemperature = Number(bytes[1]);
+        data.sensorTemperature = Number(sensorTemp.toFixed(2));
+        data.relativeHumidity = Number(((bytes[3] * 100) / 256).toFixed(2));
+        data.motorRange = motorRange;
+        data.motorPosition = motorPosition;
+        data.batteryVoltage = Number(batteryVoltageCalculated.toFixed(2));
+        data.openWindow = toBool(openWindow);
+        data.highMotorConsumption = toBool(highMotorConsumption);
+        data.lowMotorConsumption = toBool(lowMotorConsumption);
+        data.brokenSensor = toBool(brokenSensor);
+        data.childLock = toBool(childLock);
+        data.calibrationFailed = toBool(calibrationFailed);
+        data.attachedBackplate = toBool(attachedBackplate);
+        data.perceiveAsOnline = toBool(perceiveAsOnline);
+
+
+        return data;
+    }
+   
+    function handleResponse(bytes, data){
+        var commands = bytes.map(function(byte, i){
+        	return ("0" + byte.toString(16)).substr(-2); 
+        });
+        commands = commands.slice(0,-9);
+        var command_len = 0;
+
+        commands.map(function (command, i) {
+            switch (command) {
+                case '04':
+                    {
+                        command_len = 2;
+                        var hardwareVersion = commands[i + 1];
+                        var softwareVersion = commands[i + 2];
+                        var dataK = { deviceVersions: { hardware: Number(hardwareVersion), software: Number(softwareVersion) } };
+                        resultToPass = merge_obj(resultToPass, dataK);
+                    }
+                break;
+                case '12':
+                    {
+                        command_len = 1;
+                        var dataC = { keepAliveTime: parseInt(commands[i + 1], 16) };
+                        resultToPass = merge_obj(resultToPass, dataC);
+                    }
+                break;
+                case '13':
+                    {
+                        command_len = 4;
+                        var enabled = toBool(parseInt(commands[i + 1], 16));
+                        var duration = parseInt(commands[i + 2], 16) * 5;
+                        var tmp = ("0" + commands[i + 4].toString(16)).substr(-2);
+                        var motorPos2 = ("0" + commands[i + 3].toString(16)).substr(-2);
+                        var motorPos1 = tmp[0];
+                        var motorPosition = parseInt('0x' + motorPos1 + motorPos2, 16);
+                        var delta = Number(tmp[1]);
+
+                        var dataD = { openWindowParams: { enabled: enabled, duration: duration, motorPosition: motorPosition, delta: delta } };
+                        resultToPass = merge_obj(resultToPass, dataD);
+                    }
+                break;
+                case '14':
+                    {
+                        command_len = 1;
+                        var dataB = { childLock: toBool(parseInt(commands[i + 1], 16)) };
+                        resultToPass = merge_obj(resultToPass, dataB);
+                    }
+                break;
+                case '15':
+                    {
+                        command_len = 2;
+                        var dataA = { temperatureRangeSettings: { min: parseInt(commands[i + 1], 16), max: parseInt(commands[i + 2], 16) } };
+                        resultToPass = merge_obj(resultToPass, dataA);
+                    }
+                break;
+                case '16':
+                    {
+                        command_len = 2;
+                        var data = { internalAlgoParams: { period: parseInt(commands[i + 1], 16), pFirstLast: parseInt(commands[i + 2], 16), pNext: parseInt(commands[i + 3], 16) } };
+                        resultToPass = merge_obj(resultToPass, data);
+                    }
+                break;
+                case '17':
+                    {
+                        command_len = 2;
+                        var dataF = { internalAlgoTdiffParams: { warm: parseInt(commands[i + 1], 16), cold: parseInt(commands[i + 2], 16) } };
+                        resultToPass = merge_obj(resultToPass, dataF);
+                    }
+                break;
+                case '18':
+                    {
+                        command_len = 1;
+                        var dataE = { operationalMode: parseInt(commands[i + 1], 16) };
+                        resultToPass = merge_obj(resultToPass, dataE);
+                    }
+                break;
+                case '19':
+                    {
+                        command_len = 1;
+                        var commandResponse = parseInt(commands[i + 1], 16);
+                        var periodInMinutes = commandResponse * 5 / 60;
+                        var dataH = { joinRetryPeriod: periodInMinutes };
+                        resultToPass = merge_obj(resultToPass, dataH);
+                    }
+                break;
+                case '1b':
+                    {
+                        command_len = 1;
+                        var dataG = { uplinkType: parseInt(commands[i + 1], 16) };
+                        resultToPass = merge_obj(resultToPass, dataG);
+                    }
+                break;
+                case '1d':
+                    {
+                        // get default keepalive if it is not available in data
+                        command_len = 2;
+                        var deviceKeepAlive = 5;
+                        var wdpC = commands[i + 1] == '00' ? false : commands[i + 1] * deviceKeepAlive + 7;
+                        var wdpUc = commands[i + 2] == '00' ? false : parseInt(commands[i + 2], 16);
+                        var dataJ = { watchDogParams: { wdpC: wdpC, wdpUc: wdpUc } };
+                        resultToPass = merge_obj(resultToPass, dataJ);
+                    }
+                break;
+                case '1f':
+                    {
+                        command_len = 1;
+                        var data = {  primaryOperationalMode: commands[i + 1] };
+                        resultToPass = merge_obj(resultToPass, data);
+                    }
+                break;
+                case '21':
+                    {
+                        command_len = 6;
+                        var data = {batteryRangesBoundaries:{ 
+                            Boundary1: parseInt(commands[i + 1] + commands[i + 2], 16), 
+                            Boundary2: parseInt(commands[i + 3] + commands[i + 4], 16), 
+                            Boundary3: parseInt(commands[i + 5] + commands[i + 6], 16), 
+                        }};
+                        resultToPass = merge_obj(resultToPass, data);
+                    }
+                break;
+                case '23':
+                    {
+                        command_len = 4;
+                        var data = {batteryRangesOverVoltage:{ 
+                            Range1: parseInt(commands[i + 2], 16), 
+                            Range2: parseInt(commands[i + 3], 16), 
+                            Range3: parseInt(commands[i + 4], 16), 
+                        }};
+                        resultToPass = merge_obj(resultToPass, data);
+                    }
+                break;
+                case '27':
+                    {
+                        command_len = 1;
+                        var data = {OVAC: parseInt(commands[i + 1], 16)};
+                        resultToPass = merge_obj(resultToPass, data);
+                    }
+                break;
+                case '28':
+                    {
+                        command_len = 1;
+                        var data = { manualTargetTemperatureUpdate: parseInt(commands[i + 1], 16) };
+                        resultToPass = merge_obj(resultToPass, data);
+
+                    }
+                break;
+                case '29':
+                    {
+                        command_len = 2;
+                        var data = { proportionalAlgoParams: { coefficient: parseInt(commands[i + 1], 16), period: parseInt(commands[i + 2], 16) } };
+                        resultToPass = merge_obj(resultToPass, data);
+
+                    }
+                break;
+                case '2b':
+                    {
+                        command_len = 1;
+                        var data = { algoType: commands[i + 1] };
+                        resultToPass = merge_obj(resultToPass, data);
+                    }
+                break;
+                default:
+                    break;
+            }
+            commands.splice(i,command_len);
+        });
+        return resultToPass;
+    }
+    
+    if (bytes[0].toString(16) == 1 || bytes[0].toString(16) == 129) {
+        data = merge_obj(data, handleKeepalive(bytes, data));
+    }else{
+        data = merge_obj(data, handleResponse(bytes, data));
+        bytes = bytes.slice(-9);
+        data = merge_obj(data, handleKeepalive(bytes, data));
+    }
+
+    return {
+        data: data
+    };
+}
+
+function Decoder(payload, port) {
+    
+    var decoded = decodeUplink({bytes: payload, fPort: port}).data;
+    
+    // Extract Gateway Information
+    
+    try {
+        
+        decoded.LORA_RSSI = (!!normalizedPayload.gateways && !!normalizedPayload.gateways[0] && normalizedPayload.gateways[0].rssi) || 0;
+        decoded.LORA_SNR = (!!normalizedPayload.gateways && !!normalizedPayload.gateways[0] && normalizedPayload.gateways[0].snr) || 0;
+        decoded.LORA_DATARATE = normalizedPayload.data_rate;   
+        
+    } catch (e) {
+        
+        console.log(JSON.stringify(e));
+    }
+    
+    
+    // Array where we store the fields that are being sent to Datacake
+    var datacakeFields = []
+    
+    // take each field from decodedElsysFields and convert them to Datacake format
+    for (var key in decoded) {
+        if (decoded.hasOwnProperty(key)) {           
+            datacakeFields.push({field: key.toUpperCase(), value: decoded[key]})
+        }
+    }      
+    
+    // forward data to Datacake
+    return datacakeFields;
+}
+```
