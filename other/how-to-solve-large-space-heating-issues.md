@@ -18,13 +18,13 @@ Vicki uses a high-quality temperature and humidity sensor by Texas Instruments. 
 
 Contrary to common believe, measuring temperature near radiators is actually an excellent placement, since radiators are hot and cause a lot of convection. Air is heated by the radiator, rises up and draws fresh air into the radiator (check out the image below).
 
-<figure><img src="../.gitbook/assets/image (41).png" alt=""><figcaption><p>Unobstructed radiator convection</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (9).png" alt=""><figcaption><p>Unobstructed radiator convection</p></figcaption></figure>
 
 Naturally, a radiator that’s 30cm high will measure a different temperature than a radiator that’s at 1m height. That’s normal and is the status quo even with the manual thermostatic valves.
 
 Now to the external factors – if you have a cover on top/in front of the radiator, the readings will definitely be different, since the covers are affecting the convection. If you have a baseboard/sill on top of the radiator, it would again cause slightly different measured temperature. Same would happen if the Vicki is covered by a curtain or is too close to e.g., a cabinet/sofa, as those things would naturally impede the natural flow of the air (check out the image below for reference).
 
-<figure><img src="../.gitbook/assets/image (42).png" alt=""><figcaption><p>Obstructed radiator convection</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (10).png" alt=""><figcaption><p>Obstructed radiator convection</p></figcaption></figure>
 
 ## Strategies to improve the measurement & control
 

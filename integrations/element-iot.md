@@ -62,7 +62,7 @@ Refer to the image below for example values (yours will differ)
 
 Select all the check boxes available.
 
-<figure><img src="../.gitbook/assets/image (10).png" alt=""><figcaption><p>JSON options selection</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (10) (1).png" alt=""><figcaption><p>JSON options selection</p></figcaption></figure>
 
 Save and you are done.
 
