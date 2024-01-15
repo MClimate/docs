@@ -12,7 +12,7 @@ Select the appropriate folder for your device set.
 
 Save.
 
-<figure><img src="../.gitbook/assets/image (4).png" alt=""><figcaption><p>Stream creation</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (4) (1).png" alt=""><figcaption><p>Stream creation</p></figcaption></figure>
 
 ### 2. Generating the M-token and API key
 
@@ -22,7 +22,7 @@ Go to [https://enterprise.mclimate.eu/integrations](https://enterprise.mclimate.
 
 Create a new token, give it a name and copy it from the next window. Make sure to keep it someplace safe, you won't be allowed to copy it over again, rather create a new one.
 
-<figure><img src="../.gitbook/assets/image (8).png" alt=""><figcaption><p>M-token creation</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (8) (1).png" alt=""><figcaption><p>M-token creation</p></figcaption></figure>
 
 In Element-IoT go to Settings -> API Keys. Add a new API Key with the following configuration options and give it a name.
 
@@ -30,7 +30,7 @@ In Element-IoT go to Settings -> API Keys. Add a new API Key with the following 
 
 **Role** - Admin
 
-<figure><img src="../.gitbook/assets/image (9).png" alt=""><figcaption><p>API Key creation</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (9) (1).png" alt=""><figcaption><p>API Key creation</p></figcaption></figure>
 
 ### 3. Next you need to create a "Rule" to associate to the Stream to properly route the data. Go to the Automation > Rules section and create a new one
 
@@ -58,7 +58,7 @@ _api-key:{your API Key created in Element-IoT in point 2)_
 
 Refer to the image below for example values (yours will differ)
 
-<figure><img src="../.gitbook/assets/image (7).png" alt=""><figcaption><p>HTTP Header creation</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (7) (1).png" alt=""><figcaption><p>HTTP Header creation</p></figcaption></figure>
 
 Select all the check boxes available.
 

@@ -168,6 +168,7 @@
 
 * [Battery Lifetime Estimation Methodology](other/battery-lifetime-estimation-methodology.md)
 * [Discover Smart Buildings solutions](https://mclimate.eu/pages/smartbuildings)
+* [How to solve Large space heating issues](other/how-to-solve-large-space-heating-issues.md)
 
 ## Integrations
 
