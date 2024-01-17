@@ -15,7 +15,13 @@ If you need to have the PIR constantly enabled and detecting movement, you have 
 
 If you want to do this, we recommend sending the following downlink to the device:
 
-0x3C014A0000
+**Option 1 - blind period 1 minute:** \
+0x3C014A00004C003C \
+\
+**Option 2 - blind period 10 minutes**\
+0x3C014A00004C0258\
+\
+Read more about blind period below.
 {% endhint %}
 
 ## PIR Status
@@ -40,11 +46,19 @@ This commands allow you to set/get the PIR status - whether it's enabled or disa
 
 ## PIR Blind period
 
-After detecting a movement in the room, the PIR sensor is disabled for the specified blind period.
+After detecting a movement in the room, the PIR sensor is disabled for the specified blind period to avoid too many uplinks, improving the energy usage - saving battery or requiring less light to harvest.
+
+Example with Blind period of 1 minute:
+
+* The moment the sensor detects movement, it sends an uplink.
+* Then the PIR is powered down for 1 minute to save energy.&#x20;
+* After 1 minute, the PIR is powered up again and the device will send a new uplink immediately after the PIR detects movement.
+
+The shorter the Blind period, the more time-accurate detection of movement and more uplinks, but more energy is used.&#x20;
 
 {% tabs %}
 {% tab title="SET" %}
-<table data-header-hidden><thead><tr><th width="140"></th><th></th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Hex value – Meaning</strong></td></tr><tr><td>0</td><td>4C – The command code.</td></tr><tr><td>1</td><td>00 –  PIR check period data, bits 15:8;</td></tr><tr><td>2</td><td><p>06 – PIR check period data, bits 7:0. </p><p>Minimum value = 15sec. </p><p><strong>Default value = 10min.</strong></p></td></tr></tbody></table>
+<table data-header-hidden><thead><tr><th width="140"></th><th></th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Hex value – Meaning</strong></td></tr><tr><td>0</td><td>4C – The command code.</td></tr><tr><td>1</td><td>XX –  PIR blind period data, bits 15:8;</td></tr><tr><td>2</td><td><p>XX – PIR blind period data, bits 7:0. </p><p>Minimum value = 15sec. </p><p><strong>Default value = 10min.</strong></p></td></tr></tbody></table>
 {% endtab %}
 
 {% tab title="GET" %}
@@ -62,7 +76,7 @@ When the value is 0, the PIR is constantly powered and checking for movements.
 
 {% tabs %}
 {% tab title="SET" %}
-<table data-header-hidden><thead><tr><th width="161"></th><th></th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Hex value – Meaning</strong></td></tr><tr><td>0</td><td>4A – The command code.</td></tr><tr><td>1</td><td>00 –  PIR check period data, bits 15:8;</td></tr><tr><td>2</td><td><p>06 – PIR check period data, bits 7:0. </p><p>Minimum value = 0sec. </p><p><strong>Default value = 54sec.</strong></p></td></tr></tbody></table>
+<table data-header-hidden><thead><tr><th width="161"></th><th></th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Hex value – Meaning</strong></td></tr><tr><td>0</td><td>4A – The command code.</td></tr><tr><td>1</td><td>XX –  PIR check period data, bits 15:8;</td></tr><tr><td>2</td><td><p>XX – PIR check period data, bits 7:0. </p><p>Minimum value = 0sec. </p><p><strong>Default value = 54sec.</strong></p></td></tr></tbody></table>
 
 **Example downlink:** 0x4A0006 – Set the PIR check period to 6sec.
 {% endtab %}
@@ -82,7 +96,7 @@ The PIR Measurement period is a value that instructs the sensor how long after t
 
 {% tabs %}
 {% tab title="SET" %}
-<table data-header-hidden><thead><tr><th width="145"></th><th></th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Hex value – Meaning</strong></td></tr><tr><td>0</td><td>48 – The command code.</td></tr><tr><td>1</td><td><p>04 – PIR measurement time period. </p><p>Minimum value = 3sec. </p><p><strong>Default value = 3sec.</strong></p></td></tr></tbody></table>
+<table data-header-hidden><thead><tr><th width="145"></th><th></th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Hex value – Meaning</strong></td></tr><tr><td>0</td><td>48 – The command code.</td></tr><tr><td>1</td><td><p>XX – PIR measurement time period. </p><p>Minimum value = 3sec. </p><p><strong>Default value = 3sec.</strong></p></td></tr></tbody></table>
 
 Example command: 0x4804 – Set the measurement period of the PIR sensor = 4sec
 {% endtab %}
