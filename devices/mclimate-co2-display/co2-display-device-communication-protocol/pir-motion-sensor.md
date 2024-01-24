@@ -16,10 +16,10 @@ If you need to have the PIR constantly enabled and detecting movement, you have 
 If you want to do this, we recommend sending the following downlink to the device:
 
 **Option 1 - blind period 1 minute:** \
-0x3C014A00004C003C \
+0x3C014A00004C003C3D4B4D\
 \
 **Option 2 - blind period 10 minutes**\
-0x3C014A00004C0258\
+0x3C014A00004C02583D4B4D\
 \
 Read more about blind period below.
 {% endhint %}
