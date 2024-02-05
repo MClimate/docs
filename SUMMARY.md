@@ -1,6 +1,7 @@
 # Table of contents
 
 * [Overview](README.md)
+* [Firmware Upgrade Over The Air (FUOTA)](firmware-upgrade-over-the-air-fuota.md)
 
 ## Devices
 
