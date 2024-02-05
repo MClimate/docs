@@ -23,6 +23,17 @@ description: Find release notes for firmware of Vicki LoRaWAN
   * This command can be used in cases when an already installed device starts reporting motorRange of 0.
   * Keep in mind that the 5th bit in the 8th byte of the keepalive indicates whether the backplate button is pressed at all.
 
+{% hint style="info" %}
+If your devices are running firmware version 4.0 or higher, they are eligible for FUOTA upgrade to 4.2. Please get in touch with us at [lorawan-support@mclimate.eu](mailto:lorawan-support@mclimate.eu) to coordinate the process.
+{% endhint %}
+
+{% hint style="warning" %}
+Known issues:
+
+* If device is frequently recalibrated, motorRange might decrease.&#x20;
+  * Workaround: Avoid recalibrating frequently. motorRange is fixed when the device is manually removed from the backplate and mounted again.
+{% endhint %}
+
 ### Firmware version 4.1
 
 **Release date:**\
