@@ -163,6 +163,18 @@
   * [AQI Sensor Downlink encoder](devices/mclimate-aqi-sensor-and-notifier-lorawan/aqi-sensor-downlink-encoder.md)
   * [AQI Sensor Uplink Decoder](devices/mclimate-aqi-sensor-and-notifier-lorawan/aqi-sensor-uplink-decoder.md)
   * [Purchase AQI Sensor](https://mclimate.eu/products/aqi-sensor)
+* [🆕 MClimate CO2 Display Lite](devices/mclimate-co2-display-lite.md)
+* [🥳 Release notes](devices/release-notes.md)
+* [📖 CO2 Display Lite Device communication protocol](devices/co2-display-lite-device-communication-protocol/README.md)
+  * [Communication concepts](devices/co2-display-lite-device-communication-protocol/communication-concepts.md)
+  * [Commands cheat sheet](devices/co2-display-lite-device-communication-protocol/commands-cheat-sheet.md)
+  * [Uplink types](devices/co2-display-lite-device-communication-protocol/uplink-types.md)
+  * [Keep-alive](devices/co2-display-lite-device-communication-protocol/keep-alive.md)
+  * [Hiding data from the display](devices/co2-display-lite-device-communication-protocol/hiding-data-from-the-display.md)
+  * [Child lock](devices/co2-display-lite-device-communication-protocol/child-lock.md)
+  * [Network-related settings & Others](devices/co2-display-lite-device-communication-protocol/network-related-settings-and-others.md)
+  * [Get Firmware & Hardware version](devices/co2-display-lite-device-communication-protocol/get-firmware-and-hardware-version.md)
+  * [CO2 measurement settings](devices/co2-display-lite-device-communication-protocol/co2-measurement-settings.md)
 
 ## Others <a href="#other" id="other"></a>
 
