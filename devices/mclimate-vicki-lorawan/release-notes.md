@@ -32,7 +32,7 @@ Known issues:
 
 * If device is frequently recalibrated, motorRange might decrease.&#x20;
   * Workaround: Avoid recalibrating frequently. motorRange is fixed when the device is manually removed from the backplate and mounted again.
-  * Additional advise: When you send recalibration downlink, use unconfirmed downlink along with another get command, so you know the downlink is delivered. When using confirmed downlinks, it increases the chance of the issue occurance.
+  * Additional advise: When you send recalibration downlink, use unconfirmed downlink. When using confirmed downlink for recalibration, it increases the chance of the issue occurance.
 {% endhint %}
 
 ### Firmware version 4.1
