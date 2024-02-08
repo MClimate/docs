@@ -179,6 +179,7 @@
 
 ## Others <a href="#other" id="other"></a>
 
+* [Application of MClimate Vicki to One-pipe steam heating systems](other/application-of-mclimate-vicki-to-one-pipe-steam-heating-systems.md)
 * [Battery Lifetime Estimation Methodology](other/battery-lifetime-estimation-methodology.md)
 * [Discover Smart Buildings solutions](https://mclimate.eu/pages/smartbuildings)
 * [How to solve Large space heating issues](other/how-to-solve-large-space-heating-issues.md)
