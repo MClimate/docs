@@ -57,6 +57,7 @@
   * [📺 Technical Deepdive Webinar](https://www.youtube.com/watch?v=LtvFchshJIA)
   * [🛒 Purchase Vicki LoRaWAN](https://mclimate.eu/products/vicki-lorawan)
 * [🆕 MClimate CO2 Display Lite](devices/mclimate-co2-display-lite/README.md)
+  * [⬆ MClimate CO2 Display Lite Uplink decoder](devices/mclimate-co2-display-lite/mclimate-co2-display-lite-uplink-decoder.md)
   * [🥳 Release notes](devices/mclimate-co2-display-lite/release-notes.md)
   * [📖 CO2 Display Lite Device communication protocol](devices/mclimate-co2-display-lite/co2-display-lite-device-communication-protocol/README.md)
     * [Communication concepts](devices/mclimate-co2-display-lite/co2-display-lite-device-communication-protocol/communication-concepts.md)
