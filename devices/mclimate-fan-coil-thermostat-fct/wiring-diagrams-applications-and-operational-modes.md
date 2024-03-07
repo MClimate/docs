@@ -5,7 +5,7 @@ description: >-
   seven possible schemes.
 ---
 
-# ⚡ Wiring diagrams (applications) & Operational Modes
+# ⚡ Wiring Diagrams (Applications) & Operational Modes
 
 There is a total of 7 possible applications each with its specific wiring. They you can group them in 2 categories, depending whether you are utilizing a 3-speed or an ECM fan.
 
@@ -13,19 +13,11 @@ The two categories have very different wiring so it is advisable to examine the 
 
 A summary can be found in the table below:
 
-| Application code | Fan Type | Description                                                              |
-| ---------------- | -------- | ------------------------------------------------------------------------ |
-| 00               | 3-speed  | 2-pipe ON/OFF                                                            |
-| 01               | 3-speed  | 2-pipe ON/OFF 3-wire  valve (220VAC); TiO2 / ESP                         |
-| 02               | 3-speed  | 4-pipe ON/OFF 3-wire  valve (220VAC); TiO2 / ESP                         |
-| 03               | ECM fan  | 4-pipe ON/OFF; optional TiO2 / ESP                                       |
-| 04               | ECM fan  | 2-pipe ON/OFF; optional TiO2 / ESP                                       |
-| 05               | ECM fan  | 2-pipe ON/OFF 3-wire  valve; optional TiO2 / ESP                         |
-| 06               | ECM fan  | 2-pipe ON/OFF 3-wire  valve; optional TiO2 / ESP, optional floor heating |
+<table><thead><tr><th>Application code</th><th width="121">Fan Type</th><th>Description</th></tr></thead><tbody><tr><td>00</td><td>3-speed</td><td>2-pipe ON/OFF</td></tr><tr><td>01</td><td>3-speed</td><td>2-pipe ON/OFF 3-wire valve (220VAC)</td></tr><tr><td>02</td><td>3-speed</td><td>4-pipe ON/OFF 3-wire valve (220VAC)</td></tr><tr><td>03</td><td>ECM fan</td><td>4-pipe ON/OFF</td></tr><tr><td>04</td><td>ECM fan</td><td>2-pipe ON/OFF</td></tr><tr><td>05</td><td>ECM fan</td><td>2-pipe ON/OFF 3-wire valve</td></tr></tbody></table>
 
-<figure><img src="../../.gitbook/assets/image (18).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/Wiring diagrams.png" alt=""><figcaption><p>Wiring Diagrams (Applications)</p></figcaption></figure>
 
-## Wiring Diagrams (applications)
+## Wiring Diagrams (Applications)
 
 You can change the applications with the following command set.
 

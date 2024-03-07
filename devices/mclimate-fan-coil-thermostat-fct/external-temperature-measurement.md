@@ -2,6 +2,24 @@
 
 ## 1. A**utomatic temperature control mode with external temperature reading**
 
+{% hint style="warning" %}
+When enabling this mode you need to first set the External temperature sensor value with the 3B command below. If you don't the FCT will assume a target temperature of 0°C degrees and act accordingly.
+
+For example send the following command set (whichever of the two you use will have the same end result):
+
+[Temperature with accuracy of 1°C](external-temperature-measurement.md#id-2.1-set-external-temperature-sensor-value-with-resolution-1.0-c)
+
+0x3B183501 (set external temperature to 24°C)
+
+or
+
+[Temperature with accuracy of 0.1°C](external-temperature-measurement.md#id-2.2-set-get-external-temperature-sensor-value-with-resolution-0.1-c)
+
+0x3C00F03501 (set external temperature to 24.0°C)
+
+This will set the target temperature to a nice 24°C and activate the External temperature mode and await a new reading.
+{% endhint %}
+
 {% tabs %}
 {% tab title="SET" %}
 #### This command activates/deactivates the automatic temp. control mode with external temp. reading.

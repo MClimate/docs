@@ -20,7 +20,7 @@ If the fan speed is set to auto, the actual speed is determined by an algorithm 
 {% tab title="GET" %}
 You can get the fan speed with the command. The keepalive data in the example below is omitted for clarity.
 
-<table data-header-hidden><thead><tr><th width="143.99999999999997"></th><th width="190"></th><th></th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Sent request</strong></td><td><strong>Received response</strong></td></tr><tr><td>0</td><td>45 – Command code</td><td>45 – Command code.</td></tr><tr><td>1</td><td> </td><td>00: Fan speed is automatic. <br>01, 02: Fan speed is Low.<br>03, 04: Fan speed is Medium.<br>05, 06: Fan speed is High.</td></tr></tbody></table>
+<table data-header-hidden><thead><tr><th width="143.99999999999997"></th><th width="190"></th><th></th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Sent request</strong></td><td><strong>Received response</strong></td></tr><tr><td>0</td><td>45 – Command code</td><td>45 – Command code.</td></tr><tr><td>1</td><td> </td><td>00: Fan speed is automatic. <br>02: Fan speed is Low.<br>04: Fan speed is Medium.<br>06: Fan speed is High.</td></tr></tbody></table>
 
 **Example command:** 0x45;
 
@@ -162,7 +162,7 @@ The ECM fan starts at maximum speed for a specified start up time.
 
 {% tabs %}
 {% tab title="SET" %}
-#### Set up the the start up time.
+#### Set up the start up time.
 
 <table data-header-hidden><thead><tr><th width="131"></th><th></th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Hex value – Meaning</strong></td></tr><tr><td>0</td><td>4A – The command code.</td></tr><tr><td>1</td><td>XX - ECM start up time.  <strong>Default value:</strong> 0x00 (The function is deactivated). </td></tr></tbody></table>
 

@@ -1,6 +1,6 @@
 # 😲 MClimate Fan Coil Thermostat (FCT)
 
-<figure><img src="../../.gitbook/assets/MClimate FCT Header image" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/Main.png" alt=""><figcaption><p>Device view and dimensions</p></figcaption></figure>
 
 ### General information
 

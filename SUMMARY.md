@@ -8,7 +8,7 @@
 * [😲 MClimate Fan Coil Thermostat (FCT)](devices/mclimate-fan-coil-thermostat-fct/README.md)
   * [🥳 Release notes](devices/mclimate-fan-coil-thermostat-fct/release-notes.md)
   * [⭐ Getting started](devices/mclimate-fan-coil-thermostat-fct/getting-started.md)
-  * [⚡ Wiring diagrams (applications) & Operational Modes](devices/mclimate-fan-coil-thermostat-fct/wiring-diagrams-applications-and-operational-modes.md)
+  * [⚡ Wiring Diagrams (Applications) & Operational Modes](devices/mclimate-fan-coil-thermostat-fct/wiring-diagrams-applications-and-operational-modes.md)
   * [Communication concepts](devices/mclimate-fan-coil-thermostat-fct/communication-concepts.md)
   * [Commands cheat sheet](devices/mclimate-fan-coil-thermostat-fct/commands-cheat-sheet.md)
   * [Keep-alive](devices/mclimate-fan-coil-thermostat-fct/keep-alive.md)
