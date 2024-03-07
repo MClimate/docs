@@ -4,6 +4,32 @@ description: Find release notes for firmware of Vicki LoRaWAN
 
 # 🥳 Release notes
 
+### Firmware version 4.3
+
+Release date: \
+01.03.2024
+
+{% hint style="info" %}
+If your devices are running firmware version 4.0 or higher, they are eligible for FUOTA upgrade to 4.3. Read more [here](../../firmware-upgrade-over-the-air-fuota.md).
+{% endhint %}
+
+* Further improvements on calibration mechanism.
+* Temperature measurement can now reach -5 degrees C - previously the lowest value was 5 degrees C.
+* [Introduced anti-freeze functionality.](vicki-lorawan-device-communication-protocol/anti-freeze-functionality.md)
+* Each time the device is powered, it briefly rotates the motor to verify the fully open position.
+* [Added SET/GET command for PI's anti wind-up value.](vicki-lorawan-device-communication-protocol/operational-modes-and-temperature-control-algorithm/algorithm-3-proportional-integral.md#maximum-allowed-integral-value)
+* [Added a SET command to set valve openness in percentages.](vicki-lorawan-device-communication-protocol/set-motor-position-and-update-target-temperature-command-explanation.md#set-valve-openness-in-percentage)
+  * Added a "valve openness" property in the decoder to indicate what's the current valve openness in percentages.
+* [Added SET/GET for the MIN/MAX valve openness - e.g. you can set it so that the valve opens to max 60% or min 10% - useful for hydraulic balancing.](vicki-lorawan-device-communication-protocol/set-motor-position-and-update-target-temperature-command-explanation.md#valve-openness-range-in-percentage)
+* After the device joins the network, it sends the first 5 uplinks as soon as possible (depending on the Spreading Factor that the LNS has set)
+* [Added a new SET command for the target temperature with accuracy 0.1 degrees - e.g. you can now set target temperature of 22.3 degrees. ](vicki-lorawan-device-communication-protocol/set-motor-position-and-update-target-temperature-command-explanation.md#target-temperature-with-resolution-0.1-c)
+  * When the temperature is changed through the device, it switches back to whole values - e.g. 23, 24...
+  * When the target temperature is with a decimal point, e.g. 22.3, the device includes this target temperature with each uplink.
+* [Discontinued the algorithm 2 - "Proportional control", as the algorithm 3 - "Proportional Integral control" delivers better results.](vicki-lorawan-device-communication-protocol/operational-modes-and-temperature-control-algorithm/algorithm-2-proportional-control.md)
+* [Added SET/GET commands for measured temperature offset.](vicki-lorawan-device-communication-protocol/external-temperature-measurement-and-internal-temperature-offset.md#internal-temperature-offset)
+* When the device is removed from the backplate, it sends immediate uplink.
+* Bugfixes implemented for the issues found in firmware 4.2 (read below).
+
 ### Firmware version 4.2
 
 **Release date:**\
@@ -13,8 +39,8 @@ description: Find release notes for firmware of Vicki LoRaWAN
 * Maximum motorRange increased from 800 steps to 860 steps
 * The first temperature control algorithm, called [Equal Direction Control](vicki-lorawan-device-communication-protocol/operational-modes-and-temperature-control-algorithm/algorithm-1-equal-directional-control.md) is removed.
 * A [new PI algorithm](vicki-lorawan-device-communication-protocol/operational-modes-and-temperature-control-algorithm/algorithm-3-proportional-integral.md) is introduced and is now the default algorithm.
-* New command for [ext. temp measurement](vicki-lorawan-device-communication-protocol/external-temperature-measurement.md#set-external-temperature-sensor-value-with-accuracy-0.1) setting with accuracy 0.1 (previous accuracy was 1.0, old command is preserved).&#x20;
-  * New command to [GET the ext. temp measurement value](vicki-lorawan-device-communication-protocol/external-temperature-measurement.md#get-external-temperature-sensor-value-with-accuracy-0.1) is implemented.
+* New command for [ext. temp measurement](vicki-lorawan-device-communication-protocol/external-temperature-measurement-and-internal-temperature-offset.md#set-external-temperature-sensor-value-with-accuracy-0.1) setting with accuracy 0.1 (previous accuracy was 1.0, old command is preserved).&#x20;
+  * New command to [GET the ext. temp measurement value](vicki-lorawan-device-communication-protocol/external-temperature-measurement-and-internal-temperature-offset.md#get-external-temperature-sensor-value-with-accuracy-0.1) is implemented.
   * When the device is in operational mode with ext. temperature sensor, the ext. temperature value in the memory in the device is reported with each keepalive.
 * New command for [open window detection](vicki-lorawan-device-communication-protocol/open-window-detection.md#open-window-commands-with-delta-t-0.1-accuracy) with delta accuracy of 0.1 (previous accuracy was 1.0, old command is preserved).
 * The device now does not reply immediately to a downlink unless it contains a GET command.
@@ -32,7 +58,9 @@ Known issues:
 
 * If device is frequently recalibrated, motorRange might decrease.&#x20;
   * Workaround: Avoid recalibrating frequently. motorRange is fixed when the device is manually removed from the backplate and mounted again.
-  * Additional advise: When you send recalibration downlink, use unconfirmed downlink. When using confirmed downlink for recalibration, it increases the chance of the issue occurance.
+  * Additional advise: When you send recalibration downlink, use unconfirmed downlink. When using confirmed downlink for recalibration, it increases the chance of the issue occurrence.
+* When the device is removed from the backplate during motor rotation, it is possible that the motor pushes indefinitely.
+* When the device is working in ext. temp sensor mode and no ext. temp value is sent through a downlink, the PI algorithm might not work optimally, but still continues to control the valve based on the target temperature.
 {% endhint %}
 
 ### Firmware version 4.1

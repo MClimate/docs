@@ -1,10 +1,16 @@
 # Network-related settings
 
+## Get LoRaWAN Region
+
+This command gets the&#x20;
+
+<table data-header-hidden><thead><tr><th width="125">Byte index</th><th>Hex value – Meaning</th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Hex value – Meaning</strong></td></tr><tr><td>0</td><td>A4 – The command code.</td></tr><tr><td>1</td><td><p><span class="math">T, [s] = XX * 5.</span> Value 0x00 isn’t applicable. </p><p>Default value for f.w. &#x3C; 4.1: 3 minutes.<br>Default value for f.w. >= 4.1: 10 minutes</p></td></tr></tbody></table>
+
 ## Set network join retry period command explanation.
 
 This command is used to set the period (T) of LoRaWAN join request sending from Vicki, in case it was unable to join the network from the first attempt. The command is described in Table 17.
 
-<table data-header-hidden><thead><tr><th width="136">Byte index</th><th>Hex value – Meaning</th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Hex value – Meaning</strong></td></tr><tr><td>0</td><td>10 – The command code.</td></tr><tr><td>1</td><td><p><span class="math">T, [s] = XX * 5.</span> Value 0x00 isn’t applicable. </p><p>Default value for f.w. &#x3C; 4.1: 3 minutes.<br>Default value for f.w. >= 4.1: 10 minutes</p></td></tr></tbody></table>
+<table data-header-hidden><thead><tr><th width="125">Byte index</th><th>Hex value – Meaning</th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Hex value – Meaning</strong></td></tr><tr><td>0</td><td>10 – The command code.</td></tr><tr><td>1</td><td>XX - LoRaWAN region<br>00: EU868<br>01:  AS923<br>02: AU915<br>03: US915<br>FF: Other</td></tr></tbody></table>
 
 Table 17
 

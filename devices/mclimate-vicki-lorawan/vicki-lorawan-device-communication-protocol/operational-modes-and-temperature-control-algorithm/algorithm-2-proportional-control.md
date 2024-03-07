@@ -4,6 +4,10 @@
 This algorithm is available for devices with firmware version >= 4.0
 {% endhint %}
 
+{% hint style="danger" %}
+Devices with firmware version >=4.3 have this algorithm removed as Algorithm 3 - Proportional Integral control has been deemed superior due to delivering better results.
+{% endhint %}
+
 ## **Algorithm logic**
 
 This control algorithm is used by the device to achieve the desired target temperature. Each time the algorithm logic is executed, the motor position is adjusted, so the target temperature is reached. The following block diagram explains the requirements in order for the proportional algorithm logic to be executed.

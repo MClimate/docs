@@ -1,4 +1,4 @@
-# External temperature measurement
+# External temperature measurement and internal temperature offset
 
 This mode is used when the measurements of Vicki's temperature sensor is not reliable - e.g. there's a cover in front of the radiator.
 
@@ -38,3 +38,31 @@ The value must be greater than 0°C!
 <table data-header-hidden><thead><tr><th width="96.33333333333331">Byte index</th><th width="198">Sent request</th><th>Received response</th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Sent request</strong></td><td><strong>Received response</strong></td></tr><tr><td>0</td><td>44 – Command code.</td><td>44 – The command code.</td></tr><tr><td>1</td><td></td><td>Т[15:8]</td></tr><tr><td>2</td><td></td><td>T[7:0]<br>t° = T[15:0]/10</td></tr></tbody></table>
 
 **Example uplink:** 0x440110 - Ext. temp measurement value is 27.2
+
+## Internal Temperature Offset
+
+This command allows you to offset the internally measured temperature by +/- 5°C
+
+{% tabs %}
+{% tab title="SET" %}
+This command sets the desired temperature offset.
+
+<table data-header-hidden><thead><tr><th width="131.66666666666666">Byte index</th><th width="138">Sent request</th><th>Received response</th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Sent request</strong></td><td><strong>Received response</strong></td></tr><tr><td>0</td><td>53 – Command code.</td><td>53 – The command code.</td></tr><tr><td>1</td><td></td><td>XX – offset parameter value</td></tr></tbody></table>
+
+**Example command sent from server:** 0x5300, where 00\[HEX]=0\[DEC]\
+offset, \[°C] = (XX - 28) \* 0.176 = (0-28)\* 0.176=-28\* 0.176=-4.928=5°C
+{% endtab %}
+
+{% tab title="GET" %}
+
+
+This command gets the current temperature offset.
+
+<table data-header-hidden><thead><tr><th width="135.20724027353867">Byte index</th><th>Hex value - Meaning</th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Hex value - Meaning</strong></td></tr><tr><td>0</td><td>54 – The command code.</td></tr><tr><td>1</td><td>XX – offset parameter value</td></tr></tbody></table>
+
+**Example command:** 0x5438,
+
+38\[HEX]=56\[DEC]\
+offset, \[°C] = (XX - 28) \* 0.176 = (56-28)\* 0.176=28\* 0.176=4.928=5°C
+{% endtab %}
+{% endtabs %}

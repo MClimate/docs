@@ -16,13 +16,49 @@ The algorithm will run on 3 occasions:
 
 &#x20;\- T(measured) - T(target) > 2 degrees Celsius
 
-The implementation does not have integral reset time - it integrates all previous errors. There's an integral anti wind-up and anti wind-down in place, which limits the integral to 0-50 degrees.&#x20;
-
 $$
 Integral = \sum_{}^{}e
 $$
 
 There's a [software hysteresis](algorithm-3-proportional-integral.md#temperature-hysteresis) in place, which prevents the movement of the motor unless the error is > Thys.
+
+{% hint style="info" %}
+The implementation does not have integral reset time - it integrates all previous errors. There's an integral anti wind-up and anti wind-down in place, which limits the integral to 0-50 degrees by default. You can change the maximum value via the command below, increasing the error limit.
+{% endhint %}
+
+## Maximum allowed Integral value
+
+{% tabs %}
+{% tab title="SET" %}
+<table><thead><tr><th width="149">Byte Index</th><th>Byte value - meaning</th></tr></thead><tbody><tr><td><strong>Byte Index</strong></td><td><strong>Byte value - meaning</strong></td></tr><tr><td>0</td><td>4C - The command code</td></tr><tr><td>1</td><td>XX - I[15:8]</td></tr><tr><td>2</td><td>XX -I[7:0] </td></tr></tbody></table>
+
+**Example command:** 0x4C012C
+
+I\[15:0] = 012C\[HEX] = 300
+
+Integral = I\[DEC] / 10 = 300 / 10 = 30
+
+The error is set to its maximum allowed value of 30°C
+
+**Default:**\
+**I\[15:0] = 01F4\[HEX] = 50\[DEC] = 50°C**
+{% endtab %}
+
+{% tab title="GET" %}
+<table><thead><tr><th width="135">Byte index</th><th width="157">Sent request</th><th>Response - Meaning</th></tr></thead><tbody><tr><td>0</td><td>4D – The command code.</td><td>4D – The command code.</td></tr><tr><td>1</td><td> </td><td>XX - I[15:8]</td></tr><tr><td>2</td><td></td><td>XX -I[7:0] </td></tr></tbody></table>
+
+**Example command response:** 0x4D03E8
+
+I\[15:0] = 03E8\[HEX] = 1000
+
+Integral = I\[DEC] / 10 = 1000 / 10 = 100
+
+The error is set to its maximum allowed value of 100°C
+
+**Default:**\
+**I\[15:0] = 01F4\[HEX] = 50\[DEC] = 50°C**
+{% endtab %}
+{% endtabs %}
 
 ## Proportional gain - Kp
 
@@ -71,7 +107,7 @@ Ki = 1122867/131072 = 8.57
 
 <table><thead><tr><th width="135">Byte index</th><th width="157">Sent request</th><th>Response - Meaning</th></tr></thead><tbody><tr><td>0</td><td>3F – The command code.</td><td>3F – The command code.</td></tr><tr><td>1</td><td> </td><td>Integral [15:8]</td></tr><tr><td>2</td><td> </td><td>Integral [7:0]</td></tr></tbody></table>
 
-The value of the integral is premultiplied by 10 by the device, so it can use 0,1 resolution.
+The value of the integral is pre-multiplied by 10 by the device, so it can use 0,1 resolution.
 
 **Example uplink:**
 
@@ -122,4 +158,3 @@ Integral = 25/10 = 2.5
 0x42FF - The temperature hysteresis is 1.6 degrees Celsius.
 {% endtab %}
 {% endtabs %}
-

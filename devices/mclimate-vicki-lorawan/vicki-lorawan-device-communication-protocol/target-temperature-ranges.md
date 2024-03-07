@@ -8,7 +8,7 @@
 
 &#x20;This command is used to set the possible min. and max. target temperature values. In Table 11 is described the data the server sends to set these values.
 
-<table data-header-hidden><thead><tr><th width="132">Byte index</th><th>Hex value - Meaning</th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Hex value - Meaning</strong></td></tr><tr><td>0</td><td>08 – The command code.</td></tr><tr><td>1</td><td>XX – lower temperature limit. Min. allowed/Default value: 0x05 (5 Celsius degrees).</td></tr><tr><td>2</td><td>XX – upper temperature limit. Max. allowed/Default value: 0x1E (30 Celsius degrees).</td></tr></tbody></table>
+<table data-header-hidden><thead><tr><th width="138">Byte index</th><th>Hex value - Meaning</th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Hex value - Meaning</strong></td></tr><tr><td>0</td><td>08 – The command code.</td></tr><tr><td>1</td><td>XX – lower temperature limit. Min. allowed/Default value: 0x05 (5 Celsius degrees).</td></tr><tr><td>2</td><td>XX – upper temperature limit. Max. allowed/Default value: 0x1E (30 Celsius degrees).</td></tr></tbody></table>
 
 Table 11
 
