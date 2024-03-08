@@ -32,9 +32,52 @@ However, LoRaWAN FUOTA provides a much more scalable solution for IoT deployment
 ### **Initiating a FUOTA session**
 
 {% hint style="info" %}
-As of now, the way to initiate FUOTA is to connect your LNS to our Cloud and email us (lorawan-support@mclimate.eu) a list of Serial numbers of devices you wish to update.
+The MClimate Enterprise platform offers a built-in functionality that allows users to initiate the FUOTA procedure themselves.&#x20;
 
-Instructions on how to connect your LNS to our Cloud are to be found in the bar on the left, in section Integrations.
+If you would rather not use Enterprise, you would need to email us at lorawan-support@mclimate.eu with a list of the  Serial numbers of devices you wish to update.
+
+In both cases you still need to connect your LNS to our cloud (refer to the [Integrations](broken-reference) section).
+{% endhint %}
+
+Once you have your Integration properly configured so your LNS can communicate with our Cloud you need to go through the following steps:
+
+* Create a Building where the devices will reside and import them
+* Select Devices and Firmware version and initiate the process
+
+#### Create a new building and import devices
+
+We have already prepared a [Getting Started](https://app.gitbook.com/s/-McsOSt2XkjYl-QZLySV/getting-started) guide for your convenience that will guide you through the process of registration with the platform, creating your first building and importing your device.
+
+Follow the steps and you should have your devices within a building in no time, ready to be updated.
+
+#### Select devices and Firmware version and initiate the process.
+
+Now that the devices are imported into a building you can choose which ones you want to update and which is the desired firmware version.
+
+Head to the "Firmware management" section in the main view of your building.
+
+<figure><img src=".gitbook/assets/1-1.png" alt=""><figcaption><p>Firmware Management</p></figcaption></figure>
+
+You will see a list of all devices in the building. Select the desired devices, you can select as many devices as you like, however for each device type you need to initiate the procedure separate.
+
+<figure><img src=".gitbook/assets/2-1.png" alt=""><figcaption><p>Selecting devices</p></figcaption></figure>
+
+Let us initiate FUOTA for the two Vickis in the image above. Select them and press on the blue Firmware management button, a window will pop up with a drop-down menu where you can select the desired firmware version to be update to.
+
+<figure><img src=".gitbook/assets/3-1.png" alt=""><figcaption><p>Firmware version selector</p></figcaption></figure>
+
+Once you press on the button to initiate the process you will be returned to the Firmware management screen with complete list of devices. You can follow the progress there in real time.
+
+<figure><img src=".gitbook/assets/4-1.png" alt=""><figcaption><p>FUOTA progress</p></figcaption></figure>
+
+{% hint style="info" %}
+The process works in real-time however since you are still viewing it through a web-page you need to refresh it for the information to be updated. The progress bar will not refresh itself.
+{% endhint %}
+
+When the process finalizes successfully you will see the bar fill up to 100% and the process Status will change to "complete". At this point your devices are updated, taking advantage of any benefits the new firmware offers.
+
+{% hint style="warning" %}
+The FUOTA process does not disable normal operation of your devices, neither requires reset/reboot after. It is seamless and no user interaction is required with the exception of its initiation.
 {% endhint %}
 
 ### What if my MClimate devices do not support FUOTA?
