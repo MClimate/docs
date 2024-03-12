@@ -50,6 +50,8 @@ The server sends this command to Fan Coil Thermostat device when it has a new me
 
 **Example downlink:** 0x3B14 – the server notifies Fan Coil Thermostat that the measured temperature by the external sensor is 0x14\[HEX] => 20\[DEC] = 20°C.
 
+The allowed range is 1...99°C (1.0°C resolution).
+
 ### 2.2 Set/Get еxternal temperature sensor value with resolution 0.1°C
 
 {% tabs %}
@@ -60,7 +62,7 @@ The server sends this command to Fan Coil Thermostat device when it has a new me
 
 T\[15:0] = Texternal\[°C] \* 10; The value of Texternal\[°C] must be greater than 0°C!
 
-**Example command**: 0x3C0102 - the server notifies the Fan Coil Thermostat that the measured temperature by the external sensor is 25,8°C => 25,8 \* 10 = 258 \[DEC] => 0x0102 \[HEX];
+**Example command**: 0x3C0102 - the server notifies the Fan Coil Thermostat that the measured temperature by the external sensor is 25.8°C => 25.8 \* 10 = 258 \[DEC] => 0x0102 \[HEX];
 {% endtab %}
 
 {% tab title="GET" %}
@@ -77,3 +79,5 @@ Texternal\[°C] = T\[15:0] / 10;
 0x0102 \[HEX] = 258 \[DEC] => Texternal = 258 / 10 = 25,8°C.
 {% endtab %}
 {% endtabs %}
+
+The allowed range is 0.1...99.9°C (0.1°C resolution).

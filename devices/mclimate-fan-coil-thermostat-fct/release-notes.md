@@ -1,5 +1,24 @@
 # 🥳 Release notes
 
+### Firmware version 1.4
+
+**Release date:** \
+04 March 2024
+
+* Settings changed with the buttons now have a 5 second delay (to avoid rapid switching when cycling through fan speeds for example).
+* Removed the black bar at the bottom of the display when the device is turned off.
+* Тhe default temperature compensation value of the measured temperature has been changed from 0°C to -1.4°C.
+* А bug related to sending the first radio packet has been fixed.
+* Fixed "GET fan speed" command to return correct values for a 3-speed fan.
+
+### Firmware version 1.3
+
+**Release date:** \
+19 January 2024
+
+* Added app menu key unlock feature.
+* Added functionality to select an app with buttons from the app menu.
+
 ### Firmware version 1.2
 
 **Release date:** \

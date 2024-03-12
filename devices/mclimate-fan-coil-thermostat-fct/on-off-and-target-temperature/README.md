@@ -42,7 +42,7 @@ T\[15:0] = Ttarget\[°C] \* 10;
 
 **Example command**: 0x2E0102;
 
-Set target temperature - 25,8°C \* 10 = 258 \[DEC]  => 0x0102 \[HEX].
+Set target temperature - 25.8°C \* 10 = 258 \[DEC]  => 0x0102 \[HEX].
 {% endtab %}
 
 {% tab title="GET" %}
@@ -74,7 +74,7 @@ Ttarget\[°C] = T\[15:0] / 10;
 
 **Example uplink**: 0x300102;
 
-0x0102 \[DEC] = 258 \[DEC] => Ttarget = 258 / 10 = 25,8°C.
+0x0102 \[DEC] = 258 \[DEC] => Ttarget = 258 / 10 = 25.8°C.
 
 ## Configuring the target temperature step
 
@@ -88,7 +88,7 @@ You can change the target temperature step, when buttons are used. E.g. when the
 
 **Example command**: 0x030F;
 
-Sets the temperature step - 1,5°C \* 10 = 15 \[DEC] => 0x0F \[HEX].
+Sets the temperature step - 1.5°C \* 10 = 15 \[DEC] => 0x0F \[HEX].
 
 
 {% endtab %}
@@ -118,13 +118,13 @@ This is applies to the measured temperature.
 {% tab title="SET" %}
 #### This command is used to set the compensation temperature values.
 
-<table data-header-hidden><thead><tr><th width="132">Byte index</th><th>Hex value - Meaning</th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Hex value - Meaning</strong></td></tr><tr><td>0</td><td>5A – The command code.</td></tr><tr><td>1</td><td>00: Positive compensation.<br>01: Negative compensation.</td></tr><tr><td>2</td><td>XX - Tcomp[°C] * 10. <strong>Default value:</strong> 0x00 (0°C).</td></tr></tbody></table>
+<table data-header-hidden><thead><tr><th width="132">Byte index</th><th>Hex value - Meaning</th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Hex value - Meaning</strong></td></tr><tr><td>0</td><td>5A – The command code.</td></tr><tr><td>1</td><td>00: Positive compensation.<br>01: Negative compensation.</td></tr><tr><td>2</td><td>XX - Tcomp[°C] * 10. <strong>Default value: 0x010E</strong> (-1.4°C).</td></tr></tbody></table>
 
 **Example command:** 0x5A0115;
 
 Set the negative temp. compensation - 0x01\[HEX].
 
-Set the compensation temperature - 2,1°C \* 10 = 21\[DEC] => 0x15\[HEX].
+Set the compensation temperature - 2.1°C \* 10 = 21\[DEC] => 0x15\[HEX].
 {% endtab %}
 
 {% tab title="GET" %}
@@ -144,4 +144,4 @@ Convert 0x15\[HEX] = 21\[DEC] => Tcomp = 21 / 10 = 2,1°C.
 {% endtab %}
 {% endtabs %}
 
-**Note:** The allowed range is -5...5°C (0,1°C resolution).
+**Note:** The allowed range is -5...5°C (0.1°C resolution).
