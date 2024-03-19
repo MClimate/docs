@@ -14,12 +14,12 @@ The data is described in Table 3. In Table 4 example packet is given.
 | ----------------- | ----- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | 0                 | 01    |          | Command byte for this packet.                                                                                                                                                                                      |
 | 1                 | XX    |          | Internal temperature sensor data, bits 15:8 – T\[15:8].                                                                                                                                                            |
-| 2                 | XX    |          | <p>Internal temperature sensor data, bits 7:0 - T[7:0]. ￼</p><p>  <span class="math">t,[ \degree C] = \frac{T[15:0] - 400 }{10}</span> </p>                                                                        |
-| 3                 | XX    |          | Relative Humidity data. $$[ \%] = \frac{XX*100}{256}$$                                                                                                                                                             |
-| 4                 | XX    |          | Device battery voltage.  $$[mV] == XX * 8 + 1600$$                                                                                                                                                                 |
+| 2                 | XX    |          | <p>Internal temperature sensor data, bits 7:0 - T[7:0].</p><p>  <span class="math">t,[ \degree C] = \frac{T[15:0] - 400 }{10}</span> </p>                                                                          |
+| 3                 | XX    |          | Relative Humidity data. $$RH, [ \%] = \frac{XX*100}{256}$$                                                                                                                                                         |
+| 4                 | XX    |          | Device battery voltage.  $$Vb, [mV] = XX * 8 + U, [mV]=1600$$                                                                                                                                                      |
 | 5                 | XX    | Bits 7:3 | Reserved.                                                                                                                                                                                                          |
 |                   |       | Bit 2    | <p>External thermistor operational status:</p><p>1: Thermistor connection is broken;</p><p>0: The thermistor is properly connected.</p>                                                                            |
-|                   |       | Bits 1:0 | <p>External thermistor temperature data, </p><p>bits 9:8 - T￼[9:8]</p>                                                                                                                                             |
+|                   |       | Bits 1:0 | <p>External thermistor temperature data, </p><p>bits 9:8 - T[9:8]</p>                                                                                                                                              |
 | 6                 | XX    |          | <p>External thermistor temperature data,</p><p>bits 7:0 - T[7:0]. The measurement resolution is  <span class="math">0.1 \degree C</span> .</p><p><span class="math">t, [\degree C] = \frac{T[9:0]}{10}</span> </p> |
 
 _Table 3_
@@ -29,11 +29,11 @@ _Table 3_
 | 0   | 01    |          | Command byte for this packet.                                                                                                                               |
 | 1   | 02    |          | Internal temperature sensor data, bits 15:8 – T\[15:8].                                                                                                     |
 | 2   | 88    |          | Temperature data, bits 7:0. $$t,[ \degree C] = \frac{648 - 400 }{10} = 24.8$$                                                                               |
-| 3   | 80    |          | Relative humidity, $$[\%] = \frac{128 * 100}{256} = 5$$                                                                                                     |
-| 4   | AB    |          | Battery voltage, $$[mV] = 171 * 8 +1600 = 1968$$                                                                                                            |
+| 3   | 80    |          | Relative humidity, $$RH, [\%] = \frac{128 * 100}{256} = 5$$                                                                                                 |
+| 4   | AB    |          | Battery voltage, $$Vb, [mV] = 171 * 8+Um, [mV]=1600 = 1968$$                                                                                                |
 | 5   | 02    | Bits 7:3 | Reserved.                                                                                                                                                   |
 |     |       | Bit 2    | <p>External thermistor operational status:</p><p>1: Thermistor connection is broken;</p><p>0: The thermistor is properly connected.</p>                     |
-|     |       | Bits 1:0 | <p>External thermistor temperature data, </p><p>bits 9:8 - T￼[9:8]</p>                                                                                      |
+|     |       | Bits 1:0 | <p>External thermistor temperature data, </p><p>bits 9:8 - T[9:8]</p>                                                                                       |
 | 6   | 9C    |          | <p>External thermistor temperature data, bits </p><p>7:0 - T[7:0]. <span class="math">t, [\degree C] = \frac{0x29C}{10} = \frac{668}{10} = 66.8</span> </p> |
 
 _Table 4_
