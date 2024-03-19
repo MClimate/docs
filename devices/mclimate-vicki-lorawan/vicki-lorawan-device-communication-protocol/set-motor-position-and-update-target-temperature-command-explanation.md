@@ -41,6 +41,10 @@ Target temperature = 258 / 10 = 25.8
 
 ## Set valve openness in percentage
 
+{% hint style="warning" %}
+This command only works in [Manual mode](operational-modes-and-temperature-control-algorithm/#set).
+{% endhint %}
+
 {% tabs %}
 {% tab title="SET" %}
 The desired valve openness in percentage.
@@ -67,13 +71,13 @@ By default this range is set to 100% for both parameters, making it possible for
 {% tab title="SET" %}
 The desired range in percentage.
 
-<table data-header-hidden><thead><tr><th width="137">Byte index</th><th>Hex value - Meaning</th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Hex value - Meaning</strong></td></tr><tr><td>0</td><td>45 – The command code.</td></tr><tr><td>1</td><td>XX - Mar parameter<br>Default is 0x00</td></tr><tr><td>2</td><td>XX - Mir parameter<br>Default is 0x64</td></tr></tbody></table>
+<table data-header-hidden><thead><tr><th width="137">Byte index</th><th>Hex value - Meaning</th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Hex value - Meaning</strong></td></tr><tr><td>0</td><td>4F – The command code.</td></tr><tr><td>1</td><td>XX - Mar parameter<br>Default is 0x00</td></tr><tr><td>2</td><td>XX - Mir parameter<br>Default is 0x64</td></tr></tbody></table>
 
 Max openness \[%] = 100-Mar
 
 Min openness \[%] = Mir
 
-**Example command:** 0x450A5A
+**Example command:** 0x4F0A5A
 
 Mar = 0A\[HEX] = 10\[DEC] => Max openness = 100-10=90%\
 The int. PI algorithm will be capable to **open the valve** to 90% of the motor range.
