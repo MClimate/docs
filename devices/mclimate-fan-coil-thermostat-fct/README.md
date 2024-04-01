@@ -34,6 +34,8 @@ Learn more about MClimate Smart Building Solutions:
 * Link budget: 130dB
 * RF Transmit Power: 14dB
 
-### Wiring diagrams
+### Documents
 
-{% file src="../../.gitbook/assets/MClimate-FCT-Initial-Wiring-Diagrams-01062023.pdf" %}
+{% file src="../../.gitbook/assets/MClimate-FCT-Datasheet.pdf" %}
+
+{% file src="../../.gitbook/assets/MClimate-FCT-User-Manual.pdf" %}
