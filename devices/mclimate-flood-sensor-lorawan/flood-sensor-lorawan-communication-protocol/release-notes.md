@@ -6,15 +6,15 @@
 18 May 2023
 
 * Now the most important device's settings are sent together with the first uplink.
-* Added a bit to the [keepalive](flood-sensor-lorawan-communication-protocol/keep-alive.md) to indicate when the measured temperature is negative.
-* Added command to [get keepalive period](flood-sensor-lorawan-communication-protocol/keep-alive.md#keepalive-period).
-* Added command to GET the [Acoustic and LED alarm duration](flood-sensor-lorawan-communication-protocol/flood-event-available-configurations.md#acoustic-and-led-alarm-duration).
-* Added commands to SET and GET the [radio watch dog configurations](flood-sensor-lorawan-communication-protocol/network-related-settings.md#communication-watch-dog).
-* Added commands to SET and GET the [radio join-retry period](flood-sensor-lorawan-communication-protocol/network-related-settings.md#join-retry-period).
-* Added commands to SET and GET the [device periodic uplink message type](flood-sensor-lorawan-communication-protocol/uplink-types.md#device-uplink-messages-type-command-explanation).
-* Added commands to SET and GET the [Flood event uplink messages type](flood-sensor-lorawan-communication-protocol/flood-event-available-configurations.md#flood-event-uplink-messages-type).
-* Added commands to SET and GET the [Alarm Uplink periodicity](flood-sensor-lorawan-communication-protocol/flood-event-available-configurations.md#alarm-uplink-periodicity).
-* Added command to [Read device hardware and firmware version](flood-sensor-lorawan-communication-protocol/read-firmware-and-hardware-version.md).
+* Added a bit to the [keepalive](keep-alive.md) to indicate when the measured temperature is negative.
+* Added command to [get keepalive period](keep-alive.md#keepalive-period).
+* Added command to GET the [Acoustic and LED alarm duration](flood-event-available-configurations.md#acoustic-and-led-alarm-duration).
+* Added commands to SET and GET the [radio watch dog configurations](network-related-settings.md#communication-watch-dog).
+* Added commands to SET and GET the [radio join-retry period](network-related-settings.md#join-retry-period).
+* Added commands to SET and GET the [device periodic uplink message type](uplink-types.md#device-uplink-messages-type-command-explanation).
+* Added commands to SET and GET the [Flood event uplink messages type](flood-event-available-configurations.md#flood-event-uplink-messages-type).
+* Added commands to SET and GET the [Alarm Uplink periodicity](flood-event-available-configurations.md#alarm-uplink-periodicity).
+* Added command to [Read device hardware and firmware version](read-firmware-and-hardware-version.md).
 * Added FUOTA functionality.
 
 {% hint style="info" %}

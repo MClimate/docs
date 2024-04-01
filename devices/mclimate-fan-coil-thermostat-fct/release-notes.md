@@ -25,7 +25,6 @@
 03 January 2024
 
 * Added function to lock/unlock keys by pressing a certain combination.
-* Added functionality for [Automatic temperature control mode with external temperature reading](mclimate-fan-coil-thermostat-device-communication-protocol/external-temperature-measurement.md)
 * Added separate PLC commands to delay relays, command to reset buffers and FCC outputs.
 * Added a new PLC command to delay the ECM fan voltage output.
 * Fixed a bug related to the SPI driver responsible for communication between the display and the device.

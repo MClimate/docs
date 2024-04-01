@@ -4,7 +4,7 @@
 
 The diagram below shows how the actual fan speed changes when the user has set the fan to auto.
 
-<figure><img src="../../../../.gitbook/assets/FCT - AUTO FAN operation" alt="" width="563"><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/FCT - AUTO FAN operation" alt="" width="563"><figcaption></figcaption></figure>
 
 Example:\
 &#x20;\- **current operational mode: Heating**\
@@ -24,7 +24,7 @@ Example:\
 5. Temperature increases further till it reach 21.8°C (20%Δt2 threshold), where the fan speed is further reduced to Low.
 6. Temperature increases still, reaching 23°C (target temperature - w), the Fan turns off.
 
-<figure><img src="../../../../.gitbook/assets/image (20).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (20).png" alt=""><figcaption></figcaption></figure>
 
 ## Delta temperature 1 (ΔT1)
 

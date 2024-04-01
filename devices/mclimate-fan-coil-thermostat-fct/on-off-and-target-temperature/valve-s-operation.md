@@ -4,7 +4,7 @@ Regardless of the application (wiring diagram) choice, the valve(s) are operated
 
 The corresponding valve is activated together with the fan as the measured temperature crosses the _**Δt1**_ threshold in relation with the target temperature _**w**_. As the temperature in the room reaches the target temperature, the valve(s) and the fan are deactivated.
 
-<figure><img src="../../../../.gitbook/assets/FCT - Valves operation" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/FCT - Valves operation" alt=""><figcaption></figcaption></figure>
 
 Example:\
 &#x20;\- **current operational mode: Heating**\
@@ -18,6 +18,6 @@ Example:\
 3. Once the target **temperature (w)** has been reached the valve(s) and fan deactivate.
 4. When the temperature drops to 22°C again the the valve(s) and fan activate again, etc.
 
-<figure><img src="../../../../.gitbook/assets/image (19).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (19).png" alt=""><figcaption></figcaption></figure>
 
 Information how to change Δt1 is to be found [here](../fan-settings/auto-fan-d-settings.md#delta-temperature-dt1).

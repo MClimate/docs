@@ -145,4 +145,4 @@ When the mode is changed from the changeover function, the command is sent toget
 
 ### 09: ECM Fan
 
-In case your system has an ECM Fan, then the OCC port is used to control the fan and cannot be used for any other purpose. View available wiring diagrams (applications) [here](../../wiring-diagrams-applications-and-operational-modes.md).
+In case your system has an ECM Fan, then the OCC port is used to control the fan and cannot be used for any other purpose. View available wiring diagrams (applications) [here](../wiring-diagrams-applications-and-operational-modes.md).

@@ -26,7 +26,7 @@ You can change the device ON/OFF status with the following command set.
 
 ## Changing the current operational mode
 
-Information on how to change between Heating/Cooling/Ventilation is available [here](../../wiring-diagrams-applications-and-operational-modes.md#allowed-operational-modes).
+Information on how to change between Heating/Cooling/Ventilation is available [here](../wiring-diagrams-applications-and-operational-modes.md#allowed-operational-modes).
 
 ## Target temperature
 
@@ -118,7 +118,7 @@ This is applies to the measured temperature.
 {% tab title="SET" %}
 #### This command is used to set the compensation temperature values.
 
-<table data-header-hidden><thead><tr><th width="132">Byte index</th><th>Hex value - Meaning</th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Hex value - Meaning</strong></td></tr><tr><td>0</td><td>5A – The command code.</td></tr><tr><td>1</td><td>00: Positive compensation.<br>01: Negative compensation.</td></tr><tr><td>2</td><td><p>XX - Tcomp[°C] * 10. <strong>Default value: 0x010E</strong> (-1.4°C). -> FW ≥1.4 </p><p>                                         <strong>Default value: 0x0000</strong> (0°C). -> FW &#x3C; 1.4</p></td></tr></tbody></table>
+<table data-header-hidden><thead><tr><th width="132">Byte index</th><th>Hex value - Meaning</th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Hex value - Meaning</strong></td></tr><tr><td>0</td><td>5A – The command code.</td></tr><tr><td>1</td><td>00: Positive compensation.<br>01: Negative compensation.</td></tr><tr><td>2</td><td>XX - Tcomp[°C] * 10. <strong>Default value: 0x010E</strong> (-1.4°C).</td></tr></tbody></table>
 
 **Example command:** 0x5A0115;
 

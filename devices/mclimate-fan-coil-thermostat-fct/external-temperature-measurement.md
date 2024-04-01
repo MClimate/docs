@@ -1,12 +1,6 @@
 # External temperature measurement
 
-## A**utomatic temperature control mode with external temperature reading**
-
-
-
-{% hint style="info" %}
-This mode of operation is only available for devices with Firmware version 1.2 and up.
-{% endhint %}
+## 1. A**utomatic temperature control mode with external temperature reading**
 
 {% hint style="warning" %}
 When enabling this mode you need to first set the External temperature sensor value with the 3B command below. If you don't the FCT will assume a target temperature of 0°C degrees and act accordingly.
@@ -46,11 +40,11 @@ This will set the target temperature to a nice 24°C and activate the External t
 {% endtab %}
 {% endtabs %}
 
-## External temperature sensor value
+## 2. External temperature sensor value
 
 The server sends this command to Fan Coil Thermostat device when it has a new measured temperature by the external sensor. This external temperature will be used by Fan Coil Thermostat for the internal temperature control algorithm. The commands are detailed in the tables below.
 
-### Set еxternal temperature sensor value with resolution 1.0°C
+### 2.1 Set еxternal temperature sensor value with resolution 1.0°C
 
 <table data-header-hidden><thead><tr><th width="135">Byte index</th><th>Hex value - Meaning</th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Hex value - Meaning</strong></td></tr><tr><td>0</td><td>3B – The command code.</td></tr><tr><td>1</td><td>XX – The ext. temperature in degrees Celsius. The value must be greater than 0°C!</td></tr></tbody></table>
 
@@ -58,7 +52,7 @@ The server sends this command to Fan Coil Thermostat device when it has a new me
 
 The allowed range is 1...99°C (1.0°C resolution).
 
-### Set/Get еxternal temperature sensor value with resolution 0.1°C
+### 2.2 Set/Get еxternal temperature sensor value with resolution 0.1°C
 
 {% tabs %}
 {% tab title="SET" %}

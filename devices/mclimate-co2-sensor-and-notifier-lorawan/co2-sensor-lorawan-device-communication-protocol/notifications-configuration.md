@@ -107,7 +107,7 @@ The command is described in Table 27.
 
 _Table 27_
 
-#### **Available LED commands values and meaning:**&#x20;
+**Available LED commands values and meaning:**&#x20;
 
 * 0x00: None;&#x20;
 * 0x01: LED is constantly on for the given time duration;&#x20;
