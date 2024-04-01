@@ -11,8 +11,6 @@
 * Fixed bug regarding conf. uplinks watch-dog period, when keep-alive period changed.
 * Removed the device reset functionality when you have not joined the LoRaWAN network for 5 attempts.
 
-
-
 ### Firmware version 1.1
 
 **Release date:** \
@@ -26,11 +24,9 @@ The FUOTA functionality differs from the FUOTA that's being used by the LoRa All
 Feel free to reach out to [lorawan-support@mclimate.eu](mailto:lorawan-support@mclimate.eu) to acquire more details on the process.
 {% endhint %}
 
-
-
 ### Firmware version 1.0
 
 **Release date:** \
-20 April 2022
+7 July 2022
 
 * Initial firmware release

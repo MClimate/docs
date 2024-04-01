@@ -67,11 +67,11 @@ These steps are NOT mandatory.
 
 ### 4.1 Choosing Min/Max set-point
 
-If you decide to limit the users ability to choose the set point within a certain range, you can define the minimum and maximum set-point as described [here](on-off-and-target-temperature/min-max-setpoint-adjustment.md). Example: Limit between 18 and 23 degrees.
+If you decide to limit the users ability to choose the set point within a certain range, you can define the minimum and maximum set-point as described [here](mclimate-fan-coil-thermostat-device-communication-protocol/on-off-and-target-temperature/min-max-setpoint-adjustment.md). Example: Limit between 18 and 23 degrees.
 
 ### 4.2 Locking keys
 
-You can decide that you want to lock some of the keys on the device - e.g. disable the mode change button, on/off button, fan speed selection button, etc. More information is available [here](keys-lock.md).
+You can decide that you want to lock some of the keys on the device - e.g. disable the mode change button, on/off button, fan speed selection button, etc. More information is available [here](mclimate-fan-coil-thermostat-device-communication-protocol/keys-lock.md).
 
 {% hint style="info" %}
 If you have any questions, please don't hesitate to consult with our colleagues at _lorawan-support@mclimate.eu_

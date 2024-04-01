@@ -26,7 +26,7 @@ You can change the device ON/OFF status with the following command set.
 
 ## Changing the current operational mode
 
-Information on how to change between Heating/Cooling/Ventilation is available [here](../wiring-diagrams-applications-and-operational-modes.md#allowed-operational-modes).
+Information on how to change between Heating/Cooling/Ventilation is available [here](../../wiring-diagrams-applications-and-operational-modes.md#allowed-operational-modes).
 
 ## Target temperature
 

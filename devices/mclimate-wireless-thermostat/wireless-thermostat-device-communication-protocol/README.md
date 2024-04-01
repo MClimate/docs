@@ -11,7 +11,7 @@ If you want to make yourself familiar with the details of how this device operat
 ## Communication concepts related to LoRaWAN standard
 
 * Supported LoRaWAN MAC protocol version: 1.0.3;
-* Supported LoRaWAN device class: A;
+* Supported LoRaWAN device Class: A;
 * LoRaWAN MAC Port:&#x20;
   * Uplinks: 2.&#x20;
   * **Downlinks: 1, 2, 4-223;**

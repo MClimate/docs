@@ -41,7 +41,7 @@ Purchase MClimate AQI Sensor and Notifier LoRaWAN:
 
 ### Compatibility
 
-* LoRaWAN 1.0.3, class A device, EU868
+* LoRaWAN 1.0.3, Class A device, EU868
 * Encryption: LoRaWAN End-to-end encryption (AES-CTR)
 * Activation: OTAA
 * Link budget: 130dB

@@ -24,7 +24,7 @@
 
 ### 4.Enter the URL in the Webhook
 
-* **The URL should be** [**https://lorawan-broker.mclimate.eu/firefly?token=**](https://lorawan-broker.seemelissa.com/firefly?token=600f97b5abc986ab95a81029de29c5d7\&url=lora.national.iothub.no)**{developers\_portal\_token}** [**\&url= {optional url of your instance}**](https://lorawan-broker.seemelissa.com/firefly?token=600f97b5abc986ab95a81029de29c5d7\&url=lora.national.iothub.no)**\&m-token={your\_m-token}**
+* **The URL should be** [**https://lorawan-broker.seemelissa.com/firefly?token=**](https://lorawan-broker.seemelissa.com/firefly?token=600f97b5abc986ab95a81029de29c5d7\&url=lora.national.iothub.no)**{developers\_portal\_token}** [**\&url= {optional url of your instance}**](https://lorawan-broker.seemelissa.com/firefly?token=600f97b5abc986ab95a81029de29c5d7\&url=lora.national.iothub.no)
 * **\*Default downlink URL is api.fireflyiot.com**
 * **Content Type is application/json**
 * **Triggers should be All Events**
