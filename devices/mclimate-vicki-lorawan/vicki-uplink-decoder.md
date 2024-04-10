@@ -331,7 +331,7 @@ function decodeUplink(input) {
                 case '4d':
                     {
                         command_len = 2;
-                        var data = { piMaxIntegratedError : (parseInt(`${commands[i + 1]}${commands[i + 2]}`, 16))/10 };
+                        var data = { maxAllowedIntegralValue : (parseInt(`${commands[i + 1]}${commands[i + 2]}`, 16))/10 };
                         resultToPass = merge_obj(resultToPass, data);
                     }
                 break;
