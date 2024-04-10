@@ -50,7 +50,7 @@ This command sets the desired temperature offset.
 <table data-header-hidden><thead><tr><th width="131.66666666666666">Byte index</th><th width="138">Sent request</th><th>Received response</th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Sent request</strong></td><td><strong>Received response</strong></td></tr><tr><td>0</td><td>53 – Command code.</td><td>53 – The command code.</td></tr><tr><td>1</td><td></td><td>XX – offset parameter value</td></tr></tbody></table>
 
 **Example command sent from server:** 0x5300, where 00\[HEX]=0\[DEC]\
-offset, \[°C] = (XX - 28) \* 0.176 = (0-28)\* 0.176=-28\* 0.176=-4.928=5°C
+offset, \[°C] = (XX - 28) \* 0.176 = (0-28)\* 0.176=-28\* 0.176=-4.928=-5°C
 {% endtab %}
 
 {% tab title="GET" %}
