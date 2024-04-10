@@ -338,7 +338,7 @@ function decodeUplink(input) {
                 case '50':
                     {
                         command_len = 2;
-                        var data = { effectiveMotorRange: { minMotorRange: parseInt(commands[i + 1], 16), maxMotorRange: parseInt(commands[i + 2], 16) } };
+                        var data = { valveOpennessRangeInPercentage: { min: parseInt(commands[i + 1], 16), max: parseInt(commands[i + 2], 16) } };
                         resultToPass = merge_obj(resultToPass, data);
                     }
                 break;
