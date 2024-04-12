@@ -37,7 +37,7 @@ MClimate devices ship with 3500mA batteries of the highest quality that experien
 **SF12 - 71 updates**
 {% endhint %}
 
-These are incredible numbers especially if you have a good network coverage (this should be the case whether you plat to update or not as it impacts both longevity and total network capacity).
+These are incredible numbers especially if you have a good network coverage (this should be the case whether you plan to update or not as it impacts both longevity and total network capacity).
 
 Any reasonably well designed product would not require 833 updates for a lifecycle of at least 10 years, thus FUOTA will have next to no impact on device longevity. On the other hand it is an amazing tool to prolong the functional lifecycle of a product and keep it up to date with technology advancements.
 
