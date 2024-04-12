@@ -3,7 +3,7 @@
 ## TTN V3 Decoder (JavaScript ES5):
 
 ```
- function decodeUplink(input) {
+function decodeUplink(input) {
         try{
             var bytes = input.bytes;
             var data = {};
@@ -26,6 +26,7 @@
                 var temperature = temperatureValue;
                 var humidity = humidityValue;
                 var batteryVoltage = parseInt(`${decbin(bytes[4])}${decbin(bytes[5])}`, 2)/1000;
+
                 var targetTemperature, powerSourceStatus, lux, pir;
             if(bytes[0] == 1){
                 targetTemperature = bytes[6];
@@ -245,12 +246,12 @@
             if (bytes[0] == 1|| bytes[0] == 129) {
                 data = handleKeepalive(bytes, data);
             }else{
-                var keepaliveLength = 11;
+                var keepaliveLength = 12;
 
                 var potentialKeepAlive = bytes.slice(-12/2);
                 if(potentialKeepAlive[0] == "81") keepaliveLength = 12;
                 data = handleResponse(bytes,data, keepaliveLength);
-                bytes = bytes.slice(-11);
+                bytes = bytes.slice(-keepaliveLength);
                 data = handleKeepalive(bytes, data);
             }
             return {data: data};
