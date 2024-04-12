@@ -7,9 +7,39 @@ We've first released FUOTA in Q2 2022. We have since updated a large number of o
 
 Some facts about FUOTA:
 
-* It DOES NOT impact battery life of the device significantly.
+* It DOES NOT impact battery life of the device significantly (see metrics below)
 * If a device's FUOTA session fails, the device will not freeze, but it will continue working as normally with the previous firmware image.
 {% endhint %}
+
+
+
+### FUOTA impact on device longevity
+
+Updating our devices via FUOTA does not put a significant strain on their batteries. Statistically speaking the amount of power consumed throughout the Update procedure is negligible compared to its total lifecycle.
+
+It is notable, however that this depends on the time it takes for the process to complete, which is directly related to the quality of the network coverage, that results in the utilization of higher or lower Spreading Factor (SF). To put things in perspective here are some numbers obtained via extensive testing and measurement:
+
+**SF7 - 3 mAh**\
+**SF8 - 4 mAh**\
+**SF9 - 6 mAh**\
+**SF10 - 9 mAh**\
+**SF11 - 17 mAh**\
+**SF12 - 35 mAh**
+
+MClimate devices ship with 3500mA batteries of the highest quality that experience very minor voltage degradation over time. This allows them to utilize 2500mA of their total capacity before the core functionality of the device is compromised, which gives us the following numbers:
+
+{% hint style="success" %}
+**SF7 - 833 updates**\
+**SF8 - 625 updates**\
+**SF9 - 416 updates**\
+**SF10 - 277 updates**\
+**SF11 - 147 updates**\
+**SF12 - 71 updates**
+{% endhint %}
+
+These are incredible numbers especially if you have a good network coverage (this should be the case whether you plat to update or not as it impacts both longevity and total network capacity).
+
+Any reasonably well designed product would not require 833 updates for a lifecycle of at least 10 years, thus FUOTA will have next to no impact on device longevity. On the other hand it is an amazing tool to prolong the functional lifecycle of a product and keep it up to date with technology advancements.
 
 ### FUOTA and LoRaWAN
 
@@ -78,6 +108,10 @@ When the process finalizes successfully you will see the bar fill up to 100% and
 
 {% hint style="warning" %}
 The FUOTA process does not disable normal operation of your devices, neither requires reset/reboot after. It is seamless and no user interaction is required with the exception of its initiation.
+{% endhint %}
+
+{% hint style="danger" %}
+The above rule applies if your device is controlled either via Enterprise or via the MClimate API. If you are utilizing a proprietary solution to interact and control a device the FUOTA process will override any commands you send for the duration of the process and your service will not be available.
 {% endhint %}
 
 ### What if my MClimate devices do not support FUOTA?
