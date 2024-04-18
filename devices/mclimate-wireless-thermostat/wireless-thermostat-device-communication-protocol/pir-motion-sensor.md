@@ -58,13 +58,15 @@ The shorter the Blind period, the more time-accurate detection of movement and m
 
 {% tabs %}
 {% tab title="SET" %}
-<table data-header-hidden><thead><tr><th width="140"></th><th></th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Hex value – Meaning</strong></td></tr><tr><td>0</td><td>4C – The command code.</td></tr><tr><td>1</td><td>XX –  PIR blind period data, bits 15:8;</td></tr><tr><td>2</td><td><p>XX – PIR blind period data, bits 7:0. </p><p>Minimum value = 15sec. </p><p><strong>Default value = 10min.</strong></p></td></tr></tbody></table>
+<table data-header-hidden><thead><tr><th width="140"></th><th></th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Hex value – Meaning</strong></td></tr><tr><td>0</td><td>4C – The command code.</td></tr><tr><td>1</td><td>XX –  PIR blind period data, bits 15:8;</td></tr><tr><td>2</td><td>XX – PIR blind period data, bits 7:0. <strong>Default value = 10min.</strong></td></tr></tbody></table>
 {% endtab %}
 
 {% tab title="GET" %}
 <table data-header-hidden><thead><tr><th width="143.99999999999997"></th><th width="193"></th><th></th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Sent request</strong></td><td><strong>Received response</strong></td></tr><tr><td>0</td><td>4D – Command code</td><td>4D – Command code</td></tr><tr><td>1</td><td> </td><td>XX - PIR sensor blind period - bits 15:8</td></tr><tr><td>2</td><td></td><td>XX - PIR sensor blind period - bits 7:0</td></tr></tbody></table>
 {% endtab %}
 {% endtabs %}
+
+**Note:** Acceptable values: 15...65535sec. (1sec. resolution).
 
 <figure><img src="../../../.gitbook/assets/image (32).png" alt=""><figcaption></figcaption></figure>
 
@@ -76,7 +78,7 @@ When the value is 0, the PIR is constantly powered and checking for movements.
 
 {% tabs %}
 {% tab title="SET" %}
-<table data-header-hidden><thead><tr><th width="161"></th><th></th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Hex value – Meaning</strong></td></tr><tr><td>0</td><td>4A – The command code.</td></tr><tr><td>1</td><td>XX –  PIR check period data, bits 15:8;</td></tr><tr><td>2</td><td><p>XX – PIR check period data, bits 7:0. </p><p>Minimum value = 0sec. </p><p><strong>Default value = 54sec.</strong></p></td></tr></tbody></table>
+<table data-header-hidden><thead><tr><th width="161"></th><th></th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Hex value – Meaning</strong></td></tr><tr><td>0</td><td>4A – The command code.</td></tr><tr><td>1</td><td>XX –  PIR check period data, bits 15:8;</td></tr><tr><td>2</td><td>XX – PIR check period data, bits 7:0.  <strong>Default value = 54sec.</strong></td></tr></tbody></table>
 
 **Example downlink:** 0x4A0006 – Set the PIR check period to 6sec.
 {% endtab %}
@@ -90,13 +92,15 @@ When the value is 0, the PIR is constantly powered and checking for movements.
 {% endtab %}
 {% endtabs %}
 
+**Note:** Acceptable values: 0...65535sec. (1sec. resolution).
+
 ## PIR Measurement period
 
 The PIR Measurement period is a value that instructs the sensor how long after turning on + initialisation period it should be checking for movements before going back to sleep.
 
 {% tabs %}
 {% tab title="SET" %}
-<table data-header-hidden><thead><tr><th width="145"></th><th></th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Hex value – Meaning</strong></td></tr><tr><td>0</td><td>48 – The command code.</td></tr><tr><td>1</td><td><p>XX – PIR measurement time period. </p><p>Minimum value = 3sec. </p><p><strong>Default value = 3sec.</strong></p></td></tr></tbody></table>
+<table data-header-hidden><thead><tr><th width="145"></th><th></th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Hex value – Meaning</strong></td></tr><tr><td>0</td><td>48 – The command code.</td></tr><tr><td>1</td><td>XX – PIR measurement time period. <strong>Default value = 3sec.</strong></td></tr></tbody></table>
 
 Example command: 0x4804 – Set the measurement period of the PIR sensor = 4sec
 {% endtab %}
@@ -109,6 +113,8 @@ Example command: 0x4804 – Set the measurement period of the PIR sensor = 4sec
 **Example command response:** 0x4904 –  Measurement period of the PIR sensor = 4 sec
 {% endtab %}
 {% endtabs %}
+
+**Note:** Acceptable values: 3...255sec. (1sec. resolution).
 
 ## PIR Sensitivity
 
@@ -124,7 +130,7 @@ Maximum = 255 - less sensitive
 
 {% tabs %}
 {% tab title="SET" %}
-<table data-header-hidden><thead><tr><th width="131"></th><th></th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Hex value – Meaning</strong></td></tr><tr><td>0</td><td>3Е – The command code.</td></tr><tr><td>1</td><td>XX - PIR sensor sensitivity. <strong>0x14 is the dafault value.</strong></td></tr></tbody></table>
+<table data-header-hidden><thead><tr><th width="131"></th><th></th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Hex value – Meaning</strong></td></tr><tr><td>0</td><td>3Е – The command code.</td></tr><tr><td>1</td><td>XX - PIR sensor sensitivity. <strong>20 is the dafault value.</strong></td></tr></tbody></table>
 
 **Example downlink:** 0x3E1E – Set PIR sensor sensitivity 0x1E = 30.
 {% endtab %}
@@ -138,29 +144,30 @@ Maximum = 255 - less sensitive
 {% endtab %}
 {% endtabs %}
 
-## Initialisation period
+**Note:** Acceptable values: 12...255.
+
+## Initialization period
 
 Every time the sensor turns on, it needs a little time to get used to the light conditions in the room.
 
 {% hint style="danger" %}
-We do not advise changing the default initialisation period!
+We do not advise changing the default initialization period!
 {% endhint %}
 
 {% tabs %}
 {% tab title="SET" %}
-<table data-header-hidden><thead><tr><th width="139"></th><th></th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Hex value – Meaning</strong></td></tr><tr><td>0</td><td>46 – The command code.</td></tr><tr><td>1</td><td><p>XX – PIR sensor init period in seconds. </p><p>Minimum value = 3sec. </p><p><strong>Default value = 3sec.</strong></p></td></tr></tbody></table>
+<table data-header-hidden><thead><tr><th width="139"></th><th></th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Hex value – Meaning</strong></td></tr><tr><td>0</td><td>46 – The command code.</td></tr><tr><td>1</td><td>XX – PIR sensor initialization period in seconds.  <strong>Default value = 3sec.</strong></td></tr></tbody></table>
 
-**Example downlink:** 0x4603 – Set the initialisation period of the PIR sensor = 3sec.
+**Example downlink:** 0x4604 – Set the initialization period of the PIR sensor = 4sec.
 {% endtab %}
 
 {% tab title="GET" %}
-<table data-header-hidden><thead><tr><th width="143.99999999999997"></th><th width="193"></th><th></th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Sent request</strong></td><td><strong>Received response</strong></td></tr><tr><td>0</td><td>47 – Command code</td><td>47 – Command code</td></tr><tr><td>1</td><td> </td><td>03 - PIR initialisation period.</td></tr></tbody></table>
+<table data-header-hidden><thead><tr><th width="143.99999999999997"></th><th width="193"></th><th></th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Sent request</strong></td><td><strong>Received response</strong></td></tr><tr><td>0</td><td>47 – Command code</td><td>47 – Command code</td></tr><tr><td>1</td><td> </td><td>XX - PIR initialization period.</td></tr></tbody></table>
 
 **Example downlink sent by the server:** 0x47;
 
-**Example command response:** 0x4703 –  Initialisation period of the PIR sensor = 3 sec.
+**Example command response:** 0x4704 –  Initialization period of the PIR sensor = 4 sec.
 {% endtab %}
 {% endtabs %}
 
-
-
+**Note:** Acceptable values: 3...255sec. (1sec. resolution).
