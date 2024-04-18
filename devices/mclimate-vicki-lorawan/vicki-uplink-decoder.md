@@ -628,7 +628,7 @@ function Decoder(bytes, port, uplink_info) {
 ## Tektelic Decoder (JavaScript ES5):
 
 ```
-arr = [];
+    arr = [];
 for (var i = 0; i < bytes.length; ++i)
     arr.push(bytes[i]);
 function toHexString(arr) {
@@ -640,20 +640,19 @@ function toHexString(arr) {
 }   
 
 var hexData = toHexString(arr);
-var bytes = hexData.match(/.{1,2}/g).map(function (byte){ 
-        return parseInt(byte,16);
-    }
-);
+var bytes = hexData.match(/.{1,2}/g).map(byte => 
+    parseInt(byte,16)
+)
 
 
 var deviceData;
 function merge_obj(obj1,obj2){
     var obj3 = {};
     for (var attrname in obj1) { obj3[attrname] = obj1[attrname]; }
-    for (attrname in obj2) { obj3[attrname] = obj2[attrname]; }
+    for (var attrname in obj2) { obj3[attrname] = obj2[attrname]; }
     return obj3;
 }
-function toBool(value) { return value == '1'}
+var toBool = function (value) { return value == '1'};
 function handleKeepAliveData(bytes){
     tmp = ("0" + bytes[6].toString(16)).substr(-2);
     motorRange1 = tmp[1];
@@ -666,31 +665,32 @@ function handleKeepAliveData(bytes){
 
     batteryTmp = ("0" + bytes[7].toString(16)).substr(-2)[0];
     batteryVoltageCalculated = 2 + parseInt("0x"+ batteryTmp , 16) * 0.1;
-    function decbin(number) {
+     decbin = function (number) {
        if (number < 0) {
            number = 0xFFFFFFFF + number + 1;
        }
        return parseInt(number, 10).toString(2);
-    }
+    };
 
-    byteBin = decbin(bytes[7].toString(16));
-    openWindow = byteBin.charAt(4);
-    highMotorConsumption = byteBin.charAt(5);
-    lowMotorConsumption = byteBin.charAt(6);
-    brokenSensor = byteBin.charAt(7);
-    childLockBin = decbin(bytes[8].toString(16));
-    childLock = childLockBin.charAt(0);
-    
+    byte7Bin = decbin(bytes[8]);
+    openWindow = byte7Bin[4];
+    highMotorConsumption = byte7Bin[5];
+    lowMotorConsumption = byte7Bin[6];
+    brokenSensor = byte7Bin[7];
+    byte8Bin = decbin(bytes[8]);
+    childLock = byte8Bin[0];
+    calibrationFailed = byte8Bin[1];
+    attachedBackplate = byte8Bin[2];
+    perceiveAsOnline = byte8Bin[3];
+    antiFreezeProtection = byte8Bin[4];
+
     var sensorTemp;
-    
     if(bytes[0] == 1){
         sensorTemp = (bytes[2] * 165) / 256 - 40;
     }
-    
-    if(bytes[0] == 81){
+    if(bytes[0] == 129){
         sensorTemp = (bytes[2] - 28.33333) / 5.66666;
-    }
-    
+    } 
    return {
        hex: hexData,
        reason: bytes[0],
@@ -705,11 +705,16 @@ function handleKeepAliveData(bytes){
        highMotorConsumption: toBool(highMotorConsumption),
        lowMotorConsumption: toBool(lowMotorConsumption),
        brokenSensor: toBool(brokenSensor),
+       calibrationFailed: toBool(calibrationFailed),
+       attachedBackplate: toBool(attachedBackplate),
+       perceiveAsOnline: toBool(perceiveAsOnline),
+       perceiveAsOnline: toBool(antiFreezeProtection),
+       motorOpenness: Math.round((1-(motorPosition/motorRange))*100),
        port: port,
        "payload length": bytes.length
    };
 }
-if (bytes[0] == 1 || bytes[0] == 81) {
+if (bytes[0] == 1 || bytes[0] == 129) {
     deviceData = merge_obj(deviceData, handleKeepAliveData(bytes));
     return deviceData;  
 } else {
@@ -732,213 +737,263 @@ function commandsReadingHelper(deviceData, hexData, payloadLength) {
 var resultToPass = {};
 var data = hexData.slice(0, -payloadLength);
 var commands = data.match(/.{1,2}/g);
-var command_len = 0;
 
 commands.map(function (command, i) {
     switch (command) {
         case '04':
             {
-                try {
-                    command_len = 2;
-                    var hardwareVersion = commands[i + 1];
-                    var softwareVersion = commands[i + 2];
-                    data = { deviceVersions: { hardware: Number(hardwareVersion), software: Number(softwareVersion) } };
-                    
-                    resultToPass = merge_obj(resultToPass,data);
-
-                } catch (e) {
-                    // console.log(e)
-                }
+                command_len = 2;
+                var hardwareVersion = commands[i + 1];
+                var softwareVersion = commands[i + 2];
+                var dataK = { deviceVersions: { hardware: Number(hardwareVersion), software: Number(softwareVersion) } };
+                resultToPass = merge_obj(resultToPass, dataK);
             }
         break;
         case '12':
             {
-                try {
-                    command_len = 1;
-                    data = { keepAliveTime: parseInt(commands[i + 1], 16) };
-                    resultToPass = merge_obj(resultToPass,data);
-                } catch (e) {
-                    // console.log(e)
-                }
+                command_len = 1;
+                var dataC = { keepAliveTime: parseInt(commands[i + 1], 16) };
+                resultToPass = merge_obj(resultToPass, dataC);
             }
         break;
         case '13':
             {
-                try {
-                    command_len = 4;
-                    var enabled = toBool(parseInt(commands[i + 1], 16));
-                    var duration = parseInt(commands[i + 2], 16) * 5;
-                    var tmp = ("0" + commands[i + 4].toString(16)).substr(-2);
-                    var motorPos2 = ("0" + commands[i + 3].toString(16)).substr(-2);
-                    var motorPos1 = tmp[0];
-                    var motorPosition = parseInt('0x' + motorPos1 + motorPos2, 16);
-                    var delta = Number(tmp[1]);
+                command_len = 4;
+                var enabled = toBool(parseInt(commands[i + 1], 16));
+                var duration = parseInt(commands[i + 2], 16) * 5;
+                var tmp = ("0" + commands[i + 4].toString(16)).substr(-2);
+                var motorPos2 = ("0" + commands[i + 3].toString(16)).substr(-2);
+                var motorPos1 = tmp[0];
+                var motorPosition = parseInt('0x' + motorPos1 + motorPos2, 16);
+                var delta = Number(tmp[1]);
 
-                    data = { openWindowParams: { enabled: enabled, duration: duration, motorPosition: motorPosition, delta: delta } };
-                    resultToPass = merge_obj(resultToPass,data);
-                } catch (e) {
-                    // console.log(e)
-                }
+                var dataD = { openWindowParams: { enabled: enabled, duration: duration, motorPosition: motorPosition, delta: delta } };
+                resultToPass = merge_obj(resultToPass, dataD);
             }
         break;
         case '14':
             {
-                try {
-                    command_len = 1;
-                    data = { childLock: toBool(parseInt(commands[i + 1], 16)) };
-                    resultToPass = merge_obj(resultToPass,data);
-                } catch (e) {
-                    // console.log(e)
-                }
+                command_len = 1;
+                var dataB = { childLock: toBool(parseInt(commands[i + 1], 16)) };
+                resultToPass = merge_obj(resultToPass, dataB);
             }
         break;
         case '15':
             {
-                try {
-                    command_len = 2;
-                    data = { temperatureRangeSettings: { min: parseInt(commands[i + 1], 16), max: parseInt(commands[i + 2], 16) } };
-                    resultToPass = merge_obj(resultToPass,data);
-                } catch (e) {
-                    // console.log(e)
-                }
+                command_len = 2;
+                var dataA = { temperatureRangeSettings: { min: parseInt(commands[i + 1], 16), max: parseInt(commands[i + 2], 16) } };
+                resultToPass = merge_obj(resultToPass, dataA);
             }
         break;
         case '16':
             {
-                try {
-                    command_len = 3;
-                    data = { internalAlgoParams: { period: parseInt(commands[i + 1], 16), pFirstLast: parseInt(commands[i + 2], 16), pNext: parseInt(commands[i + 3], 16) } };
-                    resultToPass = merge_obj(resultToPass,data);
-                } catch (e) {
-                    // console.log(e)
-                }
+                command_len = 2;
+                var data = { internalAlgoParams: { period: parseInt(commands[i + 1], 16), pFirstLast: parseInt(commands[i + 2], 16), pNext: parseInt(commands[i + 3], 16) } };
+                resultToPass = merge_obj(resultToPass, data);
             }
-        break;   
+        break;
         case '17':
             {
-                try {
-                    command_len = 2;
-                    data = { internalAlgoTdiffParams: { warm: parseInt(commands[i + 1], 16), cold: parseInt(commands[i + 2], 16) } };
-                    resultToPass = merge_obj(resultToPass,data);
-                } catch (e) {
-                    // console.log(e)
-                }
+                command_len = 2;
+                var dataF = { internalAlgoTdiffParams: { warm: parseInt(commands[i + 1], 16), cold: parseInt(commands[i + 2], 16) } };
+                resultToPass = merge_obj(resultToPass, dataF);
             }
         break;
         case '18':
             {
-                try {
-                    command_len = 1;
-                    data = { operationalMode: commands[i + 1].toString() };
-                    resultToPass = merge_obj(resultToPass,data);
-                } catch (e) {
-                    // console.log(e)
-                }
+                command_len = 1;
+                var dataE = { operationalMode: parseInt(commands[i + 1], 16) };
+                resultToPass = merge_obj(resultToPass, dataE);
             }
         break;
         case '19':
             {
-                try {
-                    command_len = 1;
-                    var commandResponse = parseInt(commands[i + 1], 16);
-                    var periodInMinutes = commandResponse * 5 / 60;
-                    data = { joinRetryPeriod: periodInMinutes };
-                    resultToPass = merge_obj(resultToPass,data);
-                } catch (e) {
-                    // console.log(e)
-                }
+                command_len = 1;
+                var commandResponse = parseInt(commands[i + 1], 16);
+                var periodInMinutes = commandResponse * 5 / 60;
+                var dataH = { joinRetryPeriod: periodInMinutes };
+                resultToPass = merge_obj(resultToPass, dataH);
             }
         break;
         case '1b':
             {
-                try {
-                    command_len = 2;
-                    data = { uplinkType: commands[i + 1] };
-                    resultToPass = merge_obj(resultToPass,data);
-                } catch (e) {
-                    // console.log(e)
-                }
+                command_len = 1;
+                var dataG = { uplinkType: parseInt(commands[i + 1], 16) };
+                resultToPass = merge_obj(resultToPass, dataG);
             }
         break;
         case '1d':
             {
-                try {
-                    // get default keepalive if it is not available in data
-                    command_len = 2;
-                    var deviceKeepAlive = deviceData.keepAliveTime ? deviceData.keepAliveTime : 5;
-                    var wdpC = commands[i + 1] == '00' ? false : commands[i + 1] * deviceKeepAlive + 7;
-                    var wdpUc = commands[i + 2] == '00' ? false : parseInt(commands[i + 2], 16);
-                    data = { watchDogParams: { wdpC: wdpC, wdpUc: wdpUc } };
-                    resultToPass = merge_obj(resultToPass,data);
-                } catch (e) {
-                    // console.log(e)
-                }
+                // get default keepalive if it is not available in data
+                command_len = 2;
+                var deviceKeepAlive = 5;
+                var wdpC = commands[i + 1] == '00' ? false : commands[i + 1] * deviceKeepAlive + 7;
+                var wdpUc = commands[i + 2] == '00' ? false : parseInt(commands[i + 2], 16);
+                var dataJ = { watchDogParams: { wdpC: wdpC, wdpUc: wdpUc } };
+                resultToPass = merge_obj(resultToPass, dataJ);
             }
         break;
         case '1f':
             {
-                try {
-                    command_len = 1;
-                    data = {  primaryOperationalMode: commands[i + 1] };
-                    resultToPass = merge_obj(resultToPass, data);
-                } catch (e) {
-                    // console.log(e)
-                }
+                command_len = 1;
+                var data = {  primaryOperationalMode: commands[i + 1] };
+                resultToPass = merge_obj(resultToPass, data);
             }
         break;
         case '21':
             {
-                try {
-                    command_len = 6;
-                    data = {batteryRangesBoundaries:{ 
-                        Boundary1: parseInt(commands[i + 1] + commands[i + 2], 16), 
-                        Boundary2: parseInt(commands[i + 3] + commands[i + 4], 16), 
-                        Boundary3: parseInt(commands[i + 5] + commands[i + 6], 16), 
-                    }};
-                    resultToPass = merge_obj(resultToPass, data);
-                } catch (e) {
-                    // console.log(e)
-                }
+                command_len = 6;
+                var data = {batteryRangesBoundaries:{ 
+                    Boundary1: parseInt(commands[i + 1] + commands[i + 2], 16), 
+                    Boundary2: parseInt(commands[i + 3] + commands[i + 4], 16), 
+                    Boundary3: parseInt(commands[i + 5] + commands[i + 6], 16), 
+                }};
+                resultToPass = merge_obj(resultToPass, data);
             }
         break;
         case '23':
             {
-                try {
-                    command_len = 4;
-                    data = {batteryRangesOverVoltage:{ 
-                        Range1: parseInt(commands[i + 2], 16), 
-                        Range2: parseInt(commands[i + 3], 16), 
-                        Range3: parseInt(commands[i + 4], 16), 
-                    }};
-                    resultToPass = merge_obj(resultToPass, data);
-                } catch (e) {
-                    // console.log(e)
-                }
+                command_len = 4;
+                var data = {batteryRangesOverVoltage:{ 
+                    Range1: parseInt(commands[i + 2], 16), 
+                    Range2: parseInt(commands[i + 3], 16), 
+                    Range3: parseInt(commands[i + 4], 16), 
+                }};
+                resultToPass = merge_obj(resultToPass, data);
             }
         break;
         case '27':
             {
-                try {
-                    command_len = 1;
-                    data = {OVAC: parseInt(commands[i + 1], 16)};
-                    resultToPass = merge_obj(resultToPass, data);
-                } catch (e) {
-                    // console.log(e)
-                }
+                command_len = 1;
+                var data = {OVAC: parseInt(commands[i + 1], 16)};
+                resultToPass = merge_obj(resultToPass, data);
             }
         break;
         case '28':
             {
-                try {
-                    command_len = 1;
-                    data = { manualTargetTemperatureUpdate: parseInt(commands[i + 1], 16) };
-                    resultToPass = merge_obj(resultToPass, data);
-                } catch (e) {
-                    // console.log(e)
-                }
+                command_len = 1;
+                var data = { manualTargetTemperatureUpdate: parseInt(commands[i + 1], 16) };
+                resultToPass = merge_obj(resultToPass, data);
+
             }
         break;
+        case '29':
+            {
+                command_len = 2;
+                var data = { proportionalAlgoParams: { coefficient: parseInt(commands[i + 1], 16), period: parseInt(commands[i + 2], 16) } };
+                resultToPass = merge_obj(resultToPass, data);
 
+            }
+        break;
+        case '2b':
+            {
+                command_len = 1;
+                var data = { algoType: commands[i + 1] };
+                resultToPass = merge_obj(resultToPass, data);
+            }
+        break;
+        case '36':
+            {
+                command_len = 3;
+                var kp = parseInt(`${commands[i + 1]}${commands[i + 2]}${commands[i + 3]}`, 16) / 131072;
+                var data = { proportionalGain: Number(kp).toFixed(5) };
+                resultToPass = merge_obj(resultToPass, data);
+            }
+        break;
+        case '3d':
+            {
+                command_len = 3;
+                var ki = parseInt(`${commands[i + 1]}${commands[i + 2]}${commands[i + 3]}`, 16) / 131072;
+                var data = { integralGain: Number(ki).toFixed(5) };
+                resultToPass = merge_obj(resultToPass, data);
+            }
+        break;
+        case '3f':
+            {
+                command_len = 2;
+                var data = { integralValue : (parseInt(`${commands[i + 1]}${commands[i + 2]}`, 16))/10 };
+                resultToPass = merge_obj(resultToPass, data);
+            }
+        break;
+        case '40':
+            {
+                command_len = 1;
+                var data = { piRunPeriod : parseInt(commands[i + 1], 16) };
+                resultToPass = merge_obj(resultToPass, data);
+            }
+        break;
+        case '42':
+            {
+                command_len = 1;
+                var data = { tempHysteresis : parseInt(commands[i + 1], 16) };
+                resultToPass = merge_obj(resultToPass, data);
+            }
+        break;
+        case '44':
+            {
+                command_len = 2;
+                var data = { extSensorTemperature : (parseInt(`${commands[i + 1]}${commands[i + 2]}`, 16))/10 };
+                resultToPass = merge_obj(resultToPass, data);
+            }
+        break;
+        case '46':
+            {
+                command_len = 3;
+                var enabled = toBool(parseInt(commands[i + 1], 16));
+                var duration = parseInt(commands[i + 2], 16) * 5;
+                var delta = parseInt(commands[i + 3], 16) /10;
+
+                var data = { openWindowParams: { enabled: enabled, duration: duration, delta: delta } };
+                resultToPass = merge_obj(resultToPass, data);
+            }
+        break;
+        case '48':
+            {
+                command_len = 1;
+                var data = { forceAttach : parseInt(commands[i + 1], 16) };
+                resultToPass = merge_obj(resultToPass, data);
+            }
+        break;
+        case '4a':
+            {
+                command_len = 3;
+                var activatedTemperature = parseInt(commands[i + 1], 16)/10;
+                var deactivatedTemperature = parseInt(commands[i + 2], 16)/10;
+                var targetTemperature = parseInt(commands[i + 3], 16);
+
+                var data = { antiFreezeParams: { activatedTemperature, deactivatedTemperature, targetTemperature } };
+                resultToPass = merge_obj(resultToPass, data);
+            }
+        break;
+        case '4d':
+            {
+                command_len = 2;
+                var data = { piMaxIntegratedError : (parseInt(`${commands[i + 1]}${commands[i + 2]}`, 16))/10 };
+                resultToPass = merge_obj(resultToPass, data);
+            }
+        break;
+        case '50':
+            {
+                command_len = 2;
+                var data = { effectiveMotorRange: { minMotorRange: parseInt(commands[i + 1], 16), maxMotorRange: parseInt(commands[i + 2], 16) } };
+                resultToPass = merge_obj(resultToPass, data);
+            }
+        break;
+        case '52':
+            {
+                command_len = 2;
+                var data = { targetTemperatureFloat : (parseInt(`${commands[i + 1]}${commands[i + 2]}`, 16))/10 };
+                resultToPass = merge_obj(resultToPass, data);
+            }
+        break;
+        case '54':
+            {
+                command_len = 1;
+                var offset =  (parseInt(commands[i + 1], 16) - 28) * 0.176
+                var data = { temperatureOffset : offset };
+                resultToPass = merge_obj(resultToPass, data);
+            }
+        break;
         default:
             break;
     }
@@ -946,7 +1001,8 @@ commands.map(function (command, i) {
 });
 
 return resultToPass;
-};    
+};
+
 ```
 
 ## Chirpstack Decoder (JavaScript ES5):
