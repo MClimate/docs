@@ -87,9 +87,9 @@ function decodeUplink(input) {
         data.attachedBackplate = toBool(attachedBackplate);
         data.perceiveAsOnline = toBool(perceiveAsOnline);
         data.perceiveAsOnline = toBool(antiFreezeProtection);
-        data.motorOpenness = Math.round((1-(motorPosition/motorRange))*100);
+        data.motorOpenness = motorRange != 0 ? Math.round((1-(motorPosition/motorRange))*100) : 0;
         if(!data.hasOwnProperty('targetTemperatureFloat')){
-            data.targetTemperatureFloat =  bytes[1].toFixed(2);
+            data.targetTemperatureFloat = parseFloat(bytes[1])
         }
         return data;
     }
@@ -331,14 +331,14 @@ function decodeUplink(input) {
                 case '4d':
                     {
                         command_len = 2;
-                        var data = { maxAllowedIntegralValue : (parseInt(`${commands[i + 1]}${commands[i + 2]}`, 16))/10 };
+                        var data = { piMaxIntegratedError : (parseInt(`${commands[i + 1]}${commands[i + 2]}`, 16))/10 };
                         resultToPass = merge_obj(resultToPass, data);
                     }
                 break;
                 case '50':
                     {
                         command_len = 2;
-                        var data = { valveOpennessRangeInPercentage: { min: parseInt(commands[i + 1], 16), max: parseInt(commands[i + 2], 16) } };
+                        var data = { effectiveMotorRange: { minMotorRange: parseInt(commands[i + 1], 16), maxMotorRange: parseInt(commands[i + 2], 16) } };
                         resultToPass = merge_obj(resultToPass, data);
                     }
                 break;
