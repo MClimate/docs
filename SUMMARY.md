@@ -217,3 +217,4 @@
 * [Milesight](integrations/milesight.md)
 * [Akenza](integrations/akenza.md)
 * [Element-IoT](integrations/element-iot.md)
+* [Senet](integrations/senet.md)
