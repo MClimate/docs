@@ -1,5 +1,12 @@
 # 🥳 Release notes
 
+### Firmware version 1.5
+
+**Release date:** \
+19 April 2024
+
+* Added improvements for AS923 radio region.
+
 ### Firmware version 1.4
 
 **Release date:** \
