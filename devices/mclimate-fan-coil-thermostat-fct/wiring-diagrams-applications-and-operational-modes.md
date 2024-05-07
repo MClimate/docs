@@ -15,7 +15,7 @@ A summary can be found in the table below:
 
 <table><thead><tr><th>Application code</th><th width="121">Fan Type</th><th>Description</th></tr></thead><tbody><tr><td>00</td><td>3-speed</td><td>2-pipe ON/OFF</td></tr><tr><td>01</td><td>3-speed</td><td>2-pipe ON/OFF 3-wire valve (220VAC)</td></tr><tr><td>02</td><td>3-speed</td><td>4-pipe ON/OFF 3-wire valve (220VAC)</td></tr><tr><td>03</td><td>ECM fan</td><td>4-pipe ON/OFF</td></tr><tr><td>04</td><td>ECM fan</td><td>2-pipe ON/OFF</td></tr><tr><td>05</td><td>ECM fan</td><td>2-pipe ON/OFF 3-wire valve</td></tr></tbody></table>
 
-<figure><img src="../../.gitbook/assets/Wiring diagrams.png" alt=""><figcaption><p>Wiring Diagrams (Applications)</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/Screenshot 2024-05-07 at 12.30.55 (1).png" alt=""><figcaption><p>Wiring Diagrams (Applications)</p></figcaption></figure>
 
 ## Wiring Diagrams (Applications)
 
