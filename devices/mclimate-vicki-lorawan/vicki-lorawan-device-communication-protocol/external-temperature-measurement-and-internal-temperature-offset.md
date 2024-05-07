@@ -41,16 +41,33 @@ The value must be greater than 0°C!
 
 ## Internal Temperature Offset
 
-This command allows you to offset the internally measured temperature by +/- 5°C
+This command allows you to offset the internally measured temperature by +/- 5°C.
 
 {% tabs %}
 {% tab title="SET" %}
 This command sets the desired temperature offset.
 
-<table data-header-hidden><thead><tr><th width="131.66666666666666">Byte index</th><th width="138">Sent request</th><th>Received response</th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Sent request</strong></td><td><strong>Received response</strong></td></tr><tr><td>0</td><td>53 – Command code.</td><td>53 – The command code.</td></tr><tr><td>1</td><td></td><td>XX – offset parameter value</td></tr></tbody></table>
+<table data-header-hidden><thead><tr><th width="131.66666666666666">Byte index</th><th width="138">Sent request</th><th>Received response</th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Sent request</strong></td><td><strong>Received response</strong></td></tr><tr><td>0</td><td>53 – Command code.</td><td>53 – The command code.</td></tr><tr><td>1</td><td></td><td>XX – offset parameter value, where<br>XX = (offset, [°C] + 4.928) / 0.176</td></tr></tbody></table>
 
-**Example command sent from server:** 0x5300, where 00\[HEX]=0\[DEC]\
+Tabulated values for example offsets:
+
 offset, \[°C] = (XX - 28) \* 0.176 = (0-28)\* 0.176=-28\* 0.176=-4.928=-5°C
+
+Offset -5°C -> XX = 00\[HEX] -> Command: **0x5300**\
+Offset -4°C -> XX = 05\[HEX]-> Command: **0x5305**\
+Offset -3°C -> XX = 0B\[HEX]-> Command: **0x530B**\
+Offset -2°C -> XX = 11\[HEX] -> Command: **0x5311**\
+Offset -1°C -> XX = 16\[HEX] -> Command: **0x5316**\
+
+
+Offset 0°C -> XX = 1C\[HEX] -> Command: **0x531C**\
+
+
+Offset 1°C -> XX = 22\[HEX] -> Command: **0x5322**\
+Offset 2°C -> XX = 27\[HEX] -> Command: **0x5327**\
+Offset 3°C -> XX = 2D\[HEX] -> Command: **0x532D**\
+Offset 4°C -> XX = 33\[HEX] -> Command: **0x5333**\
+Offset 5°C -> XX = 38\[HEX] -> Command: **0x5338**
 {% endtab %}
 
 {% tab title="GET" %}

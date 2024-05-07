@@ -8,7 +8,7 @@ The device has one multifunctional analog/digital input/output (between ports IO
 {% tab title="SET" %}
 #### You can set the function of digital input/output (IO1/IO2) with the command:
 
-<table data-header-hidden><thead><tr><th width="138"></th><th></th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Hex value – Meaning</strong></td></tr><tr><td>0</td><td>62 – The command code.</td></tr><tr><td>1</td><td>XX – function of (IO1/IO2) value. <strong>Default value:</strong> 0x00.<br><strong>Possible settings:</strong><br> - 00: open → occupied, closed → not occupied (set-point decrease) (default) <br> - 01: closed → occupied, open → not occupied (set-point decrease) <br> - 02: open → occupied, closed → not occupied (fan off, valve closed) <br> - 03: close → occupied, open → not occupied (fan off, valve closed)<br> - 04: closed → dew point reached, open → dew point not reached<br> - 05: open → dew point reached, closed → dew point not reached<br> - 06: closed → filter alarm<br> - 07: opened → filter alarm<br><br>The two below are GET only. They are dictated by other commands and cannot be changed unless the respective functionality is disabled:<br> - 08: 10k NTC for automatic changever (<a href="automatic-changeover.md">see more here</a>)<br> - 09: ECM Fan (controlled by the <a href="../../wiring-diagrams-applications-and-operational-modes.md">wiring diagram</a>)</td></tr></tbody></table>
+<table data-header-hidden><thead><tr><th width="138"></th><th></th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Hex value – Meaning</strong></td></tr><tr><td>0</td><td>62 – The command code.</td></tr><tr><td>1</td><td>XX – function of (IO1/IO2) value. <strong>Default value:</strong> 0x00.<br><strong>Possible settings:</strong><br> - 00: open → occupied, closed → not occupied (set-point decrease) (default) <br> - 01: closed → occupied, open → not occupied (set-point decrease) <br> - 02: open → occupied, closed → not occupied (fan off, valve closed) <br> - 03: close → occupied, open → not occupied (fan off, valve closed)<br> - 04: closed → dew point reached, open → dew point not reached<br> - 05: open → dew point reached, closed → dew point not reached<br> - 06: closed → filter alarm<br> - 07: opened → filter alarm<br><br>The two below are GET only. They are dictated by other commands and cannot be changed unless the respective functionality is disabled:<br> - 08: 10k NTC for automatic changever (<a href="../mclimate-fan-coil-thermostat-device-communication-protocol/function-of-digital-input-output-io1-and-io2-ports/automatic-changeover.md">see more here</a>)<br> - 09: ECM Fan (controlled by the <a href="../wiring-diagrams-applications-and-operational-modes.md">wiring diagram</a>)</td></tr></tbody></table>
 
 **Example downlink**: 0x6206 – Sets function of (IO1/IO2) to closed -> filter alarm.
 
@@ -30,7 +30,7 @@ The allowed function of (IO1/IO2) values is 0...7 and are described in detail be
 There are 3 main logics for the IO1/IO2 input/output you can choose from:
 
 1. Control the occupied/not occupied status:
-   * Option 1: [Set-point decrease](./#set-point-decrease) (changes the set-point to ["not occupied"](occupancy-sensor.md) & the fan and valve are based on the "not occupied" set-point and current temperature in the room).&#x20;
+   * Option 1: [Set-point decrease](./#set-point-decrease) (changes the set-point to ["not occupied"](../mclimate-fan-coil-thermostat-device-communication-protocol/function-of-digital-input-output-io1-and-io2-ports/occupancy-sensor.md) & the fan and valve are based on the "not occupied" set-point and current temperature in the room).&#x20;
    * Option 2: [Fan off, valve closed](./#fan-off-valve-closed) (does not change set-point, only forbids operation during not occupied status)
 2. [Dew-point alarm](./#dew-point-reached-not-reached)
 3. [Filter alarm](./#filter-alarm)
@@ -50,7 +50,7 @@ The logic for all 3 options have their reversed counterpart in terms of the inpu
 _Command code 0x6200_
 {% endhint %}
 
-It means that if the OCC port is opened, then the room is considered occupied. And if the OCC port is closed, then the room is considered not occupied, temperature set-point and fan speed are decreased as described [here](occupancy-sensor.md).
+It means that if the OCC port is opened, then the room is considered occupied. And if the OCC port is closed, then the room is considered not occupied, temperature set-point and fan speed are decreased as described [here](../mclimate-fan-coil-thermostat-device-communication-protocol/function-of-digital-input-output-io1-and-io2-ports/occupancy-sensor.md).
 
 #### 01: closed → occupied, open → not occupied (set-point decrease)&#x20;
 
@@ -180,7 +180,7 @@ In those modes, **you cannot change the function of the OCC** unless you change 
 
 ### 08: 10k NTC for auto changeover
 
-Used case you want to use the auto changeover functionality. Read more about the settings of the automatic changeover [here](automatic-changeover.md).
+Used case you want to use the auto changeover functionality. Read more about the settings of the automatic changeover [here](../mclimate-fan-coil-thermostat-device-communication-protocol/function-of-digital-input-output-io1-and-io2-ports/automatic-changeover.md).
 
 {% tabs %}
 {% tab title="GET" %}
@@ -201,4 +201,4 @@ When the mode is changed from the changeover function, the command is sent toget
 
 ### 09: ECM Fan
 
-In case your system has an ECM Fan, then the OCC port is used to control the fan and cannot be used for any other purpose. View available wiring diagrams (applications) [here](../../wiring-diagrams-applications-and-operational-modes.md).
+In case your system has an ECM Fan, then the OCC port is used to control the fan and cannot be used for any other purpose. View available wiring diagrams (applications) [here](../wiring-diagrams-applications-and-operational-modes.md).

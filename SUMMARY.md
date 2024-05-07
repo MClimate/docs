@@ -23,7 +23,7 @@
     * [🔓 Keys lock](devices/mclimate-fan-coil-thermostat-fct/keys-lock.md)
     * [External temperature measurement](devices/mclimate-fan-coil-thermostat-fct/external-temperature-measurement.md)
     * [Power module communication status](devices/mclimate-fan-coil-thermostat-fct/power-module-communication-status.md)
-    * [Function of digital input/output (IO1 and IO2 ports)](devices/mclimate-fan-coil-thermostat-fct/mclimate-fan-coil-thermostat-device-communication-protocol/function-of-digital-input-output-io1-and-io2-ports/README.md)
+    * [Function of digital input/output (IO1 and IO2 ports)](devices/mclimate-fan-coil-thermostat-fct/function-of-digital-input-output-occ/README.md)
       * [Automatic changeover](devices/mclimate-fan-coil-thermostat-fct/mclimate-fan-coil-thermostat-device-communication-protocol/function-of-digital-input-output-io1-and-io2-ports/automatic-changeover.md)
       * [Occupancy sensor](devices/mclimate-fan-coil-thermostat-fct/mclimate-fan-coil-thermostat-device-communication-protocol/function-of-digital-input-output-io1-and-io2-ports/occupancy-sensor.md)
     * [General, Display & Power recovery](devices/mclimate-fan-coil-thermostat-fct/general-display-and-power-recovery/README.md)
