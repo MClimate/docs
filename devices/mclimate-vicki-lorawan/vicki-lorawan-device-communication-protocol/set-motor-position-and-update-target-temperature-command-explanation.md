@@ -59,53 +59,65 @@ The valve will open 10% of its maximum capabilities.
 {% endtab %}
 {% endtabs %}
 
-## Valve openness range in percentage
-
-The effective device motor range is used to limit the valve open and close by the internal PI control algorithm. Thus, it's not used when the device operates in "Manual control" mode.
+## Limit MIN/MAX Valve Openness
 
 {% hint style="info" %}
-By default this range is set to 100% for both parameters, making it possible for the valve to be closed and opened entirely.
+This feature is available for firmware >= 4.3
+{% endhint %}
+
+This command allows you to decide what's the minimum and maximum valve openness for Vicki in percentages. It's only applicable when using the internal algorithm for temperature control. For example, you can decide that you want Vicki to control the valve only between 20% and 60% valve openness.
+
+* If Vicki has to heat the room, it'll first open the valve to the MIN value you have specified.
+* Vicki will not open more than the MAX value you have specified, which is particularly useful for hydronic balancing.
+
+{% hint style="info" %}
+By default Vicki controls the valve openness from 0% to 100%&#x20;
+{% endhint %}
+
+{% hint style="warning" %}
+Not allowed to set values that result in Min - Max < 10%.
 {% endhint %}
 
 {% tabs %}
 {% tab title="SET" %}
 The desired range in percentage.
 
-<table data-header-hidden><thead><tr><th width="137">Byte index</th><th>Hex value - Meaning</th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Hex value - Meaning</strong></td></tr><tr><td>0</td><td>4F – The command code.</td></tr><tr><td>1</td><td>XX - Mar parameter<br>Default is 0x00</td></tr><tr><td>2</td><td>XX - Mir parameter<br>Default is 0x64</td></tr></tbody></table>
-
-Max openness \[%] = 100-Mar
-
-Min openness \[%] = Mir
-
-**Example command:** 0x4F0A5A
-
-Mar = 0A\[HEX] = 10\[DEC] => Max openness = 100-10=90%\
-The int. PI algorithm will be capable to **open the valve** to 90% of the motor range.
-
-Min = 5A\[HEX] = 90\[DEC] => Min openness = 90%\
-The int. PI algorithm will be capable to **close the valve** to 90% of the motor range.&#x20;
+<table data-header-hidden><thead><tr><th width="137">Byte index</th><th>Hex value - Meaning</th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Hex value - Meaning</strong></td></tr><tr><td>0</td><td>4F – The command code.</td></tr><tr><td>1</td><td>XX - 100-Maximum valve openness in %.<br>Default is 0x00</td></tr><tr><td>2</td><td>YY - 100-Minimum valve openness in %.<br>Default is 0x64</td></tr></tbody></table>
 
 {% hint style="info" %}
-Not allowed to set values that result in Min - Max < 10%.
+**You have to deduct the desired value from 100!**
+
+Meaning, if you want to set the range between min 20% and max 60%, you have to compose the command as follows:
+
+1\) MAX: 100 - 60% = 40 \[dec] or 0x28 \[hex]
+
+2\) MIN: 100 - 20% = 80 \[dec] or 0x50 \[hex]
+
+Full command would be 4F2850.\
+\
+Another example - min 15%, max 90%
+
+1\) MAX: 100 - 90 = 10\[dec] or 0x0A \[hex]\
+2\) MIN: 100 - 15 = 85\[dec] or 0x55 \[hex]
+
+Full command would be 4F0A55
 {% endhint %}
 {% endtab %}
 
 {% tab title="GET" %}
 This command gets the openness range to which the valve can be opened.
 
-<table data-header-hidden><thead><tr><th width="132.66666666666666">Byte index</th><th width="149">Sent request</th><th>Received response</th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Sent request</strong></td><td><strong>Received response</strong></td></tr><tr><td>0</td><td>50 – Command code.</td><td>50 – The command code.</td></tr><tr><td>1</td><td></td><td>XX - Mar parameter</td></tr><tr><td>2</td><td></td><td>XX - Mir parameter</td></tr></tbody></table>
+<table data-header-hidden><thead><tr><th width="132.66666666666666">Byte index</th><th width="149">Sent request</th><th>Received response</th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Sent request</strong></td><td><strong>Received response</strong></td></tr><tr><td>0</td><td>50 – Command code.</td><td>50 – The command code.</td></tr><tr><td>1</td><td></td><td>XX -Maximum effective openness parameter.</td></tr><tr><td>2</td><td></td><td>YY - Minimum effective openness parameter.</td></tr></tbody></table>
 
 **Example response:** 0x500064&#x20;
 
-Max openness \[%] = 100-Mar
+Max openness \[%] = 100-XX \[DEC]
 
-Min openness \[%] = Mir
+Min openness \[%] = 100-YY \[DEC]
 
-Mar = 00\[HEX] = 00\[DEC] => Max openness = 100-0 =100%\
-The int. PI algorithm will be capable to **open the valve** fully.
+XX = 00\[HEX] = 00\[DEC] => Max openness = 100-0 =100%
 
-Min = 64\[HEX] = 100\[DEC] => Min openness = 100%\
-The int. PI algorithm will be capable to **close the valve** fully.
+YY = 64\[HEX] = 100\[DEC] => Min openness = 0%
 {% endtab %}
 {% endtabs %}
 
