@@ -7,7 +7,6 @@ The device sends uplink on the following occasions:
 
 1. Period uplink - Every keep-alive period
 2. Immediate uplink - on CO2 check via the button
-3. Immediate uplink - when movement is detected
 {% endhint %}
 
 MClimate CO2 Display Lite periodically sends messages (keep-alive commands) to the server. The server can then send command to the CO2 Display Lite and the data will be received in the receiving windows, opened after each sent message, according to the LoRaWAN Class A devices protocol.&#x20;

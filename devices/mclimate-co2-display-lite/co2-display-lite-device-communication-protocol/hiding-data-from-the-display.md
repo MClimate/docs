@@ -7,7 +7,7 @@ description: >-
 
 # Hiding data from the display
 
-## **Hiding/showing specific readings on the display**
+## **Hiding/showing spеcific readings on the display**
 
 ### Measured temperature
 

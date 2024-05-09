@@ -10,7 +10,7 @@ When CO2 measurement is started by button press, for the given blind time next s
 
 This command sets the the measuring blind time in minutes
 
-<table data-header-hidden><thead><tr><th width="131"></th><th width="101"></th><th></th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Bit index</strong></td><td><strong>Hex value – Meaning</strong></td></tr><tr><td>0</td><td>-</td><td>81 – The command code.</td></tr><tr><td>1</td><td>-</td><td>Measuring blind time in minutes.<br><strong>Default</strong> <strong>value 0x0F=15min.</strong></td></tr></tbody></table>
+<table data-header-hidden><thead><tr><th width="131"></th><th width="101"></th><th></th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Bit index</strong></td><td><strong>Hex value – Meaning</strong></td></tr><tr><td>0</td><td>-</td><td>81 – The command code.</td></tr><tr><td>1</td><td>-</td><td>Measuring blind time in minutes.<br><strong>Default</strong> <strong>value 0x01=1min.</strong></td></tr></tbody></table>
 
 **Example downlink**: 0x810E – when we separate the value of the time from the command code we get 0x**0E,** which is 14 min.
 {% endtab %}
@@ -91,7 +91,7 @@ The commands configures the CO2 measurement period.
 {% tab title="SET" %}
 Set the measurement period.
 
-<table data-header-hidden><thead><tr><th width="139"></th><th width="101"></th><th></th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Bit index</strong></td><td><strong>Hex value – Meaning</strong></td></tr><tr><td>0</td><td>-</td><td>24 – The command code.</td></tr><tr><td>1</td><td>-</td><td>Measurement period in the Good-zone in minutes.<br><strong>Default</strong> <strong>value 0x0A=10min.</strong></td></tr><tr><td>2</td><td>-</td><td>Measurement period in the Medium-zone in minutes.<br><strong>Default</strong> <strong>value 0x0A=10min.</strong></td></tr><tr><td>3</td><td>-</td><td>Measurement period in the Bad-zone in minutes.<br><strong>Default</strong> <strong>value 0x0A=10min.</strong></td></tr></tbody></table>
+<table data-header-hidden><thead><tr><th width="139"></th><th width="101"></th><th></th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Bit index</strong></td><td><strong>Hex value – Meaning</strong></td></tr><tr><td>0</td><td>-</td><td>24 – The command code.</td></tr><tr><td>1</td><td>-</td><td>Measurement period in the Good-zone in minutes.<br><strong>Default</strong> <strong>value 0x0F=15min.</strong></td></tr><tr><td>2</td><td>-</td><td>Measurement period in the Medium-zone in minutes.<br><strong>Default</strong> <strong>value 0x0F=15min.</strong></td></tr><tr><td>3</td><td>-</td><td>Measurement period in the Bad-zone in minutes.<br><strong>Default</strong> <strong>value 0x0F=15min.</strong></td></tr></tbody></table>
 
 **Example command**: 0x240A0A0A – Set the measurement periods for all 3 zones to be the same 0x0A=10min.
 {% endtab %}
@@ -115,7 +115,7 @@ Default auto-zero period, after the factory auto-zeroing, is 192 hours (8 days).
 {% tab title="SET" %}
 Set the auto-zero period.
 
-<table data-header-hidden><thead><tr><th width="139"></th><th width="101"></th><th></th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Bit index</strong></td><td><strong>Hex value – Meaning</strong></td></tr><tr><td>0</td><td>-</td><td>2A – The command code.</td></tr><tr><td>1</td><td>-</td><td>Auto-zero period in hours.<br><strong>Default</strong> <strong>value 0x48=72hrs.</strong></td></tr></tbody></table>
+<table data-header-hidden><thead><tr><th width="139"></th><th width="101"></th><th></th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Bit index</strong></td><td><strong>Hex value – Meaning</strong></td></tr><tr><td>0</td><td>-</td><td>2A – The command code.</td></tr><tr><td>1</td><td>-</td><td>Auto-zero period in hours.<br><strong>Default</strong> <strong>value 0xC0=192hrs.</strong></td></tr></tbody></table>
 
 **Example command**: 0x2A48 – Set the CO2 auto-zero period to 0x48=72hrs.
 {% endtab %}
