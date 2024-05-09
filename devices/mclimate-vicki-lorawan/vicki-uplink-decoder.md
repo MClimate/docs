@@ -51,7 +51,7 @@ function decodeUplink(input) {
             number = number.toString(2);
             return "00000000".substr(number.length) + number;
         }
-        byte7Bin = decbin(bytes[8]);
+        byte7Bin = decbin(bytes[7]);
         openWindow = byte7Bin[4];
         highMotorConsumption = byte7Bin[5];
         lowMotorConsumption = byte7Bin[6];
@@ -672,7 +672,7 @@ function handleKeepAliveData(bytes){
        return parseInt(number, 10).toString(2);
     };
 
-    byte7Bin = decbin(bytes[8]);
+    byte7Bin = decbin(bytes[7]);
     openWindow = byte7Bin[4];
     highMotorConsumption = byte7Bin[5];
     lowMotorConsumption = byte7Bin[6];
@@ -1359,7 +1359,7 @@ function decodeUplink(input) {
             number = number.toString(2);
             return "00000000".substr(number.length) + number;
         }
-        byte7Bin = decbin(bytes[8]);
+        byte7Bin = decbin(bytes[7]);
         openWindow = byte7Bin[4];
         highMotorConsumption = byte7Bin[5];
         lowMotorConsumption = byte7Bin[6];
