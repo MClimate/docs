@@ -33,7 +33,7 @@ Note that the period value must respect the LoRaWAN messages duty cycle limitati
 {% endtab %}
 
 {% tab title="GET" %}
-This command is used to get CO2 Display's period of the keep-alive command messages. Server sends the command code and the response is sent from the device together with the next keep-alive command.&#x20;
+This command is used to get the period of the keep-alive command messages. Server sends the command code and the response is sent from the device together with the next keep-alive command.&#x20;
 
 The keep-alive in the example is omitted for clarity.
 
@@ -41,6 +41,6 @@ The keep-alive in the example is omitted for clarity.
 
 **Example command sent from server:** 0x12;
 
-**Example command response:** 0x1209 – Wireless Thermostat's keep-alive is 9 minutes.
+**Example command response:** 0x1209 – the keep-alive is 9 minutes.
 {% endtab %}
 {% endtabs %}
