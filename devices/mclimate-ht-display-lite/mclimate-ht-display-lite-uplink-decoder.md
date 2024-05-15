@@ -3,7 +3,7 @@
 ## Decoder (JavaScript ES5):
 
 ```
-function decodeUplink(input) {
+    function decodeUplink(input) {
         try{
             var bytes = input.bytes;
             var data = {};
@@ -24,7 +24,7 @@ function decodeUplink(input) {
                 data.sensorTemperature = Number(temperatureValue.toFixed(2));
                 data.relativeHumidity = Number(humidityValue.toFixed(2));
                 data.batteryVoltage = Number(batteryVoltageCalculated.toFixed(3));
-                data.powerSourceStatus = parseInt(powerSourceStatus,2);
+                data.powerSourceStatus = powerSourceStatus;
                 data.lux = lux;
 
                 return data;
@@ -34,7 +34,7 @@ function decodeUplink(input) {
             var commands = bytes.map(function(byte){
                 return ("0" + byte.toString(16)).substr(-2); 
             });
-            commands = commands.slice(0,-8);
+            commands = commands.slice(0,-9);
             var command_len = 0;
         
             commands.map(function (command, i) {
@@ -129,7 +129,7 @@ function decodeUplink(input) {
                 data = handleKeepalive(bytes, data);
             }else{
                 data = handleResponse(bytes,data);
-                bytes = bytes.slice(-10);
+                bytes = bytes.slice(-9);
                 data = handleKeepalive(bytes, data);
             }
             return {data: data};
