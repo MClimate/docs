@@ -6,9 +6,7 @@ When you press the button on the device, it measures temperature, humidity and l
 
 {% tabs %}
 {% tab title="SET" %}
-When sensors measurement is started by button press, for the given blind time next start by button press will be forbidden.
-
-This command sets the the measuring blind time in minutes
+This command sets the the measuring blind time in minutes.
 
 <table data-header-hidden><thead><tr><th width="131"></th><th width="101"></th><th></th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Bit index</strong></td><td><strong>Hex value – Meaning</strong></td></tr><tr><td>0</td><td>-</td><td>46 – The command code.</td></tr><tr><td>1</td><td>-</td><td>Measuring blind time in minutes.<br><strong>Default</strong> <strong>value 0x01=1min.</strong></td></tr></tbody></table>
 
@@ -16,8 +14,6 @@ This command sets the the measuring blind time in minutes
 {% endtab %}
 
 {% tab title="GET" %}
-When sensors measurement is started by button press, for the given blind time next start by button press will be forbidden.
-
 This command gets the currently set value in minutes.
 
 <table data-header-hidden><thead><tr><th width="133.99999999999997"></th><th width="104"></th><th></th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Bit index</strong></td><td><strong>Received response</strong></td></tr><tr><td>0</td><td>-</td><td>47 – The command code</td></tr><tr><td>1</td><td>-</td><td>Measuring blind time in minutes.</td></tr></tbody></table>
