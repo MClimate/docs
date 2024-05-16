@@ -2,7 +2,7 @@
 
 ## CO2 measurement blind time
 
-When you press the button on the device it sends a CO2 readout. There is a period after each press that subsequent button presses are ignored in.
+There is a period after each press that subsequent button presses are ignored in.
 
 {% tabs %}
 {% tab title="SET" %}
