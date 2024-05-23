@@ -231,3 +231,4 @@
 * [Akenza](integrations/akenza.md)
 * [Element-IoT](integrations/element-iot.md)
 * [Senet](integrations/senet.md)
+* [Wattsense](integrations/wattsense.md)
