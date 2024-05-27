@@ -3,7 +3,7 @@
 ## Decoder (JavaScript ES5):
 
 ```
-    function decodeUplink(input) {
+function decodeUplink(input) {
         try{
             var bytes = input.bytes;
             var data = {};
@@ -11,14 +11,13 @@
             var calculateTemperature = function (rawData){return (rawData - 400) / 10};
             var calculateHumidity = function(rawData){return (rawData * 100) / 256};
             function handleKeepalive(bytes, data){
-                var tempHex = '0' + bytes[1].toString(16) + bytes[2].toString(16);
-                var tempDec = parseInt(tempHex, 16);
-                var temperatureValue = calculateTemperature(tempDec);
+                var tempRaw = (bytes[1] << 8) | bytes[2];
+                var temperatureValue = calculateTemperature(tempRaw);
                 var humidityValue = calculateHumidity(bytes[3]);
-                var lux = parseInt('0' + bytes[4].toString(16) + bytes[5].toString(16), 16);
+                var lux = (bytes[4] << 8) | bytes[5];
 
-                var batteryHex = '0' + bytes[6].toString(16) + bytes[7].toString(16);
-                var batteryVoltageCalculated =  parseInt(batteryHex, 16)/1000;
+                let batteryVoltageCalculated = ((bytes[6] << 8) | bytes[7])/1000;
+                
                 var powerSourceStatus = parseInt(bytes[8], 16);
 
                 data.sensorTemperature = Number(temperatureValue.toFixed(2));
@@ -38,6 +37,7 @@
             var command_len = 0;
         
             commands.map(function (command, i) {
+                console.log(command)
                 switch (command) {
                     case '04':
                         {
@@ -116,6 +116,12 @@
                         {
                             command_len = 1;
                             data.measurementPeriod = parseInt(commands[i + 1], 16) ;
+                        }
+                    break;
+                    case 'a4':
+                        {
+                            command_len = 1;
+                            data.region = parseInt(commands[i + 1], 16);
                         }
                     break;
                     default:
