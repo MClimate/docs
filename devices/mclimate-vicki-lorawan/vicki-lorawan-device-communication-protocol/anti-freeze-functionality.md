@@ -2,7 +2,7 @@
 
 Vicki has a built-in anti-freeze functionality based on its internal temperature readings. You can set a certain temperature threshold and if the internally measured temperature crosses it the functionality will be activated/deactivated.
 
-If the anti-freeze functionality is active the current target temperature is overwritten by the anti-freeze target temperature and a keep-alive message is sent to notify the server (bit 3 in byte 8 in the keep-alive packet is the flack for active/deactive functionality state).
+If the anti-freeze functionality is active the current target temperature is overwritten by the anti-freeze target temperature and a keep-alive message is sent to notify the server (bit 3 in byte 8 in the keep-alive packet is the flag for active/inactive functionality state).
 
 {% hint style="info" %}
 The anti-free target temperature can be set with a resolution of 1°C. When the anti-freeze functionality has been deactivated the previously set target temperature is restored.
