@@ -211,9 +211,6 @@
 * [Battery Lifetime Estimation Methodology](other/battery-lifetime-estimation-methodology.md)
 * [Discover Smart Buildings solutions](https://mclimate.eu/pages/smartbuildings)
 * [How to solve Large space heating issues](other/how-to-solve-large-space-heating-issues.md)
-* [MClimate End-to-End Solution](other/mclimate-end-to-end-solution/README.md)
-  * [MClimate End-to-end package: How to get started](other/mclimate-end-to-end-solution/mclimate-end-to-end-package-how-to-get-started.md)
-  * [Gateway Positioning Guidelines](other/mclimate-end-to-end-solution/gateway-positioning-guidelines.md)
 
 ## Integrations
 
