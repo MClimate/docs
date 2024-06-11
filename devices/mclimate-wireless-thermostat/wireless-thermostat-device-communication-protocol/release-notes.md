@@ -1,5 +1,12 @@
 # 🥳 Release notes
 
+### Firmware version 1.5
+
+**Release date:** \
+07 June 2024
+
+* Changed reset button hold time from 10 seconds to 5 seconds.
+
 ### Firmware version 1.4
 
 **Release date:** \
