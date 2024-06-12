@@ -18,24 +18,21 @@ function decodeUplink(input) {
             return "00000000".substr(number.length) + number;
         }
         function handleKeepalive(bytes, data){
-            var tempHex = '0' + bytes[1].toString(16) + bytes[2].toString(16);
-            var tempDec = parseInt(tempHex, 16);
-            var temperatureValue = calculateTemperature(tempDec);
-            var humidityValue = calculateHumidity(bytes[3]);
+            var tempRaw = (bytes[1] << 8) | bytes[2];
+            var temperature = calculateTemperature(tempRaw);
+            var humidity = calculateHumidity(bytes[3]);
+            let batteryVoltage = ((bytes[4] << 8) | bytes[5])/1000;
 
-            var temperature = temperatureValue;
-            var humidity = humidityValue;
-            var batteryVoltage = parseInt(`${decbin(bytes[4])}${decbin(bytes[5])}`, 2)/1000;
             var targetTemperature, powerSourceStatus, lux, pir;
         if(bytes[0] == 1){
             targetTemperature = bytes[6];
             powerSourceStatus = bytes[7];
-            lux = parseInt('0' + bytes[8].toString(16) + bytes[9].toString(16), 16);
+            lux = (bytes[8] << 8) | bytes[9];
             pir = toBool(bytes[10]);
         }else{
             targetTemperature = parseInt(`${decbin(bytes[6])}${decbin(bytes[7])}`, 2)/10;
             powerSourceStatus = bytes[8];
-            lux = parseInt('0' + bytes[9].toString(16) + bytes[10].toString(16), 16);
+            lux = (bytes[9] << 8) | bytes[10];
             pir = toBool(bytes[11]);
         }
 
@@ -46,7 +43,6 @@ function decodeUplink(input) {
             data.powerSourceStatus = powerSourceStatus;
             data.lux = lux;
             data.pir = pir;
-            
             return data;
         }
     
@@ -58,6 +54,7 @@ function decodeUplink(input) {
         var command_len = 0;
     
         commands.map(function (command, i) {
+            console.log(command);
             switch (command) {
                 case '04':
                     {
@@ -102,8 +99,7 @@ function decodeUplink(input) {
                 case '1d':
                     {
                         command_len = 2;
-                        var deviceKeepAlive = 5;
-                        var wdpC = commands[i + 1] == '00' ? false : commands[i + 1] * deviceKeepAlive + 7;
+                        var wdpC = commands[i + 1] == '00' ? false : (parseInt(commands[i + 1], 16))
                         var wdpUc = commands[i + 2] == '00' ? false : parseInt(commands[i + 2], 16);
                         data.watchDogParams= { wdpC: wdpC, wdpUc: wdpUc } ;
                     }
@@ -246,15 +242,16 @@ function decodeUplink(input) {
         if (bytes[0] == 1|| bytes[0] == 129) {
             data = handleKeepalive(bytes, data);
         }else{
-            var keepaliveLength = 12;
-            var potentialKeepAlive = bytes.slice(-12/2);
-            if(potentialKeepAlive[0] == "81") keepaliveLength = 12;
+            var keepaliveLength = 11;
+            var potentialKeepAlive = bytes.slice(-12);
+            if(potentialKeepAlive[0] == 129) keepaliveLength = 12;
             data = handleResponse(bytes,data, keepaliveLength);
             bytes = bytes.slice(-keepaliveLength);
             data = handleKeepalive(bytes, data);
         }
         return {data: data};
     } catch (e) {
+        console.log(e)
         throw new Error('Unhandled data');
     }
 }
