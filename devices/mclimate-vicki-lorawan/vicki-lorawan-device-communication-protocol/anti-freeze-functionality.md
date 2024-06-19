@@ -51,5 +51,3 @@ Anti-freeze target temperature = 7°C\
 **Default value is 7°C**
 {% endtab %}
 {% endtabs %}
-
-## Open window commands with delta t 1.0 accuracy
