@@ -54,7 +54,6 @@ function decodeUplink(input) {
         var command_len = 0;
     
         commands.map(function (command, i) {
-            console.log(command);
             switch (command) {
                 case '04':
                     {
