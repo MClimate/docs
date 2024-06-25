@@ -223,6 +223,8 @@
 * [Battery Lifetime Estimation Methodology](other/battery-lifetime-estimation-methodology.md)
 * [Discover Smart Buildings solutions](https://mclimate.eu/pages/smartbuildings)
 * [How to solve Large space heating issues](other/how-to-solve-large-space-heating-issues.md)
+* [Device Firmware upgrade via a Field Programming Kit (FPK)](other/device-firmware-upgrade-via-a-field-programming-kit-fpk/README.md)
+  * [Vicki Firmware Upgrade](other/device-firmware-upgrade-via-a-field-programming-kit-fpk/vicki-firmware-upgrade.md)
 
 ## Integrations
 

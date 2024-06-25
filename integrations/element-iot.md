@@ -12,7 +12,7 @@ Select the appropriate folder for your device set.
 
 Save.
 
-<figure><img src="../.gitbook/assets/image (4) (1).png" alt=""><figcaption><p>Stream creation</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (4) (1) (1).png" alt=""><figcaption><p>Stream creation</p></figcaption></figure>
 
 ### 2. Generating the M-token and API key
 
