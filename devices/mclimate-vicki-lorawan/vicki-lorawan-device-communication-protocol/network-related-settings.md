@@ -6,19 +6,19 @@ This command gets the current LoRaWAN frequency region of operation of the devic
 
 <table data-header-hidden><thead><tr><th width="125">Byte index</th><th>Hex value – Meaning</th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Hex value – Meaning</strong></td></tr><tr><td>0</td><td>A4 – The command code.</td></tr><tr><td>1</td><td>XX - LoRaWAN region<br>00: EU868<br>01:  AS923<br>02: AU915<br>03: US915<br>FF: Other</td></tr></tbody></table>
 
-## Network join retry period
+## Join-retry period
 
 {% tabs %}
 {% tab title="SET" %}
-This command is used to set the period (T) of LoRaWAN join request sending from Vicki, in case it was unable to join the network from the first attempt.
+This command is used to set the period (T) of LoRaWAN join request sending from the device, in case it was unable to join the network from the first attempt.
 
-<table data-header-hidden><thead><tr><th width="125">Byte index</th><th>Hex value – Meaning</th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Hex value – Meaning</strong></td></tr><tr><td>0</td><td>10 – The command code.</td></tr><tr><td>1</td><td><p><span class="math">T, [s] = XX * 5.</span> Value 0x00 isn’t applicable. </p><p><strong>Default value for f.w. &#x3C; 4.1: 3 minutes.</strong><br><strong>Default value for f.w. >= 4.1: 10 minutes</strong></p></td></tr></tbody></table>
+<table data-header-hidden><thead><tr><th width="40">Byte index</th><th>Hex value – Meaning</th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Hex value – Meaning</strong></td></tr><tr><td>0</td><td>10 – The command code.</td></tr><tr><td>1</td><td><p><span class="math">T, [s] = XX * 5.</span> Value 0x00 isn’t applicable. </p><p><strong>Default value for f.w. &#x3C; 4.1: 3 minutes.</strong><br><strong>Default value for f.w. >= 4.1: 10 minutes</strong></p></td></tr></tbody></table>
 
-**Example command:** 0x10F0 – the server sets Vicki LoRaWAN join request send period to 20 minutes.
+**Example command:** 0x10F0 – the server sets join request send period to 20 minutes.
 {% endtab %}
 
 {% tab title="GET" %}
-This command is used to get the period (T) of LoRaWAN join request sending from Vicki, in case it was unable to join the network from the first attempt. Server sends the command code and the response is sent from Vicki together with the next keep-alive command.
+This command is used to get the period (T) of LoRaWAN join request sending from the device, in case it was unable to join the network from the first attempt. Server sends the command code and the response is sent together with the next keep-alive command.
 
 <table data-header-hidden><thead><tr><th width="134.33333333333331">Byte index</th><th width="148">Sent request</th><th>Received response</th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Sent request</strong></td><td><strong>Received response</strong></td></tr><tr><td>0</td><td>19 – Command code.</td><td>19 – The command code.</td></tr><tr><td>1</td><td></td><td>XX – Network join retry period value. <span class="math">T, [s] = XX*5</span></td></tr></tbody></table>
 
@@ -29,14 +29,14 @@ This command is used to get the period (T) of LoRaWAN join request sending from 
 {% endtabs %}
 
 {% hint style="warning" %}
-This join retry period (T) must comply to LoRaWAN messages duty cycle. Otherwise the join request will be sent on the next attempt. In most of cases, min. acceptable value for T is 240s. Recommended are higher values, for less battery discharge, e.g. 480s;
+This join retry period (T) must comply to LoRaWAN messages duty cycle. Otherwise the join request will be sent on the next attempt. In most of cases, min. acceptable value for T is 240s. Recommended are higher values, for less battery discharge, e.g. 480s.
 {% endhint %}
 
 {% hint style="info" %}
 This join retry period (T) is for the first 15 sent messages. After, the used LoRaWAN stack automatically changes the possibility to send join request to \~20 minutes for 20 network join attempts. If the device is still not joined to the network after these 20 attempts, next join request can be sent after \~3 hours and 15 minutes.
 {% endhint %}
 
-## Device radio communication Watch Dog&#x20;
+## Communication Watch Dog&#x20;
 
 There is a Watch Dog functionality that forces the device to reset, so it can rejoin the network in case a certain threshold has been reached where no downlinks have been received. There are 2 independent threshold values, one for confirmed mode and one for unconfirmed mode.
 
@@ -48,7 +48,7 @@ The command is described in the table below. The keep-alive in the response is o
 
 {% tabs %}
 {% tab title="SET" %}
-<table data-header-hidden><thead><tr><th width="124">Byte index</th><th>Hex value – Meaning</th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Hex value – Meaning</strong></td></tr><tr><td>0</td><td>1C – The command code.</td></tr><tr><td>1</td><td><p>XX – Watch Dog Period (WDP) when <strong>confirmed uplinks</strong> are used by the device.</p><p>XX defines how many uplinks should be received without ACK so that the device restarts. On top of that XX uplinks, another 7 minutes should pass before the device restarts.</p><p>D<strong>efault value for XX: 0x02.</strong><br><em>Note that value 0x00 disables the functionality when confirmed uplinks are used.</em></p></td></tr><tr><td>2</td><td><p>XX – Watch Dog Period (WDP) when <strong>unconfirmed uplinks</strong> are used by the device. Value is represented in hours.</p><p><strong>Default value for XX: 0x18. (24 hours)</strong></p><p><em>Note that value 0x00 disables the watch-dog functionality when unconfirmed uplinks are used.</em></p></td></tr></tbody></table>
+<table data-header-hidden><thead><tr><th width="124">Byte index</th><th>Hex value – Meaning</th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Hex value – Meaning</strong></td></tr><tr><td>0</td><td>1C – The command code.</td></tr><tr><td>1</td><td><p>XX – Watch Dog Period (WDP) when <strong>confirmed uplinks</strong> are used by the device.</p><p>XX defines how many uplinks should be received without ACK so that the device restarts. On top of that XX uplinks, another 7 minutes should pass before the device restarts.</p><p>D<strong>efault value for XX: 0x02.</strong><br><em>Note that value 0x00 disables the functionality when confirmed uplinks are used.</em></p></td></tr><tr><td>2</td><td><p>XX – Watch Dog Period (WDP) when <strong>unconfirmed uplinks</strong> are used by the device. Value is represented in hours.</p><p><strong>Default value for XX: 0x18. (24 hours)</strong></p><p><em>Note that value 0x00 disables the functionality when unconfirmed uplinks are used.</em></p></td></tr></tbody></table>
 
 **Example command, \[Hex]:** 1C0300 – Assuming that the Keep-alive period is 5 minutes, the device will wait for 3x5+7 = 22 minutes before resetting if confirmed uplinks are used. If unconfirmed uplinks are used the functionality is disabled (0x00).
 {% endtab %}

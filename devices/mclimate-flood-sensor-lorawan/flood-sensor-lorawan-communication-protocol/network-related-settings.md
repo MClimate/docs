@@ -6,47 +6,54 @@ Available for firmware version 1.5 or later.
 
 ## Join-retry period
 
-See below how to set/get the join-retry period of the device. If the devices is not connected to a gateway, this value basically instructs it how frequent it should try to re-join the network.
-
 {% tabs %}
 {% tab title="SET" %}
-<table><thead><tr><th width="131">Byte index</th><th>Hex value – Meaning</th></tr></thead><tbody><tr><td>0</td><td>10 – The command code.</td></tr><tr><td>1</td><td>T, [s] = XX * 5. Value 0x00 isn’t applicable. Default value: 0x78 * 5 = 600 sec = 10 minutes.</td></tr></tbody></table>
+This command is used to set the period (T) of LoRaWAN join request sending from the device, in case it was unable to join the network from the first attempt.
 
-**Example downlink, \[Hex]:** 10F0 – the server sets the join request period to 20 minutes.
+<table data-header-hidden><thead><tr><th width="125">Byte index</th><th>Hex value – Meaning</th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Hex value – Meaning</strong></td></tr><tr><td>0</td><td>10 – The command code.</td></tr><tr><td>1</td><td><p><span class="math">T, [s] = XX * 5.</span> Value 0x00 isn’t applicable. </p><p><strong>Default value:</strong> 0x78 * 5 = 600 sec = 10 minutes.</p></td></tr></tbody></table>
 
-Notes to this command:
-
-* This join retry period (T) must comply to LoRaWAN messages duty cycle. Otherwise the join request will be sent on the next attempt. In most of cases, min. acceptable value for T is 240s. Recommended are higher values, for less battery discharge, e.g. 480s;       &#x20;
-* This join retry period (T) is for the first 15 sent messages. After, the used LoRaWAN stack automatically changes the possibility to send join request to \~20 minutes for 20 network join attempts. If the device is still not joined to the network after these 20 attempts, next join request can be sent after \~3 hours and 15 minutes.
+**Example command:** 0x10F0 – the server sets join request send period to 20 minutes.
 {% endtab %}
 
 {% tab title="GET" %}
-This command is used to get the period (T) of LoRaWAN join request sending from the end-node device. Server sends the command code and the response is sent from the device together with the next keep-alive command. The keep-alive in the response is omitted for clarity.
+This command is used to get the period (T) of LoRaWAN join request sending from the device, in case it was unable to join the network from the first attempt. Server sends the command code and the response is sent together with the next keep-alive command.
 
-<table><thead><tr><th width="131.66666666666666">Byte index</th><th width="191">Received response</th><th>Received response</th></tr></thead><tbody><tr><td>0</td><td>19 – Command code</td><td>19 – Command code</td></tr><tr><td>1</td><td></td><td>XX – Network join retry period value. T, [s] = XX * 5.</td></tr></tbody></table>
+<table data-header-hidden><thead><tr><th width="134.33333333333331">Byte index</th><th width="148">Sent request</th><th>Received response</th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Sent request</strong></td><td><strong>Received response</strong></td></tr><tr><td>0</td><td>19 – Command code.</td><td>19 – The command code.</td></tr><tr><td>1</td><td></td><td>XX – Network join retry period value. <span class="math">T, [s] = XX*5</span></td></tr></tbody></table>
 
-**Example downlink, \[Hex]:** 19
+**Example command sent from server:** 0x19;
 
-**Example command response, \[Hex]:** 19C6 - T = 0xC6 \* _5 = 198 \*_ 5 = 990s = 16.5 minutes.
+**Example command response:** 0x19C6 => T = 0xC6\*5 = 198\*5 = 990s = 16.5 minutes.
 {% endtab %}
 {% endtabs %}
 
-## Communication watch-dog
+{% hint style="warning" %}
+This join retry period (T) must comply to LoRaWAN messages duty cycle. Otherwise the join request will be sent on the next attempt. In most of cases, min. acceptable value for T is 240s. Recommended are higher values, for less battery discharge, e.g. 480s.
+{% endhint %}
+
+{% hint style="info" %}
+This join retry period (T) is for the first 15 sent messages. After, the used LoRaWAN stack automatically changes the possibility to send join request to \~20 minutes for 20 network join attempts. If the device is still not joined to the network after these 20 attempts, next join request can be sent after \~3 hours and 15 minutes.
+{% endhint %}
+
+## Communication Watch Dog&#x20;
+
+There is a Watch Dog functionality that forces the device to reset, so it can rejoin the network in case a certain threshold has been reached where no downlinks have been received. There are 2 independent threshold values, one for confirmed mode and one for unconfirmed mode.
+
+When working in confirmed mode if no downlink is received for the period defined by the  Watch Dog Period (_WDPconfirmed)_  parameter (see table below), the device resets itself.
+
+When working in unconfirmed mode if no downlink is received for the period defined by the Watch Dog Period (_WDPunconfirmed)_ parameter (see table below), the device resets itself.
+
+The command is described in the table below. The keep-alive in the response is omitted for clarity.
 
 {% tabs %}
 {% tab title="SET" %}
-This command is used to set independent radio watch-dog configurations for confirmed and unconfirmed uplink messages sent from the device. In other words, the radio watch-dog configuration for confirmed uplinks no matter when the device works with unconfirmed uplinks, and vice versa. When no downlink (regular or MAC command) is received for the defined Watch-Dog Period (WDP), the device resets itself.
+<table data-header-hidden><thead><tr><th width="124">Byte index</th><th>Hex value – Meaning</th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Hex value – Meaning</strong></td></tr><tr><td>0</td><td>1C – The command code.</td></tr><tr><td>1</td><td><p>XX – Watch Dog Period (WDP) when <strong>confirmed uplinks</strong> are used by the device.</p><p>XX defines how many uplinks should be received without ACK so that the device restarts. On top of that XX uplinks, another 7 minutes should pass before the device restarts.</p><p>D<strong>efault value for XX: 0x02.</strong><br><em>Note that value 0x00 disables the functionality when confirmed uplinks are used.</em></p></td></tr><tr><td>2</td><td><p>XX – Watch Dog Period (WDP) when <strong>unconfirmed uplinks</strong> are used by the device. Value is represented in hours.</p><p><strong>Default value for XX: 0x18. (24 hours)</strong></p><p><em>Note that value 0x00 disables the functionality when unconfirmed uplinks are used.</em></p></td></tr></tbody></table>
 
-<table><thead><tr><th width="129">Byte index</th><th>Hex value – Meaning</th></tr></thead><tbody><tr><td>0</td><td>1C – The command code.</td></tr><tr><td>1</td><td><p>XX – Watch-dog period (WDP) when <strong>confirmed uplinks</strong> are used by the device.</p><p>WDP_confirmed [min] = (XX * Keepalive period) + 7</p><p></p><p><strong>Default value for XX: 0x02.</strong></p><p>Note that value 0x00 disables the watch-dog functionality when confirmed uplinks are used.</p></td></tr><tr><td>2</td><td><p>XX – Watch-dog period (WDP) when <strong>unconfirmed uplinks</strong> are used by the device.</p><p>WDP_unconfirmed [min] = XX * 60 </p><p></p><p><strong>Default value for XX: 0x18.</strong></p><p>Note that value 0x00 disables the watch-dog functionality when unconfirmed uplinks are used.</p></td></tr></tbody></table>
-
-**Example downlink, \[Hex]:** 1C0300 – Assuming that the send Keepalive period is 5 minutes,  WDP\_confirmed = (0x03 \* 5) + 7 = (3 \* 5) + 7 = 22 minutes.&#x20;
-
-The watch-dog functionality for unconfirmed messages is totally disabled - 0x00.
+**Example command, \[Hex]:** 1C0300 – Assuming that the Keep-alive period is 5 minutes, the device will wait for 3x5+7 = 22 minutes before resetting if confirmed uplinks are used. If unconfirmed uplinks are used the functionality is disabled (0x00).
 {% endtab %}
 
 {% tab title="GET" %}
-This command is used to get the radio watch-dog configurations.
+<table data-header-hidden><thead><tr><th width="137.33333333333331">Byte index</th><th width="196">Sent request</th><th>Received response</th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Sent request</strong></td><td><strong>Received response</strong></td></tr><tr><td>0</td><td>1D – Command code.</td><td>1D – The command code.</td></tr><tr><td>1</td><td></td><td><span class="math">WDP _{confirmed}</span> value.</td></tr><tr><td>2</td><td></td><td><span class="math">WDP _{unconfirmed}</span> value.</td></tr></tbody></table>
 
-<table><thead><tr><th width="134.66666666666666">Byte index</th><th width="200">Sent request</th><th></th></tr></thead><tbody><tr><td>0</td><td>1D – Command code</td><td>1D – Command code</td></tr><tr><td>1</td><td></td><td>WDP_confirmed, as described in the SET command.</td></tr><tr><td>2</td><td></td><td>WDP_unconfirmed, as described in the SET command.</td></tr></tbody></table>
+**Example command, \[Hex]:** 1C020C – Assuming that the Keep-alive period is 5 minutes, the device will wait for 2x5+7 = 17 minutes before resetting if confirmed uplinks are used. If unconfirmed uplinks are used it will wait for 0C\[HEX]=12\[DEC] hours and reset.
 {% endtab %}
 {% endtabs %}

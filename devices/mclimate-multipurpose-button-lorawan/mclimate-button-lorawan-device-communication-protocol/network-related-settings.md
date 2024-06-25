@@ -1,31 +1,34 @@
 # Network-related settings
 
-### **Set network join retry period command explanation.**
+## Join-retry period
 
-This command is used to set the period (T) of LoRaWAN join request sending from the end node device, in case it was unable to join the network from the first attempt. The command is described in Table 9.
+{% tabs %}
+{% tab title="SET" %}
+This command is used to set the period (T) of LoRaWAN join request sending from the device, in case it was unable to join the network from the first attempt.
 
-<table data-header-hidden><thead><tr><th width="150">Byte index</th><th width="611.4285714285713">Hex value – Meaning</th><th data-hidden>Bit index</th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Hex value – Meaning</strong></td><td>Bit index</td></tr><tr><td>0</td><td>10 – The command code.</td><td>-</td></tr><tr><td>1</td><td><p>T, [s] = XX * 5. </p><p>Value 00 isn’t applicable. </p><p>Default value: 02 * 5 = 10 minutes.</p></td><td>-</td></tr></tbody></table>
+<table data-header-hidden><thead><tr><th width="131">Byte index</th><th>Hex value – Meaning</th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Hex value – Meaning</strong></td></tr><tr><td>0</td><td>10 – The command code.</td></tr><tr><td>1</td><td><p><span class="math">T, [s] = XX * 5.</span> Value 0x00 isn’t applicable. </p><p><strong>Default value:</strong> 0x78 * 5 = 600 sec = 10 minutes.</p></td></tr></tbody></table>
 
-_Table 9_
+**Example command:** 0x10F0 – the server sets join request send period to 20 minutes.
+{% endtab %}
 
-**Example command, \[HEX]:** 10F0 – the server sets device LoRaWAN join request send period to 20 minutes.
+{% tab title="GET" %}
+This command is used to get the period (T) of LoRaWAN join request sending from the device, in case it was unable to join the network from the first attempt. Server sends the command code and the response is sent together with the next keep-alive command.
 
-&#x20;Notes to this command:
+<table data-header-hidden><thead><tr><th width="134.33333333333331">Byte index</th><th width="148">Sent request</th><th>Received response</th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Sent request</strong></td><td><strong>Received response</strong></td></tr><tr><td>0</td><td>19 – Command code.</td><td>19 – The command code.</td></tr><tr><td>1</td><td></td><td>XX – Network join retry period value. <span class="math">T, [s] = XX*5</span></td></tr></tbody></table>
 
-* This join retry period (T) must comply to LoRaWAN messages duty cycle. Otherwise the join request will be sent on the next attempt. In most of cases, min. acceptable value for T is 240s. Recommended are higher values, for less battery discharge, e.g. 480s;
-* This join retry period (T) is for the first 15 sent messages. After, the used LoRaWAN stack automatically changes the possibility to send join request to \~20 minutes for 20 network join attempts. If the device is still not joined to the network after these 20 attempts, next join request can be sent after \~3 hours and 15 minutes.
+**Example command sent from server:** 0x19;
 
-### **Get network join retry period command explanation**
+**Example command response:** 0x19C6 => T = 0xC6\*5 = 198\*5 = 990s = 16.5 minutes.
+{% endtab %}
+{% endtabs %}
 
-This command is used to get the period (T) of LoRaWAN join request sending from the end-node device. Server sends the command code and the response is sent from the device together with the next keep-alive command. The sent command request and the received command response are described in Table 10. The keep-alive in the response is omitted for clarity.
+{% hint style="warning" %}
+This join retry period (T) must comply to LoRaWAN messages duty cycle. Otherwise the join request will be sent on the next attempt. In most of cases, min. acceptable value for T is 240s. Recommended are higher values, for less battery discharge, e.g. 480s.
+{% endhint %}
 
-<table data-header-hidden><thead><tr><th width="150">Byte index</th><th width="200.35661617297035">Sent request</th><th width="325.82375137102474">Sent request</th><th data-hidden>Bit index</th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Sent request</strong></td><td><strong>Sent request</strong></td><td><strong>Bit index</strong></td></tr><tr><td>0</td><td>19 – Command code.</td><td>19 – The command code.</td><td>-</td></tr><tr><td>1</td><td></td><td>XX – Network join retry period value. T, [s] = XX * 5.</td><td>-</td></tr></tbody></table>
-
-_Table 10_
-
-**Example command sent from server, \[HEX]:** 19;
-
-**Example command response, \[HEX]:** 19C6 => T = C6\*5 = 198\*5 = 990s = 16.5 minutes.
+{% hint style="info" %}
+This join retry period (T) is for the first 15 sent messages. After, the used LoRaWAN stack automatically changes the possibility to send join request to \~20 minutes for 20 network join attempts. If the device is still not joined to the network after these 20 attempts, next join request can be sent after \~3 hours and 15 minutes.
+{% endhint %}
 
 ### Set Send event button later when it is **allowed**
 
