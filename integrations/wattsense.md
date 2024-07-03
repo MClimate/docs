@@ -15,11 +15,21 @@ There are 2 properties that need to be enabled at the very least as these are wh
 * Raw encoded payload
 * Encoded downlink message
 
-<figure><img src="../.gitbook/assets/14 (1).png" alt=""><figcaption><p>Required properties</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/w1.png" alt=""><figcaption><p>Required properties</p></figcaption></figure>
 
-You also need to Edit the Encoded downlink message property in order to make it compatible with the Enterprise structure.
+You also need to Edit the "slug" for both properties in order to make them compatible with the Enterprise structure.
+
+### Raw encoded payload
 
 Open up the property editing window and expand the Advanced menu, where you need to fill in the following field
+
+_Slug_ - **raw-encoded-payload**
+
+<figure><img src="../.gitbook/assets/w2.png" alt=""><figcaption><p>Raw payload slug</p></figcaption></figure>
+
+### Encoded downlink message
+
+Open up the property editing window (same as for the previous property) and expand the Advanced menu, where you need to fill in the following field
 
 _Slug_ - **downlink-message**
 
