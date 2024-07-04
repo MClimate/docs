@@ -6,7 +6,7 @@
 {% tab title="SET" %}
 This command is used to set the period (T) of LoRaWAN join request sending from the device, in case it was unable to join the network from the first attempt.
 
-<table data-header-hidden><thead><tr><th width="125">Byte index</th><th>Hex value – Meaning</th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Hex value – Meaning</strong></td></tr><tr><td>0</td><td>10 – The command code.</td></tr><tr><td>1</td><td><p><span class="math">T, [s] = XX * 5.</span> Value 0x00 isn’t applicable. </p><p><strong>Default value:</strong> 0x24 * 5 = 180 sec = 3 minutes.</p></td></tr></tbody></table>
+<table data-header-hidden><thead><tr><th width="125">Byte index</th><th>Hex value – Meaning</th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Hex value – Meaning</strong></td></tr><tr><td>0</td><td>10 – The command code.</td></tr><tr><td>1</td><td><p><span class="math">T, [s] = XX * 5.</span> Value 0x00 isn’t applicable. </p><p><strong>Default value:</strong> 0x24 * 5 = 180 sec = 10 minutes.</p></td></tr></tbody></table>
 
 **Example command:** 0x10F0 – the server sets join request send period to 20 minutes.
 {% endtab %}
