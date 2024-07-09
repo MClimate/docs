@@ -91,7 +91,7 @@
     * [Commands cheat sheet](devices/mclimate-fcc16a/mclimate-fcc16a-device-communication-protocol/commands-cheat-sheet.md)
     * [Uplink types](devices/mclimate-fcc16a/mclimate-fcc16a-device-communication-protocol/uplink-types.md)
     * [Keep-alive](devices/mclimate-fcc16a/mclimate-fcc16a-device-communication-protocol/keep-alive.md)
-    * [Overheat and overcurrent protection](devices/mclimate-fcc16a/mclimate-fcc16a-device-communication-protocol/overheat-and-overcurrent-protection.md)
+    * [Protections](devices/mclimate-fcc16a/mclimate-fcc16a-device-communication-protocol/protections.md)
     * [Relay state](devices/mclimate-fcc16a/mclimate-fcc16a-device-communication-protocol/relay-state.md)
     * [Network-related settings & Others](devices/mclimate-fcc16a/mclimate-fcc16a-device-communication-protocol/network-related-settings-and-others.md)
     * [Get Firmware & Hardware version](devices/mclimate-fcc16a/mclimate-fcc16a-device-communication-protocol/get-firmware-and-hardware-version.md)
