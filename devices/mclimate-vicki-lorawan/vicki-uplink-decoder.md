@@ -1824,6 +1824,11 @@ function Decode(port, bytes) {
                     var dataR = { algoType: commands[i + 1] };
                     resultToPass = merge_obj(resultToPass, dataR);
                     break;
+                case '34':
+                    command_len = 1;
+                    var dataChild = { childLockBehavior: commands[i + 1] };
+                    resultToPass = merge_obj(resultToPass, dataChild);
+                    break;
                 case '36':
                     command_len = 3;
                     var kp = ((parseInt(commands[i + 1], 16) << 16) | (parseInt(commands[i + 2], 16) << 8) | parseInt(commands[i + 3], 16)) / 131072;
