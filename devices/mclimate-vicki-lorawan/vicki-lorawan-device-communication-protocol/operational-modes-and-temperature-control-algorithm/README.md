@@ -63,6 +63,10 @@ Read more about [Proportional Integral control algorithm](algorithm-3-proportion
 This feature is available in firmware >= 4.0
 {% endhint %}
 
+{% hint style="warning" %}
+The following commands are not supported in firmware >=4.3
+{% endhint %}
+
 {% tabs %}
 {% tab title="SET" %}
 <table data-header-hidden><thead><tr><th width="135"></th><th></th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Hex value - Meaning</strong></td></tr><tr><td>0</td><td>2C – The command code.</td></tr><tr><td>1</td><td><p>XX – Value to set according to the desired temperature control algorithm to be used by the device.</p><p>00: Use the "Proportional control" algorithm (not available in f.w.  >= 4.3)</p><p>01: Use the "Equal directional control" algorithm (not available in f.w. >= 4.2)<br>02: Use the "Proportional Integral control" algorithm.</p></td></tr></tbody></table>

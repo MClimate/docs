@@ -35,6 +35,12 @@ Note that the algorithm check period and coefficient parameters can be configure
 ## **Proportional temperature control algorithm parameters**
 
 {% tabs %}
+{% tab title="SET" %}
+<table><thead><tr><th width="115.05745554035565">Byte index</th><th>Hex value - Meaning</th></tr></thead><tbody><tr><td>0</td><td>2A – The command code.</td></tr><tr><td>1</td><td>XX – Value for the proportional algorithm coefficient to be set. Maximum acceptable value is 20.</td></tr><tr><td>2</td><td>XX – Value of the proportional algorithm control period, in minutes.</td></tr></tbody></table>
+
+Example command, \[Hex]: 2A040C – Set the proportional algorithm coefficient to 4 and the check period to 12 minutes.
+{% endtab %}
+
 {% tab title="GET" %}
 
 
@@ -43,12 +49,6 @@ Note that the algorithm check period and coefficient parameters can be configure
 Example command sent from the server, \[Hex]: 29.
 
 Example response, \[Hex]: 29030F – Coefficient: 3, control period: 15 minutes.
-{% endtab %}
-
-{% tab title="SET" %}
-<table><thead><tr><th width="115.05745554035565">Byte index</th><th>Hex value - Meaning</th></tr></thead><tbody><tr><td>0</td><td>2A – The command code.</td></tr><tr><td>1</td><td>XX – Value for the proportional algorithm coefficient to be set. Maximum acceptable value is 20.</td></tr><tr><td>2</td><td>XX – Value of the proportional algorithm control period, in minutes.</td></tr></tbody></table>
-
-Example command, \[Hex]: 2A040C – Set the proportional algorithm coefficient to 4 and the check period to 12 minutes.
 {% endtab %}
 {% endtabs %}
 
