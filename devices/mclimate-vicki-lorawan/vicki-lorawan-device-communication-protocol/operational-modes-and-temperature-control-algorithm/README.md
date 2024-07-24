@@ -45,9 +45,9 @@ Table 25
 
 There are two available temperature control algorithms:
 
-1. Equal directional control - available for f.w. < 4.2. (deprecated)
-2. Proportional control - available and **default** for f.w. versions >= 4.0;&#x20;
-3. Proportional Integral control - available and **default** for f.w. versions >= 4.2
+1. Equal directional control - available for f.w. < 4.2. (removed in 4.2)
+2. Proportional control - available and **default** for f.w. versions >= 4.0 (removed in 4.3)
+3. Proportional Integral control - available and **default** for f.w. versions >= 4.2 (only available algorithm in >= 4.3)
 
 Once you have selected operational mode "Automatic temperature control", you have the option to set which temperature control algorithm you want to use.
 
@@ -65,7 +65,7 @@ This feature is available in firmware >= 4.0
 
 {% tabs %}
 {% tab title="SET" %}
-<table data-header-hidden><thead><tr><th width="135"></th><th></th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Hex value - Meaning</strong></td></tr><tr><td>0</td><td>2C – The command code.</td></tr><tr><td>1</td><td><p>XX – Value to set according to the desired temperature control algorithm to be used by the device.</p><p>00: Use the "Proportional control" algorithm;</p><p>01: Use the "Equal directional control" algorithm (deprecated in f.w. >= 4.2)<br>02: Use the "Proportional Integral control" algorithm.</p></td></tr></tbody></table>
+<table data-header-hidden><thead><tr><th width="135"></th><th></th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Hex value - Meaning</strong></td></tr><tr><td>0</td><td>2C – The command code.</td></tr><tr><td>1</td><td><p>XX – Value to set according to the desired temperature control algorithm to be used by the device.</p><p>00: Use the "Proportional control" algorithm (not available in f.w.  >= 4.3)</p><p>01: Use the "Equal directional control" algorithm (not available in f.w. >= 4.2)<br>02: Use the "Proportional Integral control" algorithm.</p></td></tr></tbody></table>
 
 Example command, \[Hex]: 2C02 – Set the device to use the "Proportional Integral control" algorithm.
 {% endtab %}
