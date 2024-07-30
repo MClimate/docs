@@ -3,28 +3,24 @@
 ![](../../.gitbook/assets/mw1920\_t-valve-header-image.png)
 
 {% file src="../../.gitbook/assets/MClimate-T-Valve-LoRaWAN-Datasheet-en (2).pdf" %}
-Datasheet - MClimate T-Valve LoRaWAN
+Datasheet
 {% endfile %}
 
-{% file src="../../.gitbook/assets/T-Valve-LoRaWAN-Manual.pdf" %}
-User Manual - MClimate T-Valve LoRaWAN
+{% file src="../../.gitbook/assets/T-Valve-LoRaWAN-User-Manual (1).pdf" %}
+User Manual
 {% endfile %}
 
 ## General information
 
 T-Valve is a LoRaWAN water valve used in residential or commercial buildings available in 3/4" and 1 1/4" versions, respectively DN20 and DN32
 
-Learn more about MClimate Smart Building Solutions
+Learn more about MClimate Smart Building Solutions:
 
-{% content-ref url="broken-reference" %}
-[Broken link](broken-reference)
-{% endcontent-ref %}
+{% embed url="https://mclimate.eu/pages/smartbuildings" %}
 
 Purchase MClimate T-Valve LoRaWAN:
 
-{% content-ref url="broken-reference" %}
-[Broken link](broken-reference)
-{% endcontent-ref %}
+{% embed url="https://mclimate.eu/products/mclimate-t-valve?variant=47858941231436" %}
 
 ## Features
 
@@ -72,14 +68,4 @@ Purchase MClimate T-Valve LoRaWAN:
 * Drinking water certification: ACS, KTW, NSF/ANSI/CAN (61-2018), NSF/ANSI (372-2016), USA California Health and Safety Code 11687, USA S.3874 - 111th Congress (2009-2010)
 * CE
 
-## Resources
-
-{% file src="../../.gitbook/assets/Server-Communication-protocol.pdf" %}
-Communication Protocol - MClimate T-Valve
-{% endfile %}
-
-## Scripts
-
-{% content-ref url="t-valve-uplink-decoder.md" %}
-[t-valve-uplink-decoder.md](t-valve-uplink-decoder.md)
-{% endcontent-ref %}
+If you have any questions, feel free to reach out to us at [lorawan-support@mclimate.eu](mailto:lorawan-support@mclimate.eu)

@@ -3,11 +3,11 @@
 ![](<../../.gitbook/assets/mw1920\_MClimate-Multipurpose\_\_\_Button-LoRaWAN copy.png>)
 
 {% file src="../../.gitbook/assets/MClimate-Button-LoRaWAN-datasheet-en.pdf" %}
-Datasheet - MClimate Multipurpose Button LoRaWAN
+Datasheet
 {% endfile %}
 
-{% file src="../../.gitbook/assets/MClimate-Multipurpose-Button-LoRaWAN-User-Manual.pdf" %}
-User and Installation manual - MClimate Multipurpose Button LoRaWAN
+{% file src="../../.gitbook/assets/Multipurpose-Button-LoRaWAN-User-Manual.pdf" %}
+User Manual
 {% endfile %}
 
 ## General information
@@ -16,9 +16,11 @@ MClimate Multipurpose Button LoRaWAN  is a simple device with many application
 
 Learn more about MClimate Smart Building Solutions:
 
-{% content-ref url="broken-reference" %}
-[Broken link](broken-reference)
-{% endcontent-ref %}
+{% embed url="https://mclimate.eu/pages/smartbuildings" %}
+
+Purchase MClimate Multipurpose Button LoRaWAN:
+
+{% embed url="https://mclimate.eu/products/mclimate-button-lorawan?variant=47859048481100" %}
 
 ## Features
 
@@ -40,14 +42,4 @@ Learn more about MClimate Smart Building Solutions:
 * Link budget: 130dB
 * RF Transmit Power: 14dB
 
-## Resources
-
-{% content-ref url="mclimate-button-lorawan-device-communication-protocol/" %}
-[mclimate-button-lorawan-device-communication-protocol](mclimate-button-lorawan-device-communication-protocol/)
-{% endcontent-ref %}
-
-## Scripts
-
-{% content-ref url="multipurpose-button-uplink-decoder.md" %}
-[multipurpose-button-uplink-decoder.md](multipurpose-button-uplink-decoder.md)
-{% endcontent-ref %}
+If you have any questions, feel free to reach out to us at [lorawan-support@mclimate.eu](mailto:lorawan-support@mclimate.eu)

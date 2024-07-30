@@ -1,12 +1,16 @@
-# 🆕 MClimate HT Display Lite
+# 🆕 MClimate HT Display lite
 
 ## General Information
 
-MClimate HT Display Lite LoRaWAN is a stand-alone HT sensor powered entirely by solar energy using an organic solar panel. The device features a 1.54" e-ink screen, temperature, humidity and LUX sensor. The user can see the current levels of temperature, humidity and light intensity, as well as a historical trend. The device sends an uplink periodically, or when the "Check" button is pressed. The data from the HT Display can be used in any LoRaWAN-compatible system, incl. Building Management Systems to control demand-based ventilation. Sensor information can be exposed as datapoints in Modbus, BACnet and KNX systems through the use of a special gateway.
+MClimate HT Display lite LoRaWAN is a stand-alone HT sensor powered entirely by solar energy using an organic solar panel. The device features a 1.54" e-ink screen, temperature, humidity and LUX sensor. The user can see the current levels of temperature, humidity and light intensity, as well as a historical trend. The device sends an uplink periodically, or when the "Check" button is pressed. The data from the HT Display can be used in any LoRaWAN-compatible system, incl. Building Management Systems to control demand-based ventilation. Sensor information can be exposed as datapoints in Modbus, BACnet and KNX systems through the use of a special gateway.
 
 Learn more about MClimate Smart Building Solutions:
 
 {% embed url="https://mclimate.eu/pages/smartbuildings" fullWidth="false" %}
+
+Purchase MClimate HT Display lite:
+
+LINK TO DEVICE PAGE
 
 ### Features
 

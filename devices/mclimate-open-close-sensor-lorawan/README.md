@@ -3,6 +3,12 @@
 ![](../../.gitbook/assets/MClimate-Open-Close-Sensor-LoRaWAN-Datasheet-en\_pdf.png)
 
 {% file src="../../.gitbook/assets/MClimate-Open-Close-Sensor-Datasheet-LoRaWAN-en.pdf" %}
+Datasheet
+{% endfile %}
+
+{% file src="../../.gitbook/assets/Open-Close-Sensor-LoRaWAN-User-Manual.pdf" %}
+User Manual
+{% endfile %}
 
 ## General information <a href="#general-information" id="general-information"></a>
 
@@ -10,9 +16,11 @@ MClimate Open/Close Sensor LoRaWAN® is a device detecting the event of opening 
 
 Learn more about MClimate Smart Building Solutions:
 
-{% content-ref url="broken-reference" %}
-[Broken link](broken-reference)
-{% endcontent-ref %}
+{% embed url="https://mclimate.eu/pages/smartbuildings" %}
+
+Purchase MClimate Open/Close Sensor LoRaWAN:
+
+{% embed url="https://mclimate.eu/products/mclimate-open-close-sensor-lorawan?variant=47859077218636" %}
 
 ## Features <a href="#features" id="features"></a>
 
@@ -36,9 +44,3 @@ Learn more about MClimate Smart Building Solutions:
 * RF Transmit Power: 14dB
 
 If you have any questions, feel free to reach out to us at [lorawan-support@mclimate.eu](mailto:lorawan-support@mclimate.eu)
-
-## Resources
-
-{% content-ref url="open-close-sensor-lorawan-communication-protocol/" %}
-[open-close-sensor-lorawan-communication-protocol](open-close-sensor-lorawan-communication-protocol/)
-{% endcontent-ref %}

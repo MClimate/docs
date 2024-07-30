@@ -3,11 +3,11 @@
 <figure><img src="../../.gitbook/assets/MClimate-CO2-Display-Header-Image" alt=""><figcaption></figcaption></figure>
 
 {% file src="../../.gitbook/assets/MClimate-CO2-Display-Datasheet.pdf" %}
-MClimate CO2 Display - Datasheet English
+Datasheet
 {% endfile %}
 
-{% file src="../../.gitbook/assets/MClimate-CO2-Display-User-Manual.pdf" %}
-MClimate CO2 Display - User Manual English
+{% file src="../../.gitbook/assets/CO2-Display-LoRaWAN-User-Manual.pdf" %}
+User Manual
 {% endfile %}
 
 ## General Information
@@ -17,6 +17,10 @@ MClimate CO2 Display LoRaWAN is a stand-alone CO2 sensor powered entirely by sol
 Learn more about MClimate Smart Building Solutions:
 
 {% embed url="https://mclimate.eu/pages/smartbuildings" fullWidth="false" %}
+
+Purchase MClimate CO2 Display:
+
+{% embed url="https://mclimate.eu/products/mclimate-co2-display-lorawan?variant=47859130958156" %}
 
 ### Features
 

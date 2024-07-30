@@ -9,7 +9,7 @@ Datasheet
 {% endfile %}
 
 {% file src="../../.gitbook/assets/MClimate-Wireless-Thermostat-User-Manual (1).pdf" %}
-User manual
+User Manual
 {% endfile %}
 
 ### General information <a href="#general-information" id="general-information"></a>
@@ -22,9 +22,13 @@ The device sends an uplink after any event as well as periodically. The data fro
 
 Learn more about MClimate Smart Building Solutions:
 
-{% content-ref url="broken-reference" %}
-[Broken link](broken-reference)
-{% endcontent-ref %}
+
+
+{% embed url="https://mclimate.eu/pages/smartbuildings" %}
+
+Purchase MClimate Wireless Thermostat:
+
+{% embed url="https://mclimate.eu/products/mclimate-display-thermostat-lorawan?variant=47859106808140" %}
 
 ## Features <a href="#features" id="features"></a>
 
@@ -62,12 +66,6 @@ Learn more about MClimate Smart Building Solutions:
 * Activation: OTAA
 * Link budget: 130dB
 * RF Transmit Power: 14dB
-
-## Resources
-
-{% file src="../../.gitbook/assets/MClimate-Wireless-Thermostat-specs-lorawan-en.pdf" %}
-MClimate Wireless Thermostat - Datasheet
-{% endfile %}
 
 ## Sensors
 

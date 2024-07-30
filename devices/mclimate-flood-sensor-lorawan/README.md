@@ -3,11 +3,13 @@
 ![](../../.gitbook/assets/mw1920\_mclimate-flood-sensor-lorawan.png)
 
 {% file src="../../.gitbook/assets/MClimate-Flood-Sensor-LoRaWAN-Datasheet-en.pdf" %}
-Datasheet - MClimate Flood Sensor LoRaWAN
+Datasheet
 {% endfile %}
 
-{% file src="../../.gitbook/assets/MClimate-Flood-Sensor-LoRaWAN-User-Manual.pdf" %}
-User Manual - MClimate Flood Sensor LoRaWAN
+
+
+{% file src="../../.gitbook/assets/Flood-Sensor-LoRaWAN-Installation-Manual.pdf" %}
+User Manual
 {% endfile %}
 
 ## General information
@@ -16,15 +18,11 @@ MClimate Flood Sensor is a compact flood sensor suitable for residential and com
 
 Learn more about MClimate Smart Building Solutions:
 
-{% content-ref url="broken-reference" %}
-[Broken link](broken-reference)
-{% endcontent-ref %}
+{% embed url="https://mclimate.eu/pages/smartbuildings" %}
 
 Purchase MClimate Flood Sensor LoRaWAN:
 
-{% content-ref url="broken-reference" %}
-[Broken link](broken-reference)
-{% endcontent-ref %}
+{% embed url="https://mclimate.eu/products/flood-sensor-lorawan?variant=47545000722764" %}
 
 ## Features
 
@@ -40,14 +38,4 @@ Purchase MClimate Flood Sensor LoRaWAN:
 * Operating voltage: 2.5 - 3.6 VDC
 * Expected battery life: Up to 10 years (depending on configuration and environment)
 
-## Resources
-
-{% content-ref url="flood-sensor-lorawan-communication-protocol/" %}
-[flood-sensor-lorawan-communication-protocol](flood-sensor-lorawan-communication-protocol/)
-{% endcontent-ref %}
-
-## Scripts
-
-{% content-ref url="flood-sensor-uplink-decoder.md" %}
-[flood-sensor-uplink-decoder.md](flood-sensor-uplink-decoder.md)
-{% endcontent-ref %}
+If you have any questions, feel free to reach out to us at [lorawan-support@mclimate.eu](mailto:lorawan-support@mclimate.eu)

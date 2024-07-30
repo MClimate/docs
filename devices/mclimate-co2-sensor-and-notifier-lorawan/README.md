@@ -3,11 +3,11 @@
 ![](../../.gitbook/assets/mw1920\_MClimate-CO2\_Sensor\_\_\_Notifier-LoRaWAN.png)
 
 {% file src="../../.gitbook/assets/MClimate-CO2-Sensor-LoRaWAN-Batteries-Datasheet-en.pdf" %}
-Datasheet - MClimate CO2 Sensor LoRaWAN
+Datasheet
 {% endfile %}
 
-{% file src="../../.gitbook/assets/MClimate-CO2-Sensor-and-Notifier-LoRaWAN-Manual" %}
-User Manual - MClimate CO2 Sensor and Notifier LoRaWAN
+{% file src="../../.gitbook/assets/CO2-LoRaWAN-User-Manual.pdf" %}
+User Manual
 {% endfile %}
 
 ### General information
@@ -16,15 +16,11 @@ MClimate CO2 Sensor and Notifier is a device that uses NDIR technology to measur
 
 Learn more about MClimate Smart Building Solutions:
 
-{% content-ref url="broken-reference" %}
-[Broken link](broken-reference)
-{% endcontent-ref %}
+{% embed url="https://mclimate.eu/pages/smartbuildings" %}
 
 Purchase MClimate CO2 Sensor and Notifier LoRaWAN:
 
-{% content-ref url="broken-reference" %}
-[Broken link](broken-reference)
-{% endcontent-ref %}
+{% embed url="https://mclimate.eu/products/mclimate-co2-sensor-notifier-lorawan?variant=47859023806796" %}
 
 ## Features
 
@@ -52,14 +48,4 @@ Purchase MClimate CO2 Sensor and Notifier LoRaWAN:
 * Link budget: 130dB
 * RF Transmit Power: 14dB
 
-## Resources
-
-{% content-ref url="co2-sensor-lorawan-device-communication-protocol/" %}
-[co2-sensor-lorawan-device-communication-protocol](co2-sensor-lorawan-device-communication-protocol/)
-{% endcontent-ref %}
-
-## Scripts
-
-{% content-ref url="co2-sensor-uplink-decoder.md" %}
-[co2-sensor-uplink-decoder.md](co2-sensor-uplink-decoder.md)
-{% endcontent-ref %}
+If you have any questions, feel free to reach out to us at [lorawan-support@mclimate.eu](mailto:lorawan-support@mclimate.eu)

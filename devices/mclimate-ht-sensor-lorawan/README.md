@@ -5,26 +5,22 @@
 ### General information
 
 {% file src="../../.gitbook/assets/MClimate-HT-Sensor-LoRaWAN-Batteries-Datasheet-en.pdf" %}
-Datasheet - MClimate HT LoRaWAN
+Datasheet
 {% endfile %}
 
-{% file src="../../.gitbook/assets/MClimate-HT-Sensor-LoRaWAN-User-Manual.pdf" %}
-User manual - MClimate HT LoRaWAN
+{% file src="../../.gitbook/assets/HT-Sensor-LoRaWAN-User-Manual (2).pdf" %}
+User Manual
 {% endfile %}
 
 MClimate HT LoRaWAN Sensor is an indoor temperature and humidity sensor with 10+ years of battery life, configurable settings and beautiful and discreet design.
 
 Learn more about MClimate Smart Building Solutions:
 
-{% content-ref url="broken-reference" %}
-[Broken link](broken-reference)
-{% endcontent-ref %}
+{% embed url="https://mclimate.eu/pages/smartbuildings" %}
 
 Purchase MClimate AQI Sensor and Notifier LoRaWAN:
 
-{% content-ref url="broken-reference" %}
-[Broken link](broken-reference)
-{% endcontent-ref %}
+{% embed url="https://mclimate.eu/products/ht-sensor?variant=47859001065804" %}
 
 ## Features <a href="#bbk-o11wk" id="bbk-o11wk"></a>
 
@@ -48,14 +44,4 @@ Purchase MClimate AQI Sensor and Notifier LoRaWAN:
 * Link budget: 130dB
 * RF Transmit Power: 14dB
 
-## Resources <a href="#bbk-fc1fz" id="bbk-fc1fz"></a>
-
-{% content-ref url="ht-sensor-lorawan-device-communication-protocol/" %}
-[ht-sensor-lorawan-device-communication-protocol](ht-sensor-lorawan-device-communication-protocol/)
-{% endcontent-ref %}
-
-## Scripts <a href="#bbk-yw0vn" id="bbk-yw0vn"></a>
-
-{% content-ref url="ht-sensor-uplink-decoder.md" %}
-[ht-sensor-uplink-decoder.md](ht-sensor-uplink-decoder.md)
-{% endcontent-ref %}
+If you have any questions, feel free to reach out to us at [lorawan-support@mclimate.eu](mailto:lorawan-support@mclimate.eu)

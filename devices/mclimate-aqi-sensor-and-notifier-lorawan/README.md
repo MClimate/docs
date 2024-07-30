@@ -12,15 +12,7 @@ MClimate AQI Sensor and Notifier LoRaWAN is an indoor Air Quality Index Sensor a
 
 Learn more about MClimate Smart Building Solutions:
 
-{% content-ref url="broken-reference" %}
-[Broken link](broken-reference)
-{% endcontent-ref %}
-
-Purchase MClimate AQI Sensor and Notifier LoRaWAN:
-
-{% content-ref url="broken-reference" %}
-[Broken link](broken-reference)
-{% endcontent-ref %}
+{% embed url="https://mclimate.eu/pages/smartbuildings" %}
 
 ### Features
 
@@ -47,25 +39,4 @@ Purchase MClimate AQI Sensor and Notifier LoRaWAN:
 * Link budget: 130dB
 * RF Transmit Power: 14dB
 
-### Resources
-
-{% file src="../../.gitbook/assets/MClimate-AQI_Sensor-LoRaWAN-Datasheet.pdf" %}
-MClimate AQI Sensor LoRaWAN - Datasheet
-{% endfile %}
-
-{% content-ref url="aqi-sensor-lorawan-device-communication-protocol/" %}
-[aqi-sensor-lorawan-device-communication-protocol](aqi-sensor-lorawan-device-communication-protocol/)
-{% endcontent-ref %}
-
-
-
-### Scripts
-
-{% content-ref url="aqi-sensor-uplink-decoder.md" %}
-[aqi-sensor-uplink-decoder.md](aqi-sensor-uplink-decoder.md)
-{% endcontent-ref %}
-
-{% content-ref url="aqi-sensor-downlink-encoder.md" %}
-[aqi-sensor-downlink-encoder.md](aqi-sensor-downlink-encoder.md)
-{% endcontent-ref %}
-
+If you have any questions, feel free to reach out to us at [lorawan-support@mclimate.eu](mailto:lorawan-support@mclimate.eu)

@@ -3,20 +3,24 @@
 <figure><img src="../../.gitbook/assets/co2-lite-specs-img (1).png" alt=""><figcaption></figcaption></figure>
 
 {% file src="../../.gitbook/assets/MClimate-CO2-Display-Lite-Datasheet.pdf" %}
-MClimate CO2 Display Lite - Datasheet English
+Datasheet
 {% endfile %}
 
-{% file src="../../.gitbook/assets/MClimate-CO2-Display-Lite-User-Manual (1).pdf" %}
-MClimate CO2 Display Lite - User Manual English
+{% file src="../../.gitbook/assets/MClimate-CO2-Display-Lite-User-Manual (3).pdf" %}
+User Manual
 {% endfile %}
 
 ## General Information
 
-MClimate CO2 Display Lite LoRaWAN is a stand-alone CO2 sensor powered entirely by solar energy using an organic solar panel. The device features a 1.54" e-ink screen, temperature and humidity sensor, LUX sensor and NDIR CO2 sensor. The user can see the current levels of CO2 as well as historical trend. The device sends an uplink periodically, or when the "Check" button is pressed. The data from the CO2 Display can be used in any LoRaWAN-compatible system, incl. Building Management Systems to control demand-based ventilation. Sensor information can be exposed as datapoints in Modbus, BACnet and KNX systems through the use of a special gateway.
+MClimate CO2 Display lite LoRaWAN is a stand-alone CO2 sensor powered entirely by solar energy using an organic solar panel. The device features a 1.54" e-ink screen, temperature and humidity sensor, LUX sensor and NDIR CO2 sensor. The user can see the current levels of CO2 as well as historical trend. The device sends an uplink periodically, or when the "Check" button is pressed. The data from the CO2 Display can be used in any LoRaWAN-compatible system, incl. Building Management Systems to control demand-based ventilation. Sensor information can be exposed as datapoints in Modbus, BACnet and KNX systems through the use of a special gateway.
 
 Learn more about MClimate Smart Building Solutions:
 
 {% embed url="https://mclimate.eu/pages/smartbuildings" fullWidth="false" %}
+
+Purchase MClimate CO2 Display lite:
+
+{% embed url="https://mclimate.eu/products/mclimate-co2-display-lite?variant=47310167998796" %}
 
 ### Features
 
