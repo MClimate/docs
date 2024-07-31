@@ -75,15 +75,13 @@ By **Default** all 3 metrics are displayed at the same time (temperature, humidi
 
 You can set how the CO2 measurement is represented on the display. You can select to either see a chart, a value and/or an emoji.
 
-You can set how the CO2 measurement is represented on the display. You can select to either see a chart, a value and/or an emoji.
-
 {% tabs %}
 {% tab title="SET" %}
 Select one of the 3 options for displaying the CO2 level.
 
 <table data-header-hidden><thead><tr><th width="97"></th><th width="85"></th><th></th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Bit index</strong></td><td><strong>Hex value – Meaning</strong></td></tr><tr><td>0</td><td>-</td><td>82 – The command code.</td></tr><tr><td>1</td><td>7:3</td><td>Reserved.</td></tr><tr><td></td><td>2</td><td>1 to show the CO2 chart on the display. 0 to hide it.</td></tr><tr><td></td><td>1</td><td>1 to show the CO2 value on the display with digits. 0 to hide it.</td></tr><tr><td></td><td>0</td><td>1 to show the CO2 emoji and level on the display. 0 to hide it.</td></tr></tbody></table>
 
-**Example command:** 0x8303 – when we separate the command code value we get 0x**03.** Converting it to binary we get 00000011. Utilizing the last 3 bits we have 011, thus the value will be displayed in digits together with an emoji.
+**Example command:** 0x8203 – when we separate the command code value we get 0x**03.** Converting it to binary we get 00000011. Utilizing the last 3 bits we have 011, thus the value will be displayed in digits together with an emoji.
 {% endtab %}
 
 {% tab title="GET" %}
