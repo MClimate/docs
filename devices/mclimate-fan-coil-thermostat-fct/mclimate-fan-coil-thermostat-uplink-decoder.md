@@ -97,8 +97,7 @@ function decodeUplink(input) {
                     case '1d':
                         {
                             command_len = 2;
-                            var deviceKeepAlive = 5;
-                            var wdpC = commands[i + 1] == '00' ? false : commands[i + 1] * deviceKeepAlive + 7;
+                            var wdpC = commands[i + 1] == '00' ? false : parseInt(commands[i + 1], 16);
                             var wdpUc = commands[i + 2] == '00' ? false : parseInt(commands[i + 2], 16);
                             data.watchDogParams = { wdpC: wdpC, wdpUc: wdpUc };
                         }
@@ -125,6 +124,18 @@ function decodeUplink(input) {
                         {
                             command_len = 1;
                             data.displayRefreshPeriod = parseInt(commands[i + 1], 16);
+                        }
+                        break;
+                    case '36':
+                        {
+                            command_len = 1;
+                            data.extAutomaticTemperatureControl = parseInt(commands[i + 1], 16);
+                        }
+                        break;
+                    case '3e':
+                        {
+                            command_len = 2;
+                            data.extSensorTemperature = parseInt(`${commands[i + 1]}${commands[i + 2]}`, 16);
                         }
                         break;
                     case '41':
@@ -181,6 +192,12 @@ function decodeUplink(input) {
                             data.frostProtectionSettings = { threshold: parseInt(commands[i + 1], 16), setpoint: parseInt(commands[i + 2], 16) };
                         }
                         break;
+                    case '53':
+                        {
+                            command_len = 1;
+                            data.operationalMode = parseInt(commands[i + 1], 16);
+                        }
+                        break;
                     case '55':
                         {
                             command_len = 1;
@@ -235,6 +252,12 @@ function decodeUplink(input) {
                             data.automaticChangeoverThreshold = { coolingThreshold: parseInt(commands[i + 1], 16), heatingThreshold: parseInt(commands[i + 2], 16) };
                         }
                         break;
+                    case '67':
+                        {
+                            command_len = 1;
+                            data.deviceStatus = parseInt(commands[i + 1], 16);
+                        }
+                        break;
                     case '69':
                         {
                             command_len = 1;
@@ -250,7 +273,7 @@ function decodeUplink(input) {
                     case '6d':
                         {
                             command_len = 2;
-                            data.deltaTemperature2and3 = { deltaTemperature2: parseInt(commands[i + 1], 16) / 10, deltaTemperature3: parseInt(commands[i + 2], 16) / 10 };
+                            data.deltaTemperature2and3 = { deltaTemperature2: parseInt(commands[i + 1], 16) * 10, deltaTemperature3: parseInt(commands[i + 2], 16) * 10 };
                         }
                         break;
                     case '6e':
@@ -281,6 +304,18 @@ function decodeUplink(input) {
                         {
                             command_len = 1;
                             data.filterAlarm = parseInt(commands[i + 1], 16);
+                        }
+                        break;
+                    case '74':
+                        {
+                            command_len = 2;
+                            data.automaticChangeoverMode = { ntcTemperature: parseInt(commands[i + 1], 16), automaticChangeover: parseInt(commands[i + 2], 16) };
+                        }
+                        break;
+                    case '75':
+                        {
+                            command_len = 1;
+                            data.powerModuleStatus = parseInt(commands[i + 1], 16);
                         }
                         break;
                     case 'a0':
