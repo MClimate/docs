@@ -1,4 +1,4 @@
-# ⬆ CO2 Sensor Uplink Decoder
+# ⬆️ CO2 Sensor Uplink Decoder
 
 ## Recommended decoder
 
@@ -136,9 +136,7 @@ function Decoder (hexData) {
                         {
                             try {
                                 command_len = 2;
-                                // get default keepalive if it is not available in data
-                                let deviceKeepAlive = deviceData.keepAliveTime ? deviceData.keepAliveTime : 5;
-                                let wdpC = commands[i + 1] == '00' ? false : (commands[i + 1] * deviceKeepAlive) + 7;
+                                let wdpC = commands[i + 1] == '00' ? false : parseInt(commands[i + 1], 16);
                                 let wdpUc = commands[i + 2] == '00' ? false : parseInt(commands[i + 2], 16);
                                 let data = { watchDogParams: { wdpC, wdpUc } };
                                 Object.assign(resultToPass, { ...resultToPass }, { ...data });

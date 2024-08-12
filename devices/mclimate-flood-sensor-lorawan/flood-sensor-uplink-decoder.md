@@ -1,4 +1,4 @@
-# ⬆ Flood Sensor Uplink Decoder
+# ⬆️ Flood Sensor Uplink Decoder
 
 ### Uplink Decoder  - TTI (JavaScript ECMAScript 5)
 
@@ -95,9 +95,7 @@ function decodeUplink(input) {
 				case '1d':
 					{
 						command_len = 2;
-						// var deviceKeepAlive = 5;
-						var deviceKeepAlive = data.keepAliveTime ? data.keepAliveTime : 5;
-						var wdpC = commands[i + 1] == '00' ? false : (parseInt(commands[i + 1],16) * deviceKeepAlive) + 7;
+						var wdpC = commands[i + 1] == '00' ? false : parseInt(commands[i + 1], 16);
 						var wdpUc = commands[i + 2] == '00' ? false : parseInt(commands[i + 2], 16);
 						data.watchDogParams = { wdpC: wdpC, wdpUc: wdpUc };
 					}
