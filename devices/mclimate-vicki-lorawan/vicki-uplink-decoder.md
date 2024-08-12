@@ -189,8 +189,7 @@ function decodeUplink(input) {
                     {
                         // get default keepalive if it is not available in data
                         command_len = 2;
-                        var deviceKeepAlive = 5;
-                        var wdpC = commands[i + 1] == '00' ? false : commands[i + 1] * deviceKeepAlive + 7;
+                        var wdpC = commands[i + 1] == '00' ? false : parseInt(commands[i + 1], 16);
                         var wdpUc = commands[i + 2] == '00' ? false : parseInt(commands[i + 2], 16);
                         var dataJ = { watchDogParams: { wdpC: wdpC, wdpUc: wdpUc } };
                         resultToPass = merge_obj(resultToPass, dataJ);
@@ -539,8 +538,7 @@ function Decoder(bytes, port, uplink_info) {
                     {
                         // get default keepalive if it is not available in data
                         command_len = 2;
-                        var deviceKeepAlive = 5;
-                        var wdpC = commands[i + 1] == '00' ? false : commands[i + 1] * deviceKeepAlive + 7;
+                        var wdpC = commands[i + 1] == '00' ? false : parseInt(commands[i + 1], 16);
                         var wdpUc = commands[i + 2] == '00' ? false : parseInt(commands[i + 2], 16);
                         var dataJ = { watchDogParams: { wdpC: wdpC, wdpUc: wdpUc } };
                         resultToPass = merge_obj(resultToPass, dataJ);
@@ -826,8 +824,7 @@ commands.map(function (command, i) {
             {
                 // get default keepalive if it is not available in data
                 command_len = 2;
-                var deviceKeepAlive = 5;
-                var wdpC = commands[i + 1] == '00' ? false : commands[i + 1] * deviceKeepAlive + 7;
+                var wdpC = commands[i + 1] == '00' ? false :  parseInt(commands[i + 1], 16);
                 var wdpUc = commands[i + 2] == '00' ? false : parseInt(commands[i + 2], 16);
                 var dataJ = { watchDogParams: { wdpC: wdpC, wdpUc: wdpUc } };
                 resultToPass = merge_obj(resultToPass, dataJ);
@@ -1175,8 +1172,7 @@ function Decode(fPort, bytes, variables) {
                     {
                         // get default keepalive if it is not available in data
                         command_len = 2;
-                        var deviceKeepAlive = 5;
-                        var wdpC = commands[i + 1] == '00' ? false : commands[i + 1] * deviceKeepAlive + 7;
+                        var wdpC = commands[i + 1] == '00' ? false : parseInt(commands[i + 1], 16);
                         var wdpUc = commands[i + 2] == '00' ? false : parseInt(commands[i + 2], 16);
                         var dataJ = { watchDogParams: { wdpC: wdpC, wdpUc: wdpUc } };
                         resultToPass = merge_obj(resultToPass, dataJ);
@@ -1493,8 +1489,7 @@ function decodeUplink(input) {
                     {
                         // get default keepalive if it is not available in data
                         command_len = 2;
-                        var deviceKeepAlive = 5;
-                        var wdpC = commands[i + 1] == '00' ? false : commands[i + 1] * deviceKeepAlive + 7;
+                        var wdpC = commands[i + 1] == '00' ? false : parseInt(commands[i + 1], 16);
                         var wdpUc = commands[i + 2] == '00' ? false : parseInt(commands[i + 2], 16);
                         var dataJ = { watchDogParams: { wdpC: wdpC, wdpUc: wdpUc } };
                         resultToPass = merge_obj(resultToPass, dataJ);
@@ -1771,8 +1766,7 @@ function Decode(port, bytes) {
                     break;
                 case '1d':
                     command_len = 2;
-                    var deviceKeepAlive = 5;
-                    var wdpC = commands[i + 1] == '00' ? false : commands[i + 1] * deviceKeepAlive + 7;
+                    var wdpC = commands[i + 1] == '00' ? false : parseInt(commands[i + 1], 16);
                     var wdpUc = commands[i + 2] == '00' ? false : parseInt(commands[i + 2], 16);
                     var dataJ = { watchDogParams: { wdpC: wdpC, wdpUc: wdpUc } };
                     resultToPass = merge_obj(resultToPass, dataJ);
