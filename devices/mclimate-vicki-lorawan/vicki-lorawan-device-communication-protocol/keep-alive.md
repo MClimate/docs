@@ -51,7 +51,7 @@ Devices with firmware version 3.5 and above:\
 
 
 
-<table data-header-hidden><thead><tr><th width="176">Byte index</th><th>Hex value - Meaning</th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Hex value - Meaning</strong></td></tr><tr><td>0</td><td>02 – The command will set Vicki keep-alive period.</td></tr><tr><td>1</td><td>XX – keep-alive period in minutes. Value 0x00 isn’t applicable. Default value: 0x0A.</td></tr></tbody></table>
+<table data-header-hidden><thead><tr><th width="176">Byte index</th><th>Hex value - Meaning</th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Hex value - Meaning</strong></td></tr><tr><td>0</td><td>02 – The command will set Vicki keep-alive period.</td></tr><tr><td>1</td><td>XX – keep-alive period in minutes. Value 0x00 isn’t applicable.<br><strong>Default value: 0x0A.</strong></td></tr></tbody></table>
 
 **Example command:** 0x020A
 

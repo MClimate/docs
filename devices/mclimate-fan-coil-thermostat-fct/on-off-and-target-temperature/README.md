@@ -111,7 +111,7 @@ The allowed target temperature step range is 0.1...10°C (0.1°C max resolution)
 ### Measured temperature sensor compensation
 
 {% hint style="info" %}
-This is applies to the measured temperature.
+This applies to the measured temperature.
 {% endhint %}
 
 {% tabs %}
