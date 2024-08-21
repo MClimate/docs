@@ -726,5 +726,4 @@ function Decoder(payload, port) {
     // Forward data to Datacake
     return datacakeFields;
 }
-
 ```
