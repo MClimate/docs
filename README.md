@@ -157,3 +157,38 @@ Motor position = 0 - the valve is FULLY OPEN
 Motor Position = Motor Range - the valve is FULLY CLOSED
 {% endhint %}
 
+### Vicki is stuck in the closed state
+
+Sometimes TRVs get stuck (especially ones that have been in use for some time and have had a long time off of the heating season). Check the motor range of the Vicki, if it is calibrated well (value between 350 and 600) and the motor position is not at Motor range value (fully closed) your TRV should be at least partially open. If this is not the case the TRV itself might be stuck (from a mechanical perspective) and you will need to fix it (for example the pin could be corroded).
+
+### My Solar Powered Device goes offline
+
+MClimate devices using a solar panel (CO2 Display, Wireless Thermostat, CO2/HT Display Lite) can last a long time using energy harvesting (depending on the luminosity this could be indefinite), however in dim environments their operational time is limited. Move them to an area with greater luminosity. If this is not possible, make sure to top them up via the USB port and consider inserting batteries (in the case of the CO2 Display and Wireless Thermostat).
+
+### Where are my DevEUI, AppEUI, App Key?
+
+These are sent automatically to your email inbox when you order from the MClimate store. You should receive an email from [fulfilment@mcliamte.eu](mailto:fulfilment@mcliamte.eu) with a CSV file, containing the information.
+
+If you have purchased a device from one of our distributors, please contact them directly.
+
+In case you are unable to obtain them, still, contact us at [lorawan-support@mclimate.eu](mailto:lorawan-support@mclimate.eu)
+
+### Do I need an adapter to install Vicki on my TRV?
+
+Vicki can directly be installed on M30x1.5 TRV (in cases with a very short thread area this still might not be possible). If you are unsure of your RTVs dimensions, check our compatibility tool
+
+[https://compatibility-tool.internal.seemelissa.com/](https://compatibility-tool.internal.seemelissa.com/)
+
+If still in doubt mail us at [lorawan-support@mclimate.eu](mailto:lorawan-support@mclimate.eu)
+
+### Is my FCU compatible with the MClimate FCT
+
+We recommend you take a looking at he FCT Documentation page on the [Applications it supports](devices/mclimate-fan-coil-thermostat-fct/wiring-diagrams-applications-and-operational-modes.md).
+
+If you are still not certain whether it will work with your FCU, best contact us at [lorawan-support@mclimate.eu](mailto:lorawan-support@mclimate.eu)
+
+### Wireless Thermostat / CO2 Display battery indicator does not fill
+
+1. Solar power - the indicator level will depend on the luminosity, it could fill up or go down depending on how much light is hitting the solar panel
+2. Batteries - depending on the type of batteries used the indicator level will increase to a set point (depending on the specific battery voltage) and decrease slowly with time.
+3. USB - you will see a lightning symbol, indicating the supercapacitor (this is what actually powers the device) is charging and given enough time the indicator will fill up entirely.
