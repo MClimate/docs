@@ -86,7 +86,7 @@ function decodeUplink(input) {
         data.calibrationFailed = toBool(calibrationFailed);
         data.attachedBackplate = toBool(attachedBackplate);
         data.perceiveAsOnline = toBool(perceiveAsOnline);
-        data.perceiveAsOnline = toBool(antiFreezeProtection);
+        data.antiFreezeProtection = toBool(antiFreezeProtection);
         data.motorOpenness = motorRange != 0 ? Math.round((1-(motorPosition/motorRange))*100) : 0;
         if(!data.hasOwnProperty('targetTemperatureFloat')){
             data.targetTemperatureFloat = parseFloat(bytes[1])
@@ -706,7 +706,7 @@ function handleKeepAliveData(bytes){
        calibrationFailed: toBool(calibrationFailed),
        attachedBackplate: toBool(attachedBackplate),
        perceiveAsOnline: toBool(perceiveAsOnline),
-       perceiveAsOnline: toBool(antiFreezeProtection),
+       antiFreezeProtection: toBool(antiFreezeProtection),
        motorOpenness: Math.round((1-(motorPosition/motorRange))*100),
        port: port,
        "payload length": bytes.length
