@@ -18,7 +18,7 @@ An example of a response is given in the table below.
 | 2              | 7:4           | X – Device primary software version.                                                      |
 | 2              | 3:0           | X – Device secondary software version.                                                    |
 
-**Example response, \[Hex]**: 041211 (Here the received keep-alive command data is omitted for clarity).
+**Example response, \[Hex]**: 041210 (Here the received keep-alive command data is omitted for clarity).
 
 **Decoding**:&#x20;
 

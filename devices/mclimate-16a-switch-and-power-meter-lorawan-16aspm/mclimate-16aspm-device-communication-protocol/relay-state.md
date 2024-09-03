@@ -1,5 +1,7 @@
 # Relay state
 
+## Relay state change
+
 This command sets/gets the state of the relay, effectively powering/depowering the appliance it is controlling.
 
 {% hint style="info" %}
