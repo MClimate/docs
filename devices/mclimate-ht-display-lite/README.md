@@ -1,4 +1,4 @@
-# 🆕 MClimate HT Display lite
+# MClimate HT Display lite
 
 ## General Information
 

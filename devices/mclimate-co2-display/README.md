@@ -1,4 +1,4 @@
-# 🆕 MClimate CO2 Display
+# MClimate CO2 Display
 
 <figure><img src="../../.gitbook/assets/MClimate-CO2-Display-Header-Image" alt=""><figcaption></figcaption></figure>
 

@@ -19,7 +19,7 @@ When a downlink is sent to the Fan Coil Thermostat, it can be either confirmed o
 **Downlink fports:** 1, 2, 4-224
 {% endhint %}
 
-One downlink packet from the LNS may contain multiple commands for the FCT to optimise the communication efficiency. These downlinks can combine both multiple write and/or read commands. Response to the GET commands will be sent in the next uplink.
+One downlink packet from the LNS may contain multiple commands for the FCT to optimize the communication efficiency. These downlinks can combine both multiple write and/or read commands. Response to the GET commands will be sent in the next uplink.
 
 When the LNS wants to read data from the device, the corresponding command code or command codes are sent to the device and the response will be sent together with the next keep-alive message. If the combined length of the command responses and the keep-alive packet is longer than the allowed by the LoRaWAN MAC layer application payload size, the keep-alive packet will be omitted and only the command responses will be sent by the FCT.
 

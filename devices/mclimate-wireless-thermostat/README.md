@@ -1,4 +1,4 @@
-# 🆕 MClimate Wireless Thermostat
+# MClimate Wireless Thermostat
 
 
 
@@ -8,7 +8,7 @@
 Datasheet
 {% endfile %}
 
-{% file src="../../.gitbook/assets/MClimate-Wireless-Thermostat-User-Manual (1).pdf" %}
+{% file src="../../.gitbook/assets/Wireless-Thermostat-User-Manual.pdf" %}
 User Manual
 {% endfile %}
 

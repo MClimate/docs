@@ -42,14 +42,17 @@ The command is described in the table below. The keep-alive in the response is o
 
 {% tabs %}
 {% tab title="SET" %}
-<table data-header-hidden><thead><tr><th width="147.99999999999997"></th><th></th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Hex value – Meaning</strong></td></tr><tr><td>0</td><td>1C – The command code.</td></tr><tr><td>1</td><td><p>XX – Watch Dog Period (WDP) when <strong>confirmed uplinks</strong> are used by the device.</p><p>XX defines how many uplinks should be received without ACK so that the device restarts. On top of that XX uplinks, another 7 minutes should pass before the device restarts.</p><p>D<strong>efault value for XX: 0x02.</strong><br><em>Note that value 0x00 disables the functionality when confirmed uplinks are used.</em></p></td></tr><tr><td>2</td><td><p>XX – Watch Dog Period (WDP) when <strong>unconfirmed uplinks</strong> are used by the device. Value is represented in hours.</p><p><strong>Default value for XX: 0x18. (24 hours)</strong></p><p><em>Note that value 0x00 disables the functionality when unconfirmed uplinks are used.</em></p></td></tr></tbody></table>
+<table data-header-hidden><thead><tr><th width="331"></th><th></th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Hex value – Meaning</strong></td></tr><tr><td>0</td><td>1C – The command code.</td></tr><tr><td>1</td><td><p>XX – Watch Dog Period (WDP) when <strong>confirmed uplinks</strong> are used by the device.</p><p>XX defines how many uplinks should be received without ACK so that the device restarts. On top of that XX uplinks, another 7 minutes should pass before the device restarts.</p><p>D<strong>efault value for XX: 0x02.</strong><br><em>Note that value 0x00 disables the functionality when confirmed uplinks are used.</em></p></td></tr><tr><td>2</td><td><p>XX – Watch Dog Period (WDP) when <strong>unconfirmed uplinks</strong> are used by the device. Value is represented in hours.</p><p><strong>Default value for XX: 0x18. (24 hours)</strong></p><p><em>Note that value 0x00 disables the functionality when unconfirmed uplinks are used.</em></p></td></tr></tbody></table>
 
 **Example command, \[Hex]:** 1C0300 – Assuming that the Keep-alive period is 5 minutes, the device will wait for 3x5+7 = 22 minutes before resetting if confirmed uplinks are used. If unconfirmed uplinks are used the functionality is disabled (0x00).
 {% endtab %}
 
 {% tab title="GET" %}
+
+
 <table data-header-hidden><thead><tr><th width="143.99999999999997"></th><th width="190"></th><th></th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Sent request</strong></td><td><strong>Received response</strong></td></tr><tr><td>0</td><td>1D – Command code</td><td>1D – Command code</td></tr><tr><td>1</td><td> </td><td><span class="math">WDP _{confirmed}</span> value.</td></tr><tr><td>2</td><td></td><td><span class="math">WDP _{unconfirmed}</span> value.</td></tr></tbody></table>
 
-**Example command, \[Hex]:** 1D020C – Assuming that the Keep-alive period is 5 minutes, the device will wait for 2x5+7 = 17 minutes before resetting if confirmed uplinks are used. If unconfirmed uplinks are used it will wait for 0C\[HEX]=12\[DEC] hours and reset.
+**Example command, \[Hex]:** 1C020C – Assuming that the Keep-alive period is 5 minutes, the device will wait for 2x5+7 = 17 minutes before resetting if confirmed uplinks are used. If unconfirmed uplinks are used it will wait for 0C\[HEX]=12\[DEC] hours and reset.
 {% endtab %}
 {% endtabs %}
+
