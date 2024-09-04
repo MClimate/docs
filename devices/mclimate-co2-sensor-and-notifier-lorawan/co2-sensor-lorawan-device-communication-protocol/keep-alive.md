@@ -18,7 +18,7 @@ The data is described in Table 3. In Table 4 example packet is given.
 | 3                 | XX    |   | Internal temperature sensor data, bits 15:8 - T\[15:8]                                               |
 | 4                 | XX    |   | Internal temperature sensor data, bits 7:0 - T\[7:0]. $$t, [\degree C] = \frac{T[15:0] - 400}{10}$$  |
 | 5                 | XX    |   | Relative humidity data. _Relative humidity,_$$[\%] = \frac{XX*100}{256}$$                            |
-| 6                 | XX    |   | Device battery voltage. $$Voltage, [mV] = XX*8 + 1600$$                                              |
+| 6                 | XX    |   | Device battery voltage. $$Voltage, [mV] = XX * 8 + 1600$$                                            |
 
 _Table 3_
 
@@ -30,7 +30,7 @@ _Table 3_
 | 3                 | 02    |   |                                                                                           |
 | 4                 | 8C    |   | _Temperature_ $$t, [\degree C] = \frac{0x028C - 400}{10} = \frac{652 - 400}{10} = 25.2$$  |
 | 5                 | 8B    |   | _Relative humidity,_$$[\%] = \frac{0x8B*100}{256} =  \frac{139*100}{256} = 54.29$$        |
-| 6                 | DF    |   | Device battery voltage. $$Voltage, [mV] = 0xDF*8 + 1600 = 223 * 8 +1600 = 3384$$          |
+| 6                 | DF    |   | Device battery voltage. $$Voltage, [mV] = 223 * 8 +1600 = 3384$$                          |
 
 _Table 4_
 
