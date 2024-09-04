@@ -1,6 +1,6 @@
 # Protections
 
-## Overvoltage threshold
+## Overheating threshold
 
 This command sets the threshold temperature in Celsius at which the overheating protection activates.
 
