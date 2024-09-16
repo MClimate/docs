@@ -181,3 +181,59 @@ The ECM fan starts at maximum speed for a specified start up time.
 {% endtabs %}
 
 Acceptable values: 0...20 seconds (1sec. resolution).
+
+### 3.4.  Additional fan modes
+
+{% hint style="info" %}
+These commands are available for devices with firmware version ≥ 1.6
+{% endhint %}
+
+{% tabs %}
+{% tab title="SET" %}
+#### Set аdditional fan modes.
+
+<table data-header-hidden><thead><tr><th width="134"></th><th></th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Hex value – Meaning</strong></td></tr><tr><td>0</td><td>7A – The command code.</td></tr><tr><td>1</td><td>00: Turn off the fan when the target temperature is reached. <strong>Default.</strong><br>01: Keep the fan running for some time after reaching the target temp.<br>02: The fan runs continuously.</td></tr></tbody></table>
+
+**Example downlink:** 0x7A02 - Sets the fan runs continuously.
+{% endtab %}
+
+{% tab title="GET" %}
+#### Get аdditional fan modes.
+
+<table data-header-hidden><thead><tr><th width="143.99999999999997"></th><th width="193"></th><th></th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Sent request</strong></td><td><strong>Received response</strong></td></tr><tr><td>0</td><td>7B – Command code</td><td>7B – Command code</td></tr><tr><td>1</td><td> </td><td>XX - Additional fan mode.</td></tr></tbody></table>
+
+**Example downlink sent by the server:** 0x7B;
+
+**Example command response:** 0x7B02 – The fan runs continuously.
+{% endtab %}
+{% endtabs %}
+
+### 3.5. Fan off delay time
+
+{% hint style="info" %}
+These commands are available for devices with firmware version ≥ 1.6
+{% endhint %}
+
+Continue running for X minutes on LOW speed fan to cool off the heating element.
+
+{% tabs %}
+{% tab title="SET" %}
+#### Set up the start up time.
+
+<table data-header-hidden><thead><tr><th width="131"></th><th></th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Hex value – Meaning</strong></td></tr><tr><td>0</td><td>78 – The command code.</td></tr><tr><td>1</td><td>XX - Fan off delay time. <strong>Default value:</strong> 0x01 (1min).</td></tr></tbody></table>
+
+**Example downlink:** 0x7803 - Sets the fan off delay time to 3 minutes.
+{% endtab %}
+
+{% tab title="GET" %}
+#### Get up the the start up time.
+
+<table data-header-hidden><thead><tr><th width="143.99999999999997"></th><th width="193"></th><th></th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Sent request</strong></td><td><strong>Received response</strong></td></tr><tr><td>0</td><td>79 – Command code</td><td>79 – Command code</td></tr><tr><td>1</td><td> </td><td>XX - Fan off delay time.</td></tr></tbody></table>
+
+**Example downlink sent by the server:** 0x79;
+
+**Example command response:** 0x7903 – The fan off delay time is 3 minutes.
+{% endtab %}
+{% endtabs %}
+
+Acceptable values: 1...255 minutes (1min. resolution).

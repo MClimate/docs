@@ -67,7 +67,7 @@ These steps are NOT mandatory.
 
 ### 4.1 Choosing Min/Max set-point
 
-If you decide to limit the users ability to choose the set point within a certain range, you can define the minimum and maximum set-point as described [here](on-off-and-target-temperature/min-max-setpoint-adjustment.md). Example: Limit between 18 and 23 degrees.
+If you decide to limit the users ability to choose the set point within a certain range, you can define the minimum and maximum set-point as described [here](mclimate-fan-coil-thermostat-device-communication-protocol/on-off-and-target-temperature/target-temperature-ranges.md). Example: Limit between 18 and 23 degrees.
 
 ### 4.2 Locking keys
 

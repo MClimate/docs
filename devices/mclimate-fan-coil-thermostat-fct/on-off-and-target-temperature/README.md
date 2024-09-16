@@ -60,7 +60,7 @@ Ttarget\[°C] = T\[15:0] / 10;
 {% endtab %}
 {% endtabs %}
 
-The allowed target temperature range is 0...40°C (0.1°C resolution).
+The allowed target temperature range is 5...30°C (0.1°C resolution) by default.
 
 ## **Manual change from the thermostat's buttons**
 
@@ -74,7 +74,7 @@ Ttarget\[°C] = T\[15:0] / 10;
 
 **Example uplink**: 0x300102;
 
-0x0102 \[DEC] = 258 \[DEC] => Ttarget = 258 / 10 = 25.8°C.
+0x0102 \[HEX] = 258 \[DEC] => Ttarget = 258 / 10 = 25.8°C.
 
 ## Configuring the target temperature step
 

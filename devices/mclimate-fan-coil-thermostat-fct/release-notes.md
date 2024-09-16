@@ -1,5 +1,24 @@
 # 🥳 Release notes
 
+### Firmware version 1.6
+
+**Release date:** \
+06 September 2024&#x20;
+
+* Added French UI.
+* Added additional fan modes.
+* The Fan now runs for X minutes (adjustable setting) on LOW speed after the setpoint temperature has been reached in order to coo off the heating element (safety feture).
+* Changed default target temperature min/max values ​​from 0-40C to 5-30C.
+* When the device is in unoccupied mode, the target temperature and fan speed can be set using the buttons and the radio commands.
+* Added min/max temperature range occupied/unoccupied.
+* Added payload info when the change-over happens.
+* Added different min/max temperature depending on the mode.
+* Fixed bug related to incorrect operation of frost protection at negative measured temperature.
+* Fixed bug related to application 2 and 3 being incorrectly displayed as 2 - pipe system instead of 4 - pipe in the application menu (installer menu) of the devices.
+* Fixed bug related to wrong reporting of manually changed target temperature when changed by buttons and up to 10 sec changed by radio command.
+* Fixed bug: When the device is in ventilation mode and a radio command is sent to set the target temperature, this temperature is shown on the device display.
+* Fixed bug: When two radio commands are sent to the device before the "Duty cycle" time expires, the device only responds to the last one.
+
 ### Firmware version 1.5
 
 **Release date:** \

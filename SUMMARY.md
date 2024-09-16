@@ -30,7 +30,7 @@
     * [Keep-alive](devices/mclimate-fan-coil-thermostat-fct/keep-alive.md)
     * [ON/OFF & Target temperature](devices/mclimate-fan-coil-thermostat-fct/on-off-and-target-temperature/README.md)
       * [Valve(s) operation](devices/mclimate-fan-coil-thermostat-fct/on-off-and-target-temperature/valve-s-operation.md)
-      * [Min/Max Setpoint adjustment](devices/mclimate-fan-coil-thermostat-fct/on-off-and-target-temperature/min-max-setpoint-adjustment.md)
+      * [Target temperature ranges](devices/mclimate-fan-coil-thermostat-fct/mclimate-fan-coil-thermostat-device-communication-protocol/on-off-and-target-temperature/target-temperature-ranges.md)
     * [Fan Settings](devices/mclimate-fan-coil-thermostat-fct/fan-settings/README.md)
       * [Auto Fan - Δ settings](devices/mclimate-fan-coil-thermostat-fct/fan-settings/auto-fan-d-settings.md)
     * [🔓 Keys lock](devices/mclimate-fan-coil-thermostat-fct/keys-lock.md)

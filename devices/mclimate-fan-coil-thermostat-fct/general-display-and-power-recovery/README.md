@@ -16,7 +16,7 @@ You can change the operation after return of power supply with the following com
 {% tab title="GET" %}
 #### Get the operation after return to power status.
 
-<table data-header-hidden><thead><tr><th width="143.99999999999997"></th><th width="190"></th><th></th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Sent request</strong></td><td><strong>Received response</strong></td></tr><tr><td>0</td><td>69 – Command code</td><td>69 – Command code.</td></tr><tr><td>1</td><td> </td><td>00: Last status.<br>01: On - after return of power supply.<br>02: Off - after return of power supply.</td></tr></tbody></table>
+<table data-header-hidden><thead><tr><th width="143.99999999999997"></th><th width="192"></th><th></th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Sent request</strong></td><td><strong>Received response</strong></td></tr><tr><td>0</td><td>69 – Command code.</td><td>69 – Command code.</td></tr><tr><td>1</td><td> </td><td>00: Last status.<br>01: On - after return of power supply.<br>02: Off - after return of power supply.</td></tr></tbody></table>
 
 **Example command:** 0x69;
 

@@ -50,7 +50,7 @@ This command is used to set the frost protection set-point and threshold tempera
 {% tab title="SET" %}
 #### Set the frost protection set-point and threshold.
 
-<table data-header-hidden><thead><tr><th width="132">Byte index</th><th>Hex value - Meaning</th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Hex value - Meaning</strong></td></tr><tr><td>0</td><td>50 – The command code.</td></tr><tr><td>1</td><td>XX – Threshold temperature value. <strong>Default value:</strong> 0x07 (7°C).</td></tr><tr><td>2</td><td>XX – Set-point temperature value. <strong>Default value:</strong> 0x08 (8°C).</td></tr></tbody></table>
+<table data-header-hidden><thead><tr><th width="132">Byte index</th><th>Hex value - Meaning</th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Hex value - Meaning</strong></td></tr><tr><td>0</td><td>50 – The command code.</td></tr><tr><td>1</td><td>XX – Threshold temperature value. <strong>Default value:</strong> 0x07 (7°C).</td></tr><tr><td>2</td><td>XX – Set-point temperature value. <strong>Default value:</strong> 0x0A (10°C).</td></tr></tbody></table>
 
 **Example command:** 0x500609 – Sets the threshold temperature to 6°C and the Set-point temperature to 9°C.
 {% endtab %}
@@ -66,7 +66,7 @@ This command is used to set the frost protection set-point and threshold tempera
 {% endtab %}
 {% endtabs %}
 
-The allowed range is 0...20°C (1°C resolution).
+The allowed range is 5...20°C (1°C resolution).
 
 ## Frost protection status
 
