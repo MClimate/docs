@@ -1,6 +1,6 @@
 # 🆕 МClimate 16A Switch & Power Meter LoRaWAN (16ASPM)
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (50).png" alt=""><figcaption></figcaption></figure>
 
 {% file src="../../.gitbook/assets/MClimate-16ASPM-Datasheet.pdf" %}
 Datasheet
@@ -80,7 +80,7 @@ Purchase МClimate 16A Switch & Power Meter LoRaWAN:
 * Resolution - 0 . 01kWh
 * Accuracy - ±1.5% accuracy @ 10A 230VAC
 
-<figure><img src="../../.gitbook/assets/image (50).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (50) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Internal temperature sensor
 

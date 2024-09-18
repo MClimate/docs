@@ -11,7 +11,7 @@ You should have received the following devices with the FPK:
 
     <figure><img src="../../.gitbook/assets/IMG_4004.jpg" alt=""><figcaption><p>FPK package<br></p></figcaption></figure>
 
-    <figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption><p>Box contents</p></figcaption></figure>
+    <figure><img src="../../.gitbook/assets/image (4) (2).png" alt=""><figcaption><p>Box contents</p></figcaption></figure>
 2.  An FTDI to USB converter (small dongle with a cable attached).\
 
 
@@ -40,13 +40,13 @@ In addition they need to have the right orientation, each cable has one wire mar
 
 Refer to the image below if in doubt.
 
-<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption><p>Connecting the cables to the adapter</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (2).png" alt=""><figcaption><p>Connecting the cables to the adapter</p></figcaption></figure>
 
 Once you are done you can take out the batteries from Vicki and insert the 3D printed adapter in their place. The adapter needs to be inserted a certain way for the upgrade to work properly. The pogo pins at the bottom end are what connects to the circuit board and the part needs to be inserted in such a way that they are in the battery compartment with the "+" marking.
 
 Refer to the image below:
 
-<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption><p>3D part orientation</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (3).png" alt=""><figcaption><p>3D part orientation</p></figcaption></figure>
 
 Everything should be properly connected now and you should be able to start the Upgrade on the Laptop.
 

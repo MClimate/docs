@@ -18,7 +18,7 @@ Vicki uses a high-quality temperature and humidity sensor by Texas Instruments. 
 
 Contrary to common believe, measuring temperature near radiators is actually an excellent placement, since radiators are hot and cause a lot of convection. Air is heated by the radiator, rises up and draws fresh air into the radiator (check out the image below).
 
-<figure><img src="../.gitbook/assets/image (9).png" alt=""><figcaption><p>Unobstructed radiator convection</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (9) (1).png" alt=""><figcaption><p>Unobstructed radiator convection</p></figcaption></figure>
 
 Naturally, a radiator that’s 30cm high will measure a different temperature than a radiator that’s at 1m height. That’s normal and is the status quo even with the manual thermostatic valves.
 
