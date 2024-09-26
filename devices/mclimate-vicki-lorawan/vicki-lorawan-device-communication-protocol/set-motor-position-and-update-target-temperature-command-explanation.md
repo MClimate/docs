@@ -70,6 +70,12 @@ This command allows you to decide what's the minimum and maximum valve openness 
 * If Vicki has to heat the room, it'll first open the valve to the MIN value you have specified.
 * Vicki will not open more than the MAX value you have specified, which is particularly useful for hydronic balancing.
 
+{% hint style="warning" %}
+There is an exception to the set limits. In normal conditions if the internal algorithm calculates that it needs to go beyond the MIN or MAX opennes it will be limited to the value set.
+
+However, if the internal algorithm calculates it needs to completely close the valve it will ignore the MIN limit and completely close the valve (0% openness), no mater what the MIN limit was.
+{% endhint %}
+
 {% hint style="info" %}
 By default Vicki controls the valve openness from 0% to 100%&#x20;
 {% endhint %}
