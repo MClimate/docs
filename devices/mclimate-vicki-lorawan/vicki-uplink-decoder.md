@@ -1005,14 +1005,10 @@ return resultToPass;
 ## Chirpstack Decoder (JavaScript ES5):
 
 ```
-function Decode(fPort, bytes, variables) {
+function decodeUplink(input) {
+    var bytes = input.bytes;
     var data = {};
     var resultToPass = {};
-
-    var rawHex = bytes.map(function(byte, i){
-       return ("0" + byte.toString(16)).substr(-2); 
-    });
-
     toBool = function (value) { return value == '1' };
 
     function merge_obj(obj1, obj2) {
@@ -1035,32 +1031,33 @@ function Decode(fPort, bytes, variables) {
         batteryTmp = ("0" + bytes[7].toString(16)).substr(-2)[0];
         batteryVoltageCalculated = 2 + parseInt("0x" + batteryTmp, 16) * 0.1;
 
-        decbin = function (number) {
+        let decbin = (number) => {
             if (number < 0) {
-                number = 0xFFFFFFFF + number + 1;
+                number = 0xFFFFFFFF + number + 1
             }
-            return parseInt(number, 10).toString(2);
-        };
-
-        byteBin = decbin(bytes[7].toString(16));
-        openWindow = byteBin.substr(4, 1);
-        childLockBin = decbin(bytes[8].toString(16));
-        childLock = childLockBin.charAt(0);
-        highMotorConsumption = byteBin.substr(-2, 1);
-        lowMotorConsumption = byteBin.substr(-3, 1);
-        brokenSensor = byteBin.substr(-4, 1);
+            number = number.toString(2);
+            return "00000000".substr(number.length) + number;
+        }
+        byte7Bin = decbin(bytes[7]);
+        openWindow = byte7Bin[4];
+        highMotorConsumption = byte7Bin[5];
+        lowMotorConsumption = byte7Bin[6];
+        brokenSensor = byte7Bin[7];
+        byte8Bin = decbin(bytes[8]);
+        childLock = byte8Bin[0];
+        calibrationFailed = byte8Bin[1];
+        attachedBackplate = byte8Bin[2];
+        perceiveAsOnline = byte8Bin[3];
+        antiFreezeProtection = byte8Bin[4];
 
         var sensorTemp = 0;
         if (Number(bytes[0].toString(16))  == 1) {
             sensorTemp = (bytes[2] * 165) / 256 - 40;
         }
 
-        console.log(bytes[0].toString(16))
         if (Number(bytes[0].toString(16)) == 81) {
             sensorTemp = (bytes[2] - 28.33333) / 5.66666;
         }
-
-
         data.reason = Number(bytes[0].toString(16));
         data.targetTemperature = Number(bytes[1]);
         data.sensorTemperature = Number(sensorTemp.toFixed(2));
@@ -1069,11 +1066,18 @@ function Decode(fPort, bytes, variables) {
         data.motorPosition = motorPosition;
         data.batteryVoltage = Number(batteryVoltageCalculated.toFixed(2));
         data.openWindow = toBool(openWindow);
-        data.childLock = toBool(childLock);
         data.highMotorConsumption = toBool(highMotorConsumption);
         data.lowMotorConsumption = toBool(lowMotorConsumption);
         data.brokenSensor = toBool(brokenSensor);
-
+        data.childLock = toBool(childLock);
+        data.calibrationFailed = toBool(calibrationFailed);
+        data.attachedBackplate = toBool(attachedBackplate);
+        data.perceiveAsOnline = toBool(perceiveAsOnline);
+        data.antiFreezeProtection = toBool(antiFreezeProtection);
+        data.motorOpenness = motorRange != 0 ? Math.round((1-(motorPosition/motorRange))*100) : 0;
+        if(!data.hasOwnProperty('targetTemperatureFloat')){
+            data.targetTemperatureFloat = parseFloat(bytes[1])
+        }
         return data;
     }
    
@@ -1133,7 +1137,7 @@ function Decode(fPort, bytes, variables) {
                 break;
                 case '16':
                     {
-                        command_len = 3;
+                        command_len = 2;
                         var data = { internalAlgoParams: { period: parseInt(commands[i + 1], 16), pFirstLast: parseInt(commands[i + 2], 16), pNext: parseInt(commands[i + 3], 16) } };
                         resultToPass = merge_obj(resultToPass, data);
                     }
@@ -1299,6 +1303,46 @@ function Decode(fPort, bytes, variables) {
                         resultToPass = merge_obj(resultToPass, data);
                     }
                 break;
+                case '4a':
+                    {
+                        command_len = 3;
+                        var activatedTemperature = parseInt(commands[i + 1], 16)/10;
+                        var deactivatedTemperature = parseInt(commands[i + 2], 16)/10;
+                        var targetTemperature = parseInt(commands[i + 3], 16);
+
+                        var data = { antiFreezeParams: { activatedTemperature, deactivatedTemperature, targetTemperature } };
+                        resultToPass = merge_obj(resultToPass, data);
+                    }
+                break;
+                case '4d':
+                    {
+                        command_len = 2;
+                        var data = { piMaxIntegratedError : (parseInt(`${commands[i + 1]}${commands[i + 2]}`, 16))/10 };
+                        resultToPass = merge_obj(resultToPass, data);
+                    }
+                break;
+                case '50':
+                    {
+                        command_len = 2;
+                        var data = { effectiveMotorRange: { minValveOpenness: 100 - parseInt(commands[i + 2], 16), maxValveOpenness: 100 - parseInt(commands[i + 1], 16) } };
+                        resultToPass = merge_obj(resultToPass, data);
+                    }
+                break;
+                case '52':
+                    {
+                        command_len = 2;
+                        var data = { targetTemperatureFloat : (parseInt(`${commands[i + 1]}${commands[i + 2]}`, 16))/10 };
+                        resultToPass = merge_obj(resultToPass, data);
+                    }
+                break;
+                case '54':
+                    {
+                        command_len = 1;
+                        var offset =  (parseInt(commands[i + 1], 16) - 28) * 0.176
+                        var data = { temperatureOffset : offset };
+                        resultToPass = merge_obj(resultToPass, data);
+                    }
+                break;
                 default:
                     break;
             }
@@ -1315,7 +1359,9 @@ function Decode(fPort, bytes, variables) {
         data = merge_obj(data, handleKeepalive(bytes, data));
     }
 
-    return data
+    return {
+        data: data
+    };
 }
 ```
 

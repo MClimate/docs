@@ -8,6 +8,7 @@
 
 * [🆕 МClimate 16A Switch & Power Meter LoRaWAN (16ASPM)](devices/mclimate-16a-switch-and-power-meter-lorawan-16aspm/README.md)
   * [🥳 Release notes](devices/mclimate-16a-switch-and-power-meter-lorawan-16aspm/release-notes.md)
+  * [🛠️ How to use](devices/mclimate-16a-switch-and-power-meter-lorawan-16aspm/how-to-use.md)
   * [⬆️ MClimate 16ASPM Uplink decoder](devices/mclimate-16a-switch-and-power-meter-lorawan-16aspm/mclimate-16aspm-uplink-decoder.md)
   * [📖 MClimate 16ASPM Device communication protocol](devices/mclimate-16a-switch-and-power-meter-lorawan-16aspm/mclimate-16aspm-device-communication-protocol/README.md)
     * [Communication concepts](devices/mclimate-16a-switch-and-power-meter-lorawan-16aspm/mclimate-16aspm-device-communication-protocol/communication-concepts.md)
@@ -16,6 +17,8 @@
     * [Keep-alive](devices/mclimate-16a-switch-and-power-meter-lorawan-16aspm/mclimate-16aspm-device-communication-protocol/keep-alive.md)
     * [Protections](devices/mclimate-16a-switch-and-power-meter-lorawan-16aspm/mclimate-16aspm-device-communication-protocol/protections.md)
     * [Relay state](devices/mclimate-16a-switch-and-power-meter-lorawan-16aspm/mclimate-16aspm-device-communication-protocol/relay-state.md)
+    * [Clear accumulated energy](devices/mclimate-16a-switch-and-power-meter-lorawan-16aspm/mclimate-16aspm-device-communication-protocol/clear-accumulated-energy.md)
+    * [LED indication mode](devices/mclimate-16a-switch-and-power-meter-lorawan-16aspm/mclimate-16aspm-device-communication-protocol/led-indication-mode.md)
     * [Network-related settings](devices/mclimate-16a-switch-and-power-meter-lorawan-16aspm/mclimate-16aspm-device-communication-protocol/network-related-settings.md)
     * [Get Firmware & Hardware version](devices/mclimate-16a-switch-and-power-meter-lorawan-16aspm/mclimate-16aspm-device-communication-protocol/get-firmware-and-hardware-version.md)
 * [😲 MClimate Fan Coil Thermostat (FCT)](devices/mclimate-fan-coil-thermostat-fct/README.md)

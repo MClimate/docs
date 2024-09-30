@@ -14,7 +14,7 @@
 
 * [New command to set target temperature with 0.1°C resolution.](target-temperature-and-temperature-range.md#target-temperature-with-resolution-0.1-c)
 * Changed target temperature function to display temperature with 0.1°C resolution.
-* [Нew commands to set a target temperature step.](target-temperature-and-temperature-range.md#configuring-the-target-temperature-step)
+* [New commands to set a target temperature step.](target-temperature-and-temperature-range.md#target-temperature-range)
 * [New functionality and commands for temperature control with temperature hysteresis.](target-temperature-and-temperature-range.md#temperature-hysteresis)
 * [New functionality and commands for temperature sensor compensation.](target-temperature-and-temperature-range.md#measured-temperature-sensor-compensation)
 * Changed start byte of keep-alive packet from 01 to 81 and added another byte to collect target temperature with 0.1°C resolution.
