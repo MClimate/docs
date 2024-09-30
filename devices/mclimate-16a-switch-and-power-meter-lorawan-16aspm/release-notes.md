@@ -6,13 +6,13 @@
 24 September 2024
 
 * Fixed a bug related to writing the accumulated energy in the EEPROM memory.
-* Fixed a bug where the device restarts continuously if you press the button for 10s+. It now resets only one time unless you release and press it again.
 
 ### Firmware version 1.1
 
 **Release date:** \
 23 September 2024
 
+* Fixed a bug where the device restarts continuously if you press the button for 10s+. It now resets only one time unless you release and press it again.
 * NEW - Mechanism to store the energy in long-term (EEPROM) memory.
 * NEW - Added functionality to detect the type (DC or AC) of the voltage and respond accordingly. The device now accurately measures both AC and DC voltage, current and accumulated energy.
 * NEW - when a protection event occurs the the event uplink is sent as a confirmed message and it will be periodically sent until an acknowledgement that it has been received by the server is received by the device.
