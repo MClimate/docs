@@ -35,7 +35,7 @@ function decodeUplink(input) {
             var commands = bytes.map(function(byte){
                 return ("0" + byte.toString(16)).substr(-2); 
             });
-            commands = commands.slice(0,-14);
+            commands = commands.slice(0,-12);
             var command_len = 0;
         
             commands.map(function (command, i) {
@@ -100,6 +100,18 @@ function decodeUplink(input) {
                             data.overpowerThreshold = (parseInt(commands[i + 1], 16) << 8) | parseInt(commands[i + 2], 16) ;
                         }
                     break;
+                    case '5a':
+                        {
+                            command_len = 1;
+                            data.afterOverheatingProtectionRecovery = parseInt(commands[i + 1], 16)
+                        }
+                    break;
+                    case '5c':
+                        {
+                            command_len = 1;
+                            data.ledIndicationMode = parseInt(commands[i + 1], 16)
+                        }
+                    break;
                     case '5d':
                         {
                             command_len = 1;
@@ -136,10 +148,42 @@ function decodeUplink(input) {
                             data.overpowerEvents = { events: parseInt(commands[i + 1], 16), power: (parseInt(commands[i + 2], 16) << 8) | parseInt(commands[i + 3], 16) };
                         }
                     break;
+                    case '70':
+                        {
+                            command_len = 2;
+                            data.overheatingRecoveryTime = (parseInt(commands[i + 1], 16) << 8) | parseInt(commands[i + 2], 16) ;
+                        }
+                    break;
+                    case '71':
+                        {
+                            command_len = 2;
+                            data.overvoltageRecoveryTime = (parseInt(commands[i + 1], 16) << 8) | parseInt(commands[i + 2], 16);
+                        }
+                    break;
+                    case '72':
+                        {
+                            command_len = 1;
+                            data.overcurrentRecoveryTemp = parseInt(commands[i + 1], 16);
+                        }
+                    break;
+                    case '73':
+                        {
+                            command_len = 1;
+                            data.overpowerRecoveryTemp = parseInt(commands[i + 1], 16);
+                        }
+                    break;
                     case 'b1':
                         {
                             command_len = 1;
                             data.relayState = parseInt(commands[i + 1], 16) === 0x01
+                        }
+                    break;
+                    case 'a0':
+                        {
+                            command_len = 4;
+                            let fuota_address = parseInt(`${commands[i + 1]}${commands[i + 2]}${commands[i + 3]}${commands[i + 4]}`, 16)
+                            let fuota_address_raw = `${commands[i + 1]}${commands[i + 2]}${commands[i + 3]}${commands[i + 4]}`
+                            data.fuota = { fuota_address, fuota_address_raw };
                         }
                     break;
                     default:
@@ -155,7 +199,7 @@ function decodeUplink(input) {
         } else {
             data = handleResponse(bytes, data);
             // Handle the remaining keepalive data if required after response
-            bytes = bytes.slice(-14);
+            bytes = bytes.slice(-12);
             data = handleKeepalive(bytes, data);
         }
         return { data: data };
