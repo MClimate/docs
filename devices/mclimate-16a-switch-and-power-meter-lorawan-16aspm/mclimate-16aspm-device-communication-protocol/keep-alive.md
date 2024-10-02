@@ -18,13 +18,13 @@ The data is described in the table below, where an example is also given in a se
 {% tab title="SET" %}
 This command is used to set the period of the keep-alive command messages.
 
-<table data-header-hidden><thead><tr><th width="142">Byte index</th><th>Hex value - Meaning</th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Hex value - Meaning</strong></td></tr><tr><td>0</td><td>02 – Command code to set keepalive period</td></tr><tr><td>1</td><td>XX – keep-alive period in minutes. Value 0x00 isn’t applicable.<br><strong>Default value 0F=15min.</strong></td></tr></tbody></table>
+<table data-header-hidden><thead><tr><th width="142">Byte index</th><th>Hex value - Meaning</th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Hex value - Meaning</strong></td></tr><tr><td>0</td><td>02 – Command code to set keepalive period</td></tr><tr><td>1</td><td>XX – keep-alive period in minutes. Value 0x00 isn’t applicable.<br><strong>Default value 0A = 10min.</strong></td></tr></tbody></table>
 
 The keep-alive in the example is omitted for clarity.
 
-**Example command:** 0x020A
+**Example command:** 0x020F
 
-The example sets the keep-alive period to 10 minutes.
+The example sets the keep-alive period to 15 minutes.
 {% endtab %}
 
 {% tab title="GET" %}
@@ -36,7 +36,7 @@ The keep-alive in the example is omitted for clarity.
 
 **Example command sent from server:** 0x12;
 
-**Example command response:** 0x1209 – the keep-alive is 9 minutes.
+**Example command response:** 0x120F – the keep-alive is 15 minutes.
 {% endtab %}
 {% endtabs %}
 
