@@ -6,7 +6,7 @@ The Keep-alive is a periodically sent message which contains the most important 
 
 T-Valve has two types of keep-alive packets, depending on the payload length, a Short and a Long one.
 
-<table><thead><tr><th width="158">Packet payload size [Bytes]</th><th>Description</th></tr></thead><tbody><tr><td><strong>Packet payload size [Bytes]</strong></td><td><strong>Description</strong></td></tr><tr><td>Short [2]</td><td>Sent over regular time periods (the period is set with command <a href="set-keep-alive-period.md">0x07</a> from the server). The packet contains the device temperature sensors data from the last measurement and the water valve state. Temperature measurement is done once per hour.</td></tr><tr><td>Long [5]</td><td>Full device data. Such a packet is send from the device on certain events or by server request with command 0x08 or once per day</td></tr></tbody></table>
+<table><thead><tr><th width="158">Packet payload size [Bytes]</th><th>Description</th></tr></thead><tbody><tr><td><strong>Packet payload size [Bytes]</strong></td><td><strong>Description</strong></td></tr><tr><td>Short [2]</td><td>Sent over regular time periods (the period is set with command <a href="keep-alive-period.md">0x07</a> from the server). The packet contains the device temperature sensors data from the last measurement and the water valve state. Temperature measurement is done once per hour.</td></tr><tr><td>Long [5]</td><td>Full device data. Such a packet is send from the device on certain events or by server request with command 0x08 or once per day</td></tr></tbody></table>
 
 ## Short payload
 

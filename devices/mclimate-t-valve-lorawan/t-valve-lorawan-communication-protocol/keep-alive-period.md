@@ -1,4 +1,4 @@
-# Set keep-alive period
+# Keep-alive period
 
 This command sets the keep-alive period.
 
@@ -11,5 +11,15 @@ The command explanation is in the table below.
 **Example command:** 0x070A
 
 0A\[HEX] = 10\[DEC] -> Set the keep-alive period to 10 minutes
+{% endtab %}
+
+{% tab title="GET" %}
+The command explanation is in the table below.
+
+<table data-header-hidden><thead><tr><th width="137">Byte index</th><th>Hex value - Meaning</th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Hex value - Meaning</strong></td></tr><tr><td>0</td><td>12 – The command code</td></tr><tr><td>1</td><td>XX - Keep live period in minutes (resolution is 1 minutes)</td></tr></tbody></table>
+
+**Example response:** 0x120A
+
+0A\[HEX] = 10\[DEC] -> The keep-alive period is 10 minutes
 {% endtab %}
 {% endtabs %}

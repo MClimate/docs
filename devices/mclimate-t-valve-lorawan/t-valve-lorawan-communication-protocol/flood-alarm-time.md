@@ -1,4 +1,4 @@
-# Set flood alarm time
+# Flood alarm time
 
 This command sets how long will the flood alarm be on for, in case of the event happening.
 
@@ -13,5 +13,17 @@ The command explanation is in the table below.
 06\[HEX] = 06\[DEC] -> Set the alar time to 6x10s = 60s = 1min
 
 In  case of a flood the alarm will be on for 1 minute.
+{% endtab %}
+
+{% tab title="GET" %}
+The command explanation is in the table below.
+
+<table data-header-hidden><thead><tr><th width="137">Byte index</th><th>Hex value - Meaning</th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Hex value - Meaning</strong></td></tr><tr><td>0</td><td>10 – The command code</td></tr><tr><td>1</td><td>XX - Alarm time in seconds (resolution of 10 seconds). A zero value is forbidden. <strong>Default value is 30 (5 minutes).</strong></td></tr></tbody></table>
+
+**Example response:** 0x100C
+
+0C\[HEX] = 12\[DEC] -> Set the alar time to 12x10s = 120s = 2min
+
+In  case of a flood the alarm will be on for 2 minute.
 {% endtab %}
 {% endtabs %}

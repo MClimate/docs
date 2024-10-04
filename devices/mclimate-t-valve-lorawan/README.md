@@ -37,7 +37,7 @@ Purchase MClimate T-Valve LoRaWAN:
 
 ## Compatibility
 
-* LoRaWAN 1.0.1, Class A device, EU868
+* LoRaWAN 1.0.3, Class A device, EU868
 * LoRaWAN MAC Port: Uplink messages: 2. Downlink messages: 1, 2, 4-223;
 * Encryption: LoRaWAN End-to-end encryption (AES-CTR)
 * Activation: OTAA

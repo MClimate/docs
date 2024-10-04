@@ -31,7 +31,7 @@ Purchase MClimate Multipurpose Button LoRaWAN:
 ## Power supply
 
 * Battery type: ER10280
-* Operating voltage: 3VDC
+* Operating voltage: 3.6VDC
 * Expected battery life: Up to 10 years (depending on configuration and total number of presses)
 
 ## Compatibility

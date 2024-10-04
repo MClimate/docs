@@ -1,6 +1,6 @@
 # Set LED behavior
 
-This command controls the LEDs on the top cover of the device. You can select any of the 4 and adjust its light pattern and the time it on for.
+This command controls the LEDs on the top cover of the device. You can select any of the 4 and adjust its light pattern and the time it is on for.
 
 {% tabs %}
 {% tab title="SET" %}

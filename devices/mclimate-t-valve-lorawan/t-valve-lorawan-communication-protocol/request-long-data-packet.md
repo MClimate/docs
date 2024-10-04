@@ -1,6 +1,10 @@
 # Request Long data packet
 
-This command requests the device send a Long data packet on the next keep-alive.
+This command requests from the device a Long Keep-alive data packet that provides more information on its state.
+
+{% hint style="warning" %}
+The packet is not generated immediately, but replaces the next short keep-alive packet (it effectively is sent when the time for the next keep-alive has elapsed).
+{% endhint %}
 
 {% tabs %}
 {% tab title="GET" %}
