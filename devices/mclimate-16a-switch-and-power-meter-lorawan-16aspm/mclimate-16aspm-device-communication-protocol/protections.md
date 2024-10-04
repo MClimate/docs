@@ -146,8 +146,12 @@ The command is sent together with the keepalive of the device. The keepalive dat
 
 ## Overheating recovery event
 
-{% hint style="info" %}
+{% hint style="warning" %}
 This command is available for devices with firmware version ≥ 1.1
+{% endhint %}
+
+{% hint style="info" %}
+When the overheating protection activates the device starts a timer that runs until the temperature drops below the threshold and the device resumes normal operation. At this point an uplink is transmitted that reports the measured time, giving insights in how much time the device was off due to overheating.
 {% endhint %}
 
 The command is sent together with the keepalive of the device. The keepalive data in the example below is omitted for clarity.
@@ -178,8 +182,12 @@ The command is sent together with the keepalive of the device. The keepalive dat
 
 ## Overvoltage recovery event
 
-{% hint style="info" %}
+{% hint style="warning" %}
 This command is available for devices with firmware version ≥ 1.1
+{% endhint %}
+
+{% hint style="info" %}
+When the overvoltage protection activates the device starts a timer that runs until the voltage drops below the threshold value and the device resumes normal operation. At this point an uplink is transmitted that reports the measured time, giving insights in how much time the device was off due to overvoltage.
 {% endhint %}
 
 The command is sent together with the keepalive of the device. The keepalive data in the example below is omitted for clarity.
@@ -210,8 +218,12 @@ The command is sent together with the keepalive of the device. The keepalive dat
 
 ## Overcurrent recovery event
 
-{% hint style="info" %}
+{% hint style="warning" %}
 This command is available for devices with firmware version ≥ 1.1
+{% endhint %}
+
+{% hint style="info" %}
+Because of the way the device operates, it recovers almost instantaneously from an Overcurrent event, thus no outage time as with the Overheating and Overvoltage protections is measured. Instead the internal temperature of the device at the time of event/recovery event is measured and reported.
 {% endhint %}
 
 The command is sent together with the keepalive of the device. The keepalive data in the example below is omitted for clarity.
@@ -242,8 +254,12 @@ The command is sent together with the keepalive of the device. The keepalive dat
 
 ## Overpower recovery event
 
-{% hint style="info" %}
+{% hint style="warning" %}
 This command is available for devices with firmware version ≥ 1.1
+{% endhint %}
+
+{% hint style="info" %}
+Because of the way the device operates, it recovers almost instantaneously from an Overpower event, thus no outage time as with the Overheating and Overvoltage protections is measured. Instead the internal temperature of the device at the time of event/recovery event is measured and reported.
 {% endhint %}
 
 The command is sent together with the keepalive of the device. The keepalive data in the example below is omitted for clarity.

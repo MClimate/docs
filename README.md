@@ -4,8 +4,16 @@
 
 ### **Devices:**
 
+{% content-ref url="devices/mclimate-16a-switch-and-power-meter-lorawan-16aspm/" %}
+[mclimate-16a-switch-and-power-meter-lorawan-16aspm](devices/mclimate-16a-switch-and-power-meter-lorawan-16aspm/)
+{% endcontent-ref %}
+
 {% content-ref url="devices/mclimate-fan-coil-thermostat-fct/" %}
 [mclimate-fan-coil-thermostat-fct](devices/mclimate-fan-coil-thermostat-fct/)
+{% endcontent-ref %}
+
+{% content-ref url="devices/mclimate-vicki-lorawan/" %}
+[mclimate-vicki-lorawan](devices/mclimate-vicki-lorawan/)
 {% endcontent-ref %}
 
 {% content-ref url="devices/mclimate-wireless-thermostat/" %}
@@ -14,10 +22,6 @@
 
 {% content-ref url="devices/mclimate-co2-display/" %}
 [mclimate-co2-display](devices/mclimate-co2-display/)
-{% endcontent-ref %}
-
-{% content-ref url="devices/mclimate-vicki-lorawan/" %}
-[mclimate-vicki-lorawan](devices/mclimate-vicki-lorawan/)
 {% endcontent-ref %}
 
 {% content-ref url="devices/mclimate-t-valve-lorawan/" %}
