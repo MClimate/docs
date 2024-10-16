@@ -78,14 +78,14 @@ function decodeUplink(input) {
                     break;
                     case '1f':
                         {
-                            command_len = 1;
-                            data.overheatingThreshold = parseInt(commands[i + 1], 16);
+                            command_len = 2;
+                            data.overheatingThresholds = {trigger: parseInt(commands[i + 1], 16), recovery: parseInt(commands[i + 2], 16) }
                         }
                     break;
                     case '21':
                         {
-                            command_len = 2;
-                            data.overvoltageThreshold = (parseInt(commands[i + 1], 16) << 8) | parseInt(commands[i + 2], 16) ;
+                            command_len = 3;
+                            data.overvoltageThreshold = {trigger: (parseInt(commands[i + 1], 16) << 8) | parseInt(commands[i + 2], 16), recovery: parseInt(commands[i + 3], 16)};
                         }
                     break;
                     case '23':
