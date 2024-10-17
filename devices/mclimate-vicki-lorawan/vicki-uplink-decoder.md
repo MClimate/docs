@@ -87,7 +87,7 @@ function decodeUplink(input) {
         data.attachedBackplate = toBool(attachedBackplate);
         data.perceiveAsOnline = toBool(perceiveAsOnline);
         data.antiFreezeProtection = toBool(antiFreezeProtection);
-        data.motorOpenness = motorRange != 0 ? Math.round((1-(motorPosition/motorRange))*100) : 0;
+        data.valveOpenness = motorRange != 0 ? Math.round((1-(motorPosition/motorRange))*100) : 0;
         if(!data.hasOwnProperty('targetTemperatureFloat')){
             data.targetTemperatureFloat = parseFloat(bytes[1])
         }
