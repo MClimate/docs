@@ -243,8 +243,7 @@ const decodeUplink = (input) => {
         };
 
         const handleResponse = (bytes, data) => {
-            let commands = bytes.map(byte => (`0${byte.toString(16)}`).slice(-2));
-            commands = commands.slice(0, -12);
+            let commands = bytes.map(byte => (`0${byte.toString(16)}`).slice(-2)).slice(0, -12);
             let command_len = 0;
 
             commands.forEach((command, i) => {
