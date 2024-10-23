@@ -53,3 +53,15 @@ The command is described in the table below. The keep-alive in the response is o
 **Example command, \[Hex]:** 1D020C – Assuming that the Keep-alive period is 5 minutes, the device will wait for 2x5+7 = 17 minutes before resetting if confirmed uplinks are used. If unconfirmed uplinks are used it will wait for 0C\[HEX]=12\[DEC] hours and reset.
 {% endtab %}
 {% endtabs %}
+
+## LoRaWAN Region
+
+This command reports the LoRaWAN Region your device is setup to work in. Make sure it matches you network as LoRaWAN regions/bands are country dependent. This region is hardcoded in the FW and the user can not change it, only report on it. The keep-alive in the command response is omitted for clarity.
+
+{% tabs %}
+{% tab title="GET" %}
+<table data-header-hidden><thead><tr><th width="147"></th><th width="194"></th><th></th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Sent request</strong></td><td><strong>Received response</strong></td></tr><tr><td>0</td><td>A4 – Command code</td><td>A4 – Command code</td></tr><tr><td>1</td><td> </td><td><p>Radio region:<br>00 => EU868</p><p>01 => AS923</p><p>02 => AU915</p><p>03 => US915</p></td></tr></tbody></table>
+
+**Example command, \[Hex]:** A400 – extracting the 1st byte value we get 00\[HEX], thus the device operates in the EU868 LoRaWAN band.
+{% endtab %}
+{% endtabs %}

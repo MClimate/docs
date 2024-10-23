@@ -30,15 +30,27 @@ This join retry period (T) must comply to LoRaWAN messages duty cycle. Otherwise
 This join retry period (T) is for the first 15 sent messages. After, the used LoRaWAN stack automatically changes the possibility to send join request to \~20 minutes for 20 network join attempts. If the device is still not joined to the network after these 20 attempts, next join request can be sent after \~3 hours and 15 minutes.
 {% endhint %}
 
+## LoRaWAN Region
+
+This command reports the LoRaWAN Region your device is setup to work in. Make sure it matches you network as LoRaWAN regions/bands are country dependent. This region is hardcoded in the FW and the user can not change it, only report on it. The keep-alive in the command response is omitted for clarity.
+
+{% tabs %}
+{% tab title="GET" %}
+<table data-header-hidden><thead><tr><th width="147"></th><th width="194"></th><th></th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Sent request</strong></td><td><strong>Received response</strong></td></tr><tr><td>0</td><td>A4 – Command code</td><td>A4 – Command code</td></tr><tr><td>1</td><td> </td><td><p>Radio region:<br>00 => EU868</p><p>01 => AS923</p><p>02 => AU915</p><p>03 => US915</p></td></tr></tbody></table>
+
+**Example command, \[Hex]:** A400 – extracting the 1st byte value we get 00\[HEX], thus the device operates in the EU868 LoRaWAN band.
+{% endtab %}
+{% endtabs %}
+
 ### Set Send event button later when it is **allowed**
 
 {% hint style="info" %}
 The device may not always be able to send the command right now. The reason for this is the duty-cycle of LoRaWAN devices, which limits the amount of time a device transmits on the radio spectrum in order to be compliant with the EU regulations.
 
-The duty-cycle depends on the Spreading factor. E.g. on SF12, the device can send one command every approx 2m30s and on SF7, it can send a command approx every 15 seconds.
+The duty-cycle depends on the Spreading factor. E.g. on SF12, the device can send one command every approx. 2m30s and on SF7, it can send a command approx. every 15 seconds.
 {% endhint %}
 
-This command is used to define the device behaviour when it is not allowed to send the signal right now due to duty-cycle restrictions. You can choose to not send the signal at all or to send it at earliest convenience. The command is described in Table 9.
+This command is used to define the device behavior when it is not allowed to send the signal right now due to duty-cycle restrictions. You can choose to not send the signal at all or to send it at earliest convenience. The command is described in Table 9.
 
 <table data-header-hidden><thead><tr><th width="150">Byte index</th><th width="593.4285714285713">Hex value – Meaning</th><th data-hidden>Bit index</th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Hex value – Meaning</strong></td><td><strong>Bit index</strong></td></tr><tr><td>0</td><td>1E – The command code.</td><td>-</td></tr><tr><td>1</td><td><p>00 - Do not send the button event later when allowed. <strong>Default value: 00</strong></p><p>01 - Send the button event later when allowed. </p></td><td>-</td></tr></tbody></table>
 
@@ -48,7 +60,7 @@ _Table 9_
 
 ### **Get** Send event button later when it is **allowed**
 
-This command is used to retrieve the device behaviour on sending an uplink when the duty-cycle restrictions do not allow it to do it in real-time. The sent command request and the received command response are described in Table 10.&#x20;
+This command is used to retrieve the device behavior on sending an uplink when the duty-cycle restrictions do not allow it to do it in real-time. The sent command request and the received command response are described in Table 10.&#x20;
 
 <table data-header-hidden><thead><tr><th width="150">Byte index</th><th width="189.63302752293578">Sent request</th><th width="431.22543352601156">Sent request</th><th data-hidden>Bit index</th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Sent request</strong></td><td><strong>Sent request</strong></td><td><strong>Bit index</strong></td></tr><tr><td>0</td><td>1F – Command code.</td><td>1F – The command code.</td><td>-</td></tr><tr><td>1</td><td></td><td><p>00 - Do not send the button event later when allowed.</p><p>01 - Send the button event later when allowed. </p></td><td>-</td></tr></tbody></table>
 

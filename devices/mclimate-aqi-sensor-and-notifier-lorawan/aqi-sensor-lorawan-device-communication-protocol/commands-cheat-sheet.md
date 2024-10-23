@@ -16,5 +16,6 @@
 | 1B                       | [Get uplink messages type](uplink-types.md#get-uplink-messages-type-command-explanation)                                                                   | Server/ End device |
 | 1C                       | [Set device radio communication watch-dog parameters](network-related-settings.md#set-device-radio-communication-watch-dog-parameters-command-explanation) | Server             |
 | 1D                       | [Get device radio communication watch-dog parameters](network-related-settings.md#get-device-radio-communication-watch-dog-parameters-command-explanation) | Server/ End device |
+| A4                       | [LoRaWAN Region](network-related-settings.md#lorawan-region)                                                                                               | Server/ End device |
 
 Table 2

@@ -28,5 +28,6 @@
 | 29                       | [Get LED notification configuration](notifications-configuration.md#get-led-notification-configuration)                                                    | Server/ End device |
 | 2A                       | [Set CO2 auto-zero period](co2-auto-zero-period.md#set-co2-auto-zero-period)                                                                               | Server             |
 | 2B                       | [Get CO2 auto-zero period](co2-auto-zero-period.md#get-co2-auto-zero-period)                                                                               | Server/ End device |
+| A4                       | [LoRaWAN Region](network-related-settings.md#lorawan-region)                                                                                               | Server/ End device |
 
 Table 2

@@ -6,7 +6,21 @@ In order to properly create a Wattsense integration with MClimate Enterprise you
 
 ## Configuring the Wattsense Tower
 
-Log into our Wattsense Console ([https://console.wattsense.com/](https://console.wattsense.com/)) and open up the Tower you are going to be using to connect through. You need to edit some Properties of the devices that you wan to integrate (this needs to be done for every device you want to see in Enterprise)
+Log into our Wattsense Console ([https://console.wattsense.com/](https://console.wattsense.com/)) and open up the Tower you are going to be using to connect through.
+
+### Obtaining the DevEUI
+
+You will need the DevEUI for one of the following configuration steps, thus you need to pull it out from the device info (or obtain it otherwise, for example via an external detabase where you keep it or via the CSV file MClimate sends when one purchases a device).
+
+Open up the Configuration tab and click on the ":" icon, selecting the "Settings":
+
+<figure><img src="../.gitbook/assets/wattsense.png" alt=""><figcaption><p>Device Settings</p></figcaption></figure>
+
+You can copy over the DevEUI from here:
+
+<figure><img src="../.gitbook/assets/wattsense (1).png" alt=""><figcaption><p>DevEUI</p></figcaption></figure>
+
+Next, you need to edit the Properties of the devices that you want to integrate (this needs to be done for every device you want to see in Enterprise)
 
 <figure><img src="../.gitbook/assets/13.png" alt=""><figcaption><p>Wattsense Tower configuration</p></figcaption></figure>
 
@@ -17,23 +31,19 @@ There are 2 properties that need to be enabled at the very least as these are wh
 
 <figure><img src="../.gitbook/assets/w1.png" alt=""><figcaption><p>Required properties</p></figcaption></figure>
 
-You also need to Edit the "slug" for both properties in order to make them compatible with the Enterprise structure.
-
-### Raw encoded payload
-
-Open up the property editing window and expand the Advanced menu, where you need to fill in the following field
-
-_Slug_ - **raw-encoded-payload**
-
-<figure><img src="../.gitbook/assets/w2.png" alt=""><figcaption><p>Raw payload slug</p></figcaption></figure>
+You also need to Edit the "slug" for the Encoded downlink message property in order to make it compatible with the Enterprise structure.
 
 ### Encoded downlink message
 
-Open up the property editing window (same as for the previous property) and expand the Advanced menu, where you need to fill in the following field
+Open up the property editing window and expand the Advanced menu, where you need to fill in the following field.
 
-_Slug_ - **downlink-message**
+_Slug_ - **downlink-message-DevEUI**
 
-<figure><img src="../.gitbook/assets/15.png" alt=""><figcaption><p>Downlink slug</p></figcaption></figure>
+{% hint style="info" %}
+Refer to the image below, where an example DevEUI is shown in blue (you need to fill in your specific DevEUI that will be different).
+{% endhint %}
+
+<figure><img src="../.gitbook/assets/wattsense (2).png" alt=""><figcaption><p>Downlink slug</p></figcaption></figure>
 
 This completes the device level configuration.
 

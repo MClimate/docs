@@ -11,5 +11,6 @@
 | 19                       | [Get network join retry period](network-related-settings.md#get-network-join-retry-period-command-explanation)             | Server/ End device |
 | 1E                       | [Set send the button event later when allowed](network-related-settings.md#set-send-event-button-later-when-it-is-allowed) | Server             |
 | 1F                       | [Get send the button event later when allowed](network-related-settings.md#get-send-event-button-later-when-it-is-allowed) | Server/ End device |
+| A4                       | [LoRaWAN Region](network-related-settings.md#lorawan-region)                                                               | Server/ End device |
 
 Table 1

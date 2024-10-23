@@ -2,9 +2,9 @@
 
 {% tabs %}
 {% tab title="SET" %}
-#### This command is used to set  uplink message type.&#x20;
+#### This command is used to set  uplink message type.
 
-<table data-header-hidden><thead><tr><th width="111">Byte index</th><th>Hex value – Meaning</th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Hex value – Meaning</strong></td></tr><tr><td>0</td><td>11 – The command code.</td></tr><tr><td>1</td><td><p>00 – The device sends unconfirmed uplink messages;</p><p>01 – The device sends confirmed uplink messages. <strong>Default</strong> message type for the device</p></td></tr></tbody></table>
+<table data-header-hidden><thead><tr><th width="111">Byte index</th><th>Hex value – Meaning</th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Hex value – Meaning</strong></td></tr><tr><td>0</td><td>11 – The command code.</td></tr><tr><td>1</td><td><p>00 – The device sends unconfirmed uplink messages;<br><strong>Default</strong> message type for the device</p><p>01 – The device sends confirmed uplink messages.</p></td></tr></tbody></table>
 
 **Example command:** 0x1101 – The server sets the uplink message type to confirmed.
 {% endtab %}

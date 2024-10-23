@@ -1,18 +1,12 @@
 # Network-related settings
 
-## Get LoRaWAN Region
-
-This command gets the current LoRaWAN frequency region of operation of the device.
-
-<table data-header-hidden><thead><tr><th width="125">Byte index</th><th>Hex value – Meaning</th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Hex value – Meaning</strong></td></tr><tr><td>0</td><td>A4 – The command code.</td></tr><tr><td>1</td><td>XX - LoRaWAN region<br>00: EU868<br>01:  AS923<br>02: AU915<br>03: US915<br>FF: Other</td></tr></tbody></table>
-
 ## Join-retry period
 
 {% tabs %}
 {% tab title="SET" %}
 This command is used to set the period (T) of LoRaWAN join request sending from the device, in case it was unable to join the network from the first attempt.
 
-<table data-header-hidden><thead><tr><th width="40">Byte index</th><th>Hex value – Meaning</th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Hex value – Meaning</strong></td></tr><tr><td>0</td><td>10 – The command code.</td></tr><tr><td>1</td><td><p><span class="math">T, [s] = XX * 5.</span> Value 0x00 isn’t applicable. </p><p><strong>Default value for f.w. &#x3C; 4.1: 3 minutes.</strong><br><strong>Default value for f.w. >= 4.1: 10 minutes</strong></p></td></tr></tbody></table>
+<table data-header-hidden><thead><tr><th width="186">Byte index</th><th>Hex value – Meaning</th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Hex value – Meaning</strong></td></tr><tr><td>0</td><td>10 – The command code.</td></tr><tr><td>1</td><td><p><span class="math">T, [s] = XX * 5.</span> Value 0x00 isn’t applicable. </p><p><strong>Default value for f.w. &#x3C; 4.1: 3 minutes.</strong><br><strong>Default value for f.w. >= 4.1: 10 minutes</strong></p></td></tr></tbody></table>
 
 **Example command:** 0x10F0 – the server sets join request send period to 20 minutes.
 {% endtab %}
@@ -57,6 +51,18 @@ The command is described in the table below. The keep-alive in the response is o
 <table data-header-hidden><thead><tr><th width="137.33333333333331">Byte index</th><th width="196">Sent request</th><th>Received response</th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Sent request</strong></td><td><strong>Received response</strong></td></tr><tr><td>0</td><td>1D – Command code.</td><td>1D – The command code.</td></tr><tr><td>1</td><td></td><td><span class="math">WDP _{confirmed}</span> value.</td></tr><tr><td>2</td><td></td><td><span class="math">WDP _{unconfirmed}</span> value.</td></tr></tbody></table>
 
 **Example command, \[Hex]:** 1C020C – Assuming that the Keep-alive period is 5 minutes, the device will wait for 2x5+7 = 17 minutes before resetting if confirmed uplinks are used. If unconfirmed uplinks are used it will wait for 0C\[HEX]=12\[DEC] hours and reset.
+{% endtab %}
+{% endtabs %}
+
+## LoRaWAN Region
+
+This command reports the LoRaWAN Region your device is setup to work in. Make sure it matches you network as LoRaWAN regions/bands are country dependent. This region is hardcoded in the FW and the user can not change it, only report on it. The keep-alive in the command response is omitted for clarity.
+
+{% tabs %}
+{% tab title="GET" %}
+<table data-header-hidden><thead><tr><th width="147"></th><th width="194"></th><th></th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Sent request</strong></td><td><strong>Received response</strong></td></tr><tr><td>0</td><td>A4 – Command code</td><td>A4 – Command code</td></tr><tr><td>1</td><td> </td><td><p>Radio region:<br>00 => EU868</p><p>01 => AS923</p><p>02 => AU915</p><p>03 => US915</p></td></tr></tbody></table>
+
+**Example command, \[Hex]:** A400 – extracting the 1st byte value we get 00\[HEX], thus the device operates in the EU868 LoRaWAN band.
 {% endtab %}
 {% endtabs %}
 

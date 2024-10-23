@@ -29,3 +29,4 @@
 | 18                       | ≥1.5                 | [Get uplink type](uplink-types.md#get)                                                                         | Server/ End device |
 | 19                       | ≥1.5                 | [Set radio communication watch-dog parameters](network-related-settings.md#set-1)                              | Server             |
 | 1A                       | ≥1.5                 | [Get radio communication watch-dog parameters](network-related-settings.md#get)                                | Server/ End device |
+| A4                       | 1.0                  | [LoRaWAN Region](network-related-settings.md#lorawan-region)                                                   | Server/ End device |
