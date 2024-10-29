@@ -10,7 +10,7 @@
 
 Encode function is generated automatically.
 
-Decode function please copy from here: [**Tektelic MClimate Decoder**](https://mclimate.bit.ai/docs/cZCxvaR76MTb87M5)
+Decode function should be a valid Tektelic Decoder for one of our devices, for example the script from the [**Vicki Tektelic Decoder**](../devices/mclimate-vicki-lorawan/vicki-uplink-decoder.md#tektelic-decoder-javascript-es5), which you need to copy over.&#x20;
 
 ![](../.gitbook/assets/mw1920\_Screenshot\_2021-05-12\_at\_16.55.47.png)
 
