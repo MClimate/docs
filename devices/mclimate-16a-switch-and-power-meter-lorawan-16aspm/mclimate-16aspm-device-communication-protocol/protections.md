@@ -49,10 +49,12 @@ The allowed threshold temperature range is 30...100°C (1.0°C resolution).
 {% endhint %}
 
 {% tabs %}
+{% tab title="f.w.  ≥ 1.3" %}
+{% tabs %}
 {% tab title="SET" %}
-<table data-header-hidden><thead><tr><th width="144"></th><th width="112"></th><th></th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Bit index</strong></td><td><strong>Hex value – Meaning</strong></td></tr><tr><td>0</td><td>-</td><td>20 – The command code.</td></tr><tr><td>1</td><td>-</td><td>XX - Overvoltage trigger threshold, bits  - [15:8]. </td></tr><tr><td>2</td><td>-</td><td><p>XX - Overvoltage trigger threshold, bits - [7:0]. </p><p><strong>Default</strong> <strong>value 0x0113 = 275V.</strong></p></td></tr><tr><td>3</td><td>-</td><td><p>XX - Overvoltage recovery threshold. </p><p><strong>Default</strong> <strong>value 0xFA = 250V.</strong></p></td></tr></tbody></table>
+<table data-header-hidden><thead><tr><th width="131"></th><th width="99"></th><th></th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Bit index</strong></td><td><strong>Hex value – Meaning</strong></td></tr><tr><td>0</td><td>-</td><td>20 – The command code.</td></tr><tr><td>1</td><td>-</td><td>XX - Overvoltage trigger threshold, bits  - [15:8]. </td></tr><tr><td>2</td><td>-</td><td><p>XX - Overvoltage trigger threshold, bits - [7:0]. </p><p><strong>Default</strong> <strong>value 0x00F5 = 245V.</strong></p></td></tr><tr><td>3</td><td>-</td><td><p>XX - Overvoltage recovery threshold. </p><p><strong>Default</strong> <strong>value 0xF0 = 240V.</strong></p></td></tr></tbody></table>
 
-**Example command**: 0x20010EF5 – Set the trigger voltage to 0x010E = 270V and recovery voltage 0xF5 = 245V.&#x20;
+**Example command**: **0x20**00FAF5 – Set the trigger voltage to 0x00FA = 250V and recovery voltage 0xF5 = 245V.&#x20;
 {% endtab %}
 
 {% tab title="GET" %}
@@ -62,13 +64,39 @@ Get the threshold voltage.
 
 **Example command: 0x21**
 
-**Example command**: 0x**21**0180 – when we separate the command code value we get the threshold voltage of 0x0118 = 280V.
+**Example command**: **0x21**00FAF5 – when we separate the command code value we get the trigger voltage 0x00FA = 250V and recovery voltage 0xF5 = 245V.&#x20;
+{% endtab %}
+{% endtabs %}
+
+{% hint style="info" %}
+The allowed threshold voltage range is 1...250V (1V resolution).
+{% endhint %}
+{% endtab %}
+
+{% tab title="f.w. 1.2" %}
+{% tabs %}
+{% tab title="SET" %}
+<table data-header-hidden><thead><tr><th width="131"></th><th width="99"></th><th></th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Bit index</strong></td><td><strong>Hex value – Meaning</strong></td></tr><tr><td>0</td><td>-</td><td>20 – The command code.</td></tr><tr><td>1</td><td>-</td><td>XX - Overvoltage trigger threshold, bits  - [15:8]. </td></tr><tr><td>2</td><td>-</td><td><p>XX - Overvoltage trigger threshold, bits - [7:0]. </p><p><strong>Default</strong> <strong>value 0x0113 = 275V.</strong></p></td></tr><tr><td>3</td><td>-</td><td><p>XX - Overvoltage recovery threshold. </p><p><strong>Default</strong> <strong>value 0xFA = 250V.</strong></p></td></tr></tbody></table>
+
+**Example command**: **0x20**010EF5 – Set the trigger voltage to 0x010E = 270V and recovery voltage 0xF5 = 245V.&#x20;
+{% endtab %}
+
+{% tab title="GET" %}
+Get the threshold voltage.
+
+<table data-header-hidden><thead><tr><th width="133.99999999999997"></th><th width="101"></th><th></th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Bit index</strong></td><td><strong>Received response</strong></td></tr><tr><td>0</td><td>-</td><td>21 – The command code.</td></tr><tr><td>1</td><td>-</td><td>XX - Overvoltage trigger threshold, bits  - [15:8]. </td></tr><tr><td>2</td><td>-</td><td>XX - Overvoltage trigger threshold, bits - [7:0].</td></tr><tr><td>3</td><td>-</td><td>XX - Overvoltage recovery threshold. </td></tr></tbody></table>
+
+**Example command: 0x21**
+
+**Example command**: 0x**21**010EF5  – when we separate the command code value we get the trigger voltage 0x010E = 270V and recovery voltage 0xF5 = 245V.&#x20;
 {% endtab %}
 {% endtabs %}
 
 {% hint style="info" %}
 The allowed threshold voltage range is 1...300V (1V resolution).
 {% endhint %}
+{% endtab %}
+{% endtabs %}
 
 ## Overcurrent threshold
 
@@ -229,12 +257,24 @@ Because of the way the device operates, it recovers almost instantaneously from 
 The command is sent together with the keepalive of the device. The keepalive data in the example below is omitted for clarity.
 
 {% tabs %}
-{% tab title="GET" %}
-<table data-header-hidden><thead><tr><th width="133.99999999999997"></th><th width="101"></th><th></th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Bit index</strong></td><td><strong>Received response</strong></td></tr><tr><td>0</td><td>-</td><td>72 – The command code.</td></tr><tr><td>1</td><td>-</td><td>XX - Temperature when overcurrent protection is triggered.</td></tr></tbody></table>
+{% tab title="f.w.  ≥ 1.3" %}
+GET
+
+<table data-header-hidden><thead><tr><th width="130"></th><th width="94"></th><th></th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Bit index</strong></td><td><strong>Received response</strong></td></tr><tr><td>0</td><td>-</td><td>72 – The command code.</td></tr><tr><td>1</td><td>7</td><td>X - Set to 1 when the temperature is negative.</td></tr><tr><td>1</td><td>6:0</td><td>XX - Temperature when overcurrent protection is triggered.</td></tr></tbody></table>
 
 **Example command: 0x72**
 
-**Example command**: 0x723E – When we extract the value of the command code, we get the  temperature  when overcurrent protection is triggered - 0x3E = 62°C.
+**Example command**: 0x723E – When we extract the value of the command code, we get the temperature when overcurrent protection is triggered - 0x3E = 62°C.
+{% endtab %}
+
+{% tab title="f.w. 1.2" %}
+**GET**
+
+<table data-header-hidden><thead><tr><th width="146"></th><th width="110"></th><th></th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Bit index</strong></td><td><strong>Received response</strong></td></tr><tr><td>0</td><td>-</td><td>72 – The command code.</td></tr><tr><td>1</td><td>-</td><td>XX - Temperature when overcurrent protection is triggered.</td></tr></tbody></table>
+
+**Example command: 0x72**
+
+**Example command**: 0x723E – When we extract the value of the command code, we get the temperature when overcurrent protection is triggered - 0x3E = 62°C.
 {% endtab %}
 {% endtabs %}
 
@@ -265,11 +305,23 @@ Because of the way the device operates, it recovers almost instantaneously from 
 The command is sent together with the keepalive of the device. The keepalive data in the example below is omitted for clarity.
 
 {% tabs %}
-{% tab title="GET" %}
-<table data-header-hidden><thead><tr><th width="133.99999999999997"></th><th width="101"></th><th></th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Bit index</strong></td><td><strong>Received response</strong></td></tr><tr><td>0</td><td>-</td><td>73 – The command code.</td></tr><tr><td>1</td><td>-</td><td>XX -Temperature when overpower protection is triggered.</td></tr></tbody></table>
+{% tab title="f.w.  ≥ 1.3" %}
+**GET**
+
+<table data-header-hidden><thead><tr><th width="131"></th><th width="99"></th><th></th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Bit index</strong></td><td><strong>Received response</strong></td></tr><tr><td>0</td><td>-</td><td>73 – The command code.</td></tr><tr><td>1</td><td>7</td><td>X - Set to 1 when the temperature is negative.</td></tr><tr><td>1</td><td>6:0</td><td>XX - Temperature when overpower protection is triggered.</td></tr></tbody></table>
 
 **Example command: 0x73**
 
-**Example command**: 0x732C – When we extract the value of the command code, we get the  temperature when overpower protection is triggered - 0x2C = 44°C.
+**Example command**: 0x732F – When we extract the value of the command code, we get the  temperature when overpower protection is triggered - 0x2F = 47°C.
+{% endtab %}
+
+{% tab title="f.w. 1.2" %}
+**GET**
+
+<table data-header-hidden><thead><tr><th width="139"></th><th width="116"></th><th></th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Bit index</strong></td><td><strong>Received response</strong></td></tr><tr><td>0</td><td>-</td><td>73 – The command code.</td></tr><tr><td>1</td><td>-</td><td>XX -Temperature when overpower protection is triggered.</td></tr></tbody></table>
+
+**Example command: 0x73**
+
+**Example command**: 0x732C – When we extract the value of the command code, we get the temperature when overpower protection is triggered - 0x2C = 44°C.
 {% endtab %}
 {% endtabs %}

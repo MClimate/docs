@@ -63,7 +63,6 @@
       * [Frost Protection](devices/mclimate-fan-coil-thermostat-fct/general-display-and-power-recovery/frost-protection.md)
       * [Network-related settings](devices/mclimate-fan-coil-thermostat-fct/general-display-and-power-recovery/network-related-settings/README.md)
         * [Uplink types](devices/mclimate-fan-coil-thermostat-fct/general-display-and-power-recovery/network-related-settings/uplink-types.md)
-    * [Reset device](devices/mclimate-fan-coil-thermostat-fct/mclimate-fan-coil-thermostat-device-communication-protocol/reset-device.md)
 * [♨️ MClimate Vicki LoRaWAN](devices/mclimate-vicki-lorawan/README.md)
   * [🥳 Release notes](devices/mclimate-vicki-lorawan/release-notes.md)
   * [⬆️ Vicki Uplink Decoder](devices/mclimate-vicki-lorawan/vicki-uplink-decoder.md)

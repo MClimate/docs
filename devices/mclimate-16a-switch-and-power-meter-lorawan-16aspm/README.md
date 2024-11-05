@@ -75,6 +75,12 @@ Purchase МClimate 16A Switch & Power Meter LoRaWAN:
 * Resolution - 0.01A
 * Accuracy - ±1.5%
 
+{% hint style="warning" %}
+Current below 100mA is not registered and measured, thus a device consuming less than this threshold would produce keep-alives with 0 values for the current, power and the accumulated energy will not increase.
+
+This will not impact functionality otherwise and the connected appliance will still be powered correctly.
+{% endhint %}
+
 ### Electricity meter
 
 * Resolution - 0 . 01kWh
