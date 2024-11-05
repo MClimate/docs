@@ -4,6 +4,10 @@
 
 ### **Devices:**
 
+{% content-ref url="devices/mclimate-16a-dry-switch-16ads/" %}
+[mclimate-16a-dry-switch-16ads](devices/mclimate-16a-dry-switch-16ads/)
+{% endcontent-ref %}
+
 {% content-ref url="devices/mclimate-16a-switch-and-power-meter-lorawan-16aspm/" %}
 [mclimate-16a-switch-and-power-meter-lorawan-16aspm](devices/mclimate-16a-switch-and-power-meter-lorawan-16aspm/)
 {% endcontent-ref %}
