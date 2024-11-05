@@ -1,6 +1,6 @@
 # 🥳 Release notes
 
-### [#overvoltage-thresholds](mclimate-16aspm-device-communication-protocol/protections.md#overvoltage-thresholds "mention")Firmware version 1.3
+### Firmware version 1.3
 
 **Release date:** \
 04 November 2024
