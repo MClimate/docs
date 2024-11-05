@@ -22,21 +22,21 @@ Remember that this is a LoRaWAN Class C device, some LNSs onboard devices as Cla
 
 ## Wiring the device
 
-It is very important you wire the device properly. Remember, this is a Wet Rely device which commutates line voltage/current, thus improper wiring can damage the MClimate device and/or the appliance it is connected to.
+It is very important you wire the device properly in order to not damage the device or the appliance it is connected to.
 
-The diagram below should be used as guidance for wiring the device.
+The diagram below should be used as guidance for wiring the device, where the I/O ports are where the appliance is to be connected.
 
-<figure><img src="../../.gitbook/assets/image (57).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption><p>16ADP Wiring diagram</p></figcaption></figure>
 
 ## LED status
 
-| State                 | Meaning                                                                                                                                                                                                  |
-| --------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 2s ON, 1s OFF         | Device is powering up                                                                                                                                                                                    |
-| 1s ON, 1s OFF         | Device is trying to join the LoRaWAN Network.                                                                                                                                                            |
-| Solid ON              | Device has successfully joined the LoRaWAN network                                                                                                                                                       |
-| 1/4s ON, 1/4s OFF     | Joining the LoRaWAN network has failed.                                                                                                                                                                  |
-| 2s OFF, 2s ON, 2s OFF | Alarm activated - overcurrent, overpower, overheating or overvoltage protection activated. Once alarm is indicated, the device shows joined/not joined status for 5s and continues indicating the alarm. |
+| State                 | Meaning                                                                                                                                                           |
+| --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 2s ON, 1s OFF         | Device is powering up                                                                                                                                             |
+| 1s ON, 1s OFF         | Device is trying to join the LoRaWAN Network.                                                                                                                     |
+| Solid ON              | Device has successfully joined the LoRaWAN network                                                                                                                |
+| 1/4s ON, 1/4s OFF     | Joining the LoRaWAN network has failed.                                                                                                                           |
+| 2s OFF, 2s ON, 2s OFF | Alarm activated - overheating protection activated. Once alarm is indicated, the device shows joined/not joined status for 5s and continues indicating the alarm. |
 
 ## Button actions
 
@@ -53,7 +53,7 @@ In order to better understand how the device behaves we have provided a series o
 
 The devices is powered on, it initiates the network join procedure, it joins the network successfully and enters normal operation mode.
 
-{% embed url="https://youtu.be/BAK1tgwgI7s" fullWidth="false" %}
+{% embed url="https://www.youtube.com/watch?v=VwHhQGgcf30" %}
 Scenario 1
 {% endembed %}
 
@@ -61,15 +61,15 @@ Scenario 1
 
 The devices is powered on, it initiates the network join procedure, however it does not manage to join on this attempt and remains in a disconnected state (indicated by the LED) until the next join-request.
 
-{% embed url="https://youtu.be/F_NVXGPPA-A" %}
+{% embed url="https://www.youtube.com/watch?v=NW8Q4JMMfFA" %}
 Scenario 2
 {% endembed %}
 
 ## Scenario 3 - protection event trigger
 
-The device is working in normal operation mode, a protection even is triggered (over current/voltage/temperature/power) and this is reflected in the LED status. After a time the device recovers (the condition that cause the protection to trigger is reverted to normal levels) and enters normal operation mode again.
+The device is working in normal operation mode, he overheating protection event is triggered and this is reflected in the LED status. After a time the device recovers (the device cools off) and enters normal operation mode again.
 
-{% embed url="https://youtu.be/bZuzgpNbpmE" %}
+{% embed url="https://www.youtube.com/watch?v=h8aPxN3Xhmc" %}
 Scenario 3
 {% endembed %}
 
@@ -77,7 +77,7 @@ Scenario 3
 
 The device is working in normal operation mode, the button is pressed 2x in quick succession, the relay state changes from open to closed.
 
-{% embed url="https://youtu.be/sxXxe2jyZJQ" %}
+{% embed url="https://www.youtube.com/watch?v=I0izZc_ivp0" %}
 Scenario 4
 {% endembed %}
 
@@ -85,7 +85,7 @@ Scenario 4
 
 The device is working in normal operation mode, the button is pressed 2x in quick succession, the relay state changes from closed to open.
 
-{% embed url="https://youtu.be/QHFVYh46IuI" %}
+{% embed url="https://www.youtube.com/watch?v=i9yyhvUetq8" %}
 Scenario 5
 {% endembed %}
 
@@ -93,6 +93,6 @@ Scenario 5
 
 The device is working in normal operation mode, the button is pressed for 10 seconds. The device is reset and it enters into a cycle depicted in Scenario 1.
 
-{% embed url="https://youtu.be/UsTfBHUOsYg" %}
+{% embed url="https://www.youtube.com/watch?v=mK3oEwTKtgY" %}
 Scenario 6
 {% endembed %}

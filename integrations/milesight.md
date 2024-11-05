@@ -20,7 +20,7 @@ Copy the token.
 Depending on your device firmware the fields values in this section are different, make sure you follow the instructions that match your firmware version. You can see it in the Status page.
 {% endhint %}
 
-<figure><img src="../.gitbook/assets/image (1).png" alt=""><figcaption><p>Milesgiht Gateway Firmware version</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (1) (4).png" alt=""><figcaption><p>Milesgiht Gateway Firmware version</p></figcaption></figure>
 
 #### Firmware version  ≤ 60.0.0.42-r4 / 56.0.0.3-r1
 

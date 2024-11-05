@@ -93,13 +93,21 @@ Purchase МClimate 16A Switch & Power Meter LoRaWAN:
 The diagram below should be adhered to strictly, lest you risk damaging the device. The diagram is a representation of the device as seen from the side where the terminals are exposed (the screws are visible).
 {% endhint %}
 
-<figure><img src="../../.gitbook/assets/image (51).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (51).png" alt=""><figcaption><p>16ASPM Wiring diagram</p></figcaption></figure>
 
 ## Placement Guidelines
 
-* The device is intended for installation in console boxes, panels and in places that provide an insulating shell of at least 5mm to cover current-carrying parts or other conductive parts.
-* The device must be mounted to non-conductive surfaces!
-* The device must be installed in a place that ensures good cooling. Install vertically for improved cooling.
+{% hint style="danger" %}
+The device is intended for installation in console boxes, panels and in places that provide an insulating shell of at least 5mm to cover current-carrying parts or other conductive parts!
+{% endhint %}
+
+{% hint style="danger" %}
+The device must be mounted to non-conductive surfaces!
+{% endhint %}
+
+{% hint style="danger" %}
+The device must be installed in a place that ensures good cooling. Install vertically for improved cooling!
+{% endhint %}
 
 {% hint style="danger" %}
 To be used only as a control device and not as a protection device!
