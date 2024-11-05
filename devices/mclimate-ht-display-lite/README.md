@@ -1,3 +1,7 @@
+---
+hidden: true
+---
+
 # MClimate HT Display lite
 
 ## General Information
