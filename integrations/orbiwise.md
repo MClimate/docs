@@ -2,33 +2,42 @@
 
 ## **Connecting Orbiwise to MClimate’s LoRaWAN broker**
 
-### **1. Go to** Applications **->**Manage Applications and click Add application
+### **1. Creating an Application**
 
-![](<../.gitbook/assets/Screenshot 2022-10-26 at 15.10.01.png>)
+Go to the Applications -> Manage Applications section and click Add Application.
+
+<figure><img src="../.gitbook/assets/image (64).png" alt=""><figcaption><p>Application creation</p></figcaption></figure>
 
 ### **2. Fill the fields**
 
 * **Account ID**&#x20;
 * **Password and Passrod Confirmation - leave empty**
-* **URL:** [**https://lorawan-broker.seemelissa.com**](https://lorawan-broker.seemelissa.com/)
+* **URL:** [**https://lorawan-broker.mclimate.eu**](https://lorawan-broker.mclimate.eu)
 * **Path prefix: /up-orbiwise**
 * **Authentication Methods: Basic**
-* **Username and Password - We don't keep them with us, we recieved only the basic token**&#x20;
+* **Username and Password - the credentials you use for your Orbiwise account**
 * **Data format - hex**
+* **Store payload: On failure to push**
 * **Subscriptions - only 'payloads\_ul' and 'payloads\_dl'**
 
-![](<../.gitbook/assets/Screenshot 2022-10-26 at 15.10.53.png>)
-
-<figure><img src="../.gitbook/assets/Screenshot 2022-10-26 at 15.11.35.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (60).png" alt=""><figcaption><p>Application configuration</p></figcaption></figure>
 
 ### **3. Start Push**
 
-<figure><img src="../.gitbook/assets/Screenshot 2022-10-26 at 15.11.53.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (61).png" alt=""><figcaption><p>Start Push</p></figcaption></figure>
 
 ### **4. Assign the app to the devices**
 
-![](<../.gitbook/assets/Screenshot 2022-10-26 at 15.12.34.png>)
+Head to the Devices -> Manage Devices section.
 
-<figure><img src="../.gitbook/assets/Screenshot 2022-10-26 at 15.12.53.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (63).png" alt=""><figcaption><p>Manage Device</p></figcaption></figure>
+
+Select the desired devices use the App Assignment action via the Bulk Action menu.
+
+<figure><img src="../.gitbook/assets/image (68).png" alt=""><figcaption><p>Selecting devices</p></figcaption></figure>
+
+Select your application and Add it.
+
+<figure><img src="../.gitbook/assets/image (69).png" alt=""><figcaption><p>Adding the Application</p></figcaption></figure>
 
 ### 5. Done :tada:
