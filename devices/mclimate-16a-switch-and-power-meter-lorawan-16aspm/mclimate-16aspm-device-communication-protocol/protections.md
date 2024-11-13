@@ -200,7 +200,7 @@ The command is sent together with the keepalive of the device. The keepalive dat
 
 {% tabs %}
 {% tab title="GET" %}
-<table data-header-hidden><thead><tr><th width="133.99999999999997"></th><th width="101"></th><th></th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Bit index</strong></td><td><strong>Received response</strong></td></tr><tr><td>0</td><td>-</td><td>61 – The command code.</td></tr><tr><td>1</td><td>-</td><td>XX - Number of overcurrent events.</td></tr><tr><td>2</td><td>-</td><td>XX - Voltage data, bits - [15:8]. </td></tr><tr><td>3</td><td>-</td><td>XX - Voltage data, bits - [7:0]. </td></tr></tbody></table>
+<table data-header-hidden><thead><tr><th width="133.99999999999997"></th><th width="101"></th><th></th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Bit index</strong></td><td><strong>Received response</strong></td></tr><tr><td>0</td><td>-</td><td>61 – The command code.</td></tr><tr><td>1</td><td>-</td><td>XX - Number of overvoltage events.</td></tr><tr><td>2</td><td>-</td><td>XX - Voltage data, bits - [15:8]. </td></tr><tr><td>3</td><td>-</td><td>XX - Voltage data, bits - [7:0]. </td></tr></tbody></table>
 
 **Example command: 0x61**
 
@@ -284,7 +284,7 @@ The command is sent together with the keepalive of the device. The keepalive dat
 
 {% tabs %}
 {% tab title="GET" %}
-<table data-header-hidden><thead><tr><th width="133.99999999999997"></th><th width="101"></th><th></th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Bit index</strong></td><td><strong>Received response</strong></td></tr><tr><td>0</td><td>-</td><td>63 – The command code.</td></tr><tr><td>1</td><td>-</td><td>XX - Number of overcurrent events.</td></tr><tr><td>2</td><td>-</td><td>XX - Power data, bits - [15:8]. </td></tr><tr><td>3</td><td>-</td><td>XX - Power data, bits - [7:0]. </td></tr></tbody></table>
+<table data-header-hidden><thead><tr><th width="133.99999999999997"></th><th width="101"></th><th></th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Bit index</strong></td><td><strong>Received response</strong></td></tr><tr><td>0</td><td>-</td><td>63 – The command code.</td></tr><tr><td>1</td><td>-</td><td>XX - Number of overpower events.</td></tr><tr><td>2</td><td>-</td><td>XX - Power data, bits - [15:8]. </td></tr><tr><td>3</td><td>-</td><td>XX - Power data, bits - [7:0]. </td></tr></tbody></table>
 
 **Example command: 0x63**
 
