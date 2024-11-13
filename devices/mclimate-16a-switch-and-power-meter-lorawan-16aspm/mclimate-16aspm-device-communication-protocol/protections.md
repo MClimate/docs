@@ -204,7 +204,7 @@ The command is sent together with the keepalive of the device. The keepalive dat
 
 **Example command: 0x61**
 
-**Example command**: 0x61030180 – When we extract the value of the command code, we get the number of overvoltage events 0x03 = 3 and a voltage of 0x0180 = 280V.
+**Example command**: 0x61030104 – When we extract the value of the command code, we get the number of overvoltage events 0x03 = 3 and a voltage of 0x0104 = 260V.
 {% endtab %}
 {% endtabs %}
 
