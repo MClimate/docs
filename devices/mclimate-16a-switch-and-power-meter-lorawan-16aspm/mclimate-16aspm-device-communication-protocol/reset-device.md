@@ -1,5 +1,9 @@
 # Reset device
 
+{% hint style="info" %}
+This command is available for devices with firmware version ≥ 1.3.
+{% endhint %}
+
 {% hint style="danger" %}
 Performing a Reset IS NOT equal to factory reset.
 {% endhint %}
