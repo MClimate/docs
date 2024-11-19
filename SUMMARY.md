@@ -102,6 +102,7 @@
     * [Child lock](devices/mclimate-co2-display-lite/co2-display-lite-device-communication-protocol/child-lock.md)
     * [Network-related settings & Others](devices/mclimate-co2-display-lite/co2-display-lite-device-communication-protocol/network-related-settings-and-others.md)
     * [Get Firmware & Hardware version](devices/mclimate-co2-display-lite/co2-display-lite-device-communication-protocol/get-firmware-and-hardware-version.md)
+    * [Reset device](devices/mclimate-co2-display-lite/co2-display-lite-device-communication-protocol/reset-device.md)
 * [MClimate HT Display lite](devices/mclimate-ht-display-lite/README.md)
   * [🥳 Release notes](devices/mclimate-ht-display-lite/release-notes.md)
   * [⬆️ MClimate HT Display lite Uplink decoder](devices/mclimate-ht-display-lite/mclimate-ht-display-lite-uplink-decoder.md)

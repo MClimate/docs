@@ -1,5 +1,13 @@
 # 🥳 Release notes
 
+### Firmware version 1.2
+
+**Release date:** \
+18 November 2024
+
+* Fixed issue with temperature reading.
+* NEW - command to remotely power cycle the device - [A5](co2-display-lite-device-communication-protocol/reset-device.md).
+
 ### Firmware version 1.1
 
 **Release date:** \
