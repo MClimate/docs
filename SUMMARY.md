@@ -25,6 +25,7 @@
   * [🥳 Release notes](devices/mclimate-16a-switch-and-power-meter-lorawan-16aspm/release-notes.md)
   * [🛠️ How to use](devices/mclimate-16a-switch-and-power-meter-lorawan-16aspm/how-to-use.md)
   * [⬆️ MClimate 16ASPM Uplink decoder](devices/mclimate-16a-switch-and-power-meter-lorawan-16aspm/mclimate-16aspm-uplink-decoder.md)
+  * [⬇️ MClimate 16ASPM Downlink encoder](devices/mclimate-16a-switch-and-power-meter-lorawan-16aspm/mclimate-16aspm-downlink-encoder.md)
   * [📖 MClimate 16ASPM Device communication protocol](devices/mclimate-16a-switch-and-power-meter-lorawan-16aspm/mclimate-16aspm-device-communication-protocol/README.md)
     * [Communication concepts](devices/mclimate-16a-switch-and-power-meter-lorawan-16aspm/mclimate-16aspm-device-communication-protocol/communication-concepts.md)
     * [Commands cheat sheet](devices/mclimate-16a-switch-and-power-meter-lorawan-16aspm/mclimate-16aspm-device-communication-protocol/commands-cheat-sheet.md)
