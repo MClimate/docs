@@ -87,7 +87,7 @@ Purchase MClimate Wireless Thermostat:
 
 * View of angle: X = 100° ; Y = 90°
 
-![](../../.gitbook/assets/pir\_diagram.png)
+![](../../.gitbook/assets/pir_diagram.png)
 
 ### 4. LUX sensor
 
@@ -100,13 +100,15 @@ Purchase MClimate Wireless Thermostat:
 <figure><img src="../../.gitbook/assets/organic_solar_cell_diagrams.png" alt=""><figcaption></figcaption></figure>
 
 {% hint style="info" %}
+
+
 The device uses its internal supercapacitor as its main source of power, which is directly charged via the solar cell. When its voltage drops below a certain threshold the device stops operating until it is recharged sufficiently.
 
-In case you are using batteries/usb the following logic applies:
+In case you are using batteries/USB the following logic applies:
 
-1. Supercapacitor is discharged first (no battery/usb power is utilized).
-2. When the supercapacitor voltage drops to the voltage of the batteries/usb it starts charging from the batteries/usb. Thus, the device is effectively powered by the batteries/usb, however it is still through the supercapacitor.
-3. If at this point the batteries discharge sufficiently or sub power is no longer supplied the supercapacitor will discharge below the operational threshold and the device will turn off.
+1. Supercapacitor is discharged first (no battery/USB power is utilized).
+2. When the supercapacitor voltage drops to the voltage of the batteries/USB it starts charging from the batteries/USB. Thus, the device is effectively powered by the batteries/USB, however it is still through the supercapacitor.
+3. If at this point the batteries discharge sufficiently or USB power is no longer supplied the supercapacitor will discharge below the operational threshold and the device will turn off.
 4. When and if the supercapacitor recharges sufficiently, it becomes the main power source, and so on...
 {% endhint %}
 

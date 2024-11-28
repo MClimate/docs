@@ -2,7 +2,7 @@
 
 ## **Connecting MachineQ central to MClimate’s LoRaWAN broker**
 
-### **1. Go to Integration->**Application Management and click Add application
+### **1. Go to Integration->**&#x41;pplication Management and click Add application
 
 ![](<../.gitbook/assets/Screenshot 2022-09-09 at 16.22.15.png>)
 

@@ -20,7 +20,7 @@ This command gets the currently set value in minutes.
 
 **Example command: 0x47**
 
-**Example response:** 0x**47**0F – when we separate the value of the time from the command code we get 0x0F**,** which is 15 min.
+**Example response:** 0x**47**0F – when we separate the value of the time from the command code we get 0x0&#x46;**,** which is 15 min.
 {% endtab %}
 {% endtabs %}
 

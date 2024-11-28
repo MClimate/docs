@@ -4,15 +4,15 @@
 
 This command is used to control the device LED’s. It’s described in Table 16.
 
-| **Byte index** | **Bit index** | **Hex value – Meaning**                                 |
-| -------------- | ------------- | ------------------------------------------------------- |
-| 0              | -             | 05 – The command code.                                  |
-| 1              | 7:5           | **Red** LED behavior_1_.                                |
-|                | 4:0           | **Red** LED duration of the specified behavior_2_.      |
-| 2              | 7:5           | **Green** LED behavior_1_.                              |
-|                | 4:0           | **Green** LED duration of the specified behavior_2_.    |
-| 3              | 7:5           | **Blue** LED behavior_1_.                               |
-|                | 4:0           | **Blue** LED duration of the specified behavior _2_ .   |
+| **Byte index** | **Bit index** | **Hex value – Meaning**                                        |
+| -------------- | ------------- | -------------------------------------------------------------- |
+| 0              | -             | 05 – The command code.                                         |
+| 1              | 7:5           | **Red** LED behavio&#x72;_&#x31;_.                             |
+|                | 4:0           | **Red** LED duration of the specified behavio&#x72;_&#x32;_.   |
+| 2              | 7:5           | **Green** LED behavio&#x72;_&#x31;_.                           |
+|                | 4:0           | **Green** LED duration of the specified behavio&#x72;_&#x32;_. |
+| 3              | 7:5           | **Blue** LED behavio&#x72;_&#x31;_.                            |
+|                | 4:0           | **Blue** LED duration of the specified behavior _2_ .          |
 
 _Table 16_
 

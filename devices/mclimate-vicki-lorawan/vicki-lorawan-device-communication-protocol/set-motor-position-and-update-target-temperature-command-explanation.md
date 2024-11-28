@@ -71,7 +71,7 @@ This command allows you to decide what's the minimum and maximum valve openness 
 * Vicki will not open more than the MAX value you have specified, which is particularly useful for hydronic balancing.
 
 {% hint style="warning" %}
-There is an exception to the set limits. In normal conditions if the internal algorithm calculates that it needs to go beyond the MIN or MAX opennes it will be limited to the value set.
+There is an exception to the set limits. In normal conditions if the internal algorithm calculates that it needs to go beyond the MIN or MAX openness it will be limited to the value set.
 
 However, if the internal algorithm calculates it needs to completely close the valve it will ignore the MIN limit and completely close the valve (0% openness), no mater what the MIN limit was.
 {% endhint %}
@@ -95,16 +95,16 @@ The desired range in percentage.
 
 Meaning, if you want to set the range between min 20% and max 60%, you have to compose the command as follows:
 
-1\) MAX: 100 - 60% = 40 \[dec] or 0x28 \[hex]
+1\) MAX: 100 - 60 = 40 \[DEC] or 0x28 \[HEX]
 
-2\) MIN: 100 - 20% = 80 \[dec] or 0x50 \[hex]
+2\) MIN: 100 - 20 = 80 \[DEC] or 0x50 \[HEX]
 
 Full command would be 4F2850.\
 \
 Another example - min 15%, max 90%
 
-1\) MAX: 100 - 90 = 10\[dec] or 0x0A \[hex]\
-2\) MIN: 100 - 15 = 85\[dec] or 0x55 \[hex]
+1\) MAX: 100 - 90 = 10\[DEC] or 0x0A \[HEX]\
+2\) MIN: 100 - 15 = 85\[DEC] or 0x55 \[HEX]
 
 Full command would be 4F0A55
 {% endhint %}

@@ -10,7 +10,7 @@
 * **Automatic temperature control with external temperature reading** – device is connected to the network; internal temperature control algorithms are enabled; internal temperature sensor is disabled; Target temperature and sensor reading is determined by the server.
 
 {% hint style="danger" %}
-In f.w. versions <= 4.0, you MUST use confirmed uplinks in case you want to use Online manual control or Automatic temperature control with external temperature reading**.**
+In f.w. versions <= 4.0, you MUST use confirmed uplinks in case you want to use Online manual control or Automatic temperature control with external temperature readin&#x67;**.**
 {% endhint %}
 
 The offline mode is entered automatically when the device has lost connection with the server. If the device later restores its server connection the mode is changed automatically to the previously selected online mode.&#x20;

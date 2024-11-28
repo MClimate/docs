@@ -20,7 +20,7 @@ This command gets the currently set value in minutes.
 
 **Example command: 0x80**
 
-**Example response:** 0x**80**0F – when we separate the value of the time from the command code we get 0x0F**,** which is 15 min.
+**Example response:** 0x**80**0F – when we separate the value of the time from the command code we get 0x0&#x46;**,** which is 15 min.
 {% endtab %}
 {% endtabs %}
 
@@ -32,7 +32,7 @@ Configure the boundary levels of the CO2 zones.
 {% tab title="SET" %}
 Set the boundary levels.
 
-<table data-header-hidden><thead><tr><th width="133"></th><th width="106"></th><th></th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Bit index</strong></td><td><strong>Hex value – Meaning</strong></td></tr><tr><td>0</td><td>-</td><td>1E – The command code.</td></tr><tr><td>1</td><td>15:8</td><td>Good-medium CO2 zone boundary value in ppm [high byte].</td></tr><tr><td>2</td><td>7:0</td><td>Good-medium CO2 zone boundary value in ppm [low byte].<br><strong>Default value 0x3840=900ppm.</strong></td></tr><tr><td>3</td><td>15:8</td><td>Medium-bad CO2 zone boundary value in ppm [high byte].</td></tr><tr><td>4</td><td>7:0</td><td>Medium-bad CO2 zone boundary value in ppm [low byte].<br><strong>Default value 0x05DC=1500ppm.</strong></td></tr></tbody></table>
+<table data-header-hidden><thead><tr><th width="133"></th><th width="106"></th><th></th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Bit index</strong></td><td><strong>Hex value – Meaning</strong></td></tr><tr><td>0</td><td>-</td><td>1E – The command code.</td></tr><tr><td>1</td><td>15:8</td><td>Good-medium CO2 zone boundary value in ppm [high byte].</td></tr><tr><td>2</td><td>7:0</td><td>Good-medium CO2 zone boundary value in ppm [low byte].<br><strong>Default value 0x0384=900ppm.</strong></td></tr><tr><td>3</td><td>15:8</td><td>Medium-bad CO2 zone boundary value in ppm [high byte].</td></tr><tr><td>4</td><td>7:0</td><td>Medium-bad CO2 zone boundary value in ppm [low byte].<br><strong>Default value 0x05DC=1500ppm.</strong></td></tr></tbody></table>
 
 **Example command**: 0x1E038405DC – set the Good-medium CO2 zone to 0x3840=900ppm and the Medium-bad CO2 zone to 0x05DC=1500ppm.
 {% endtab %}
@@ -44,7 +44,7 @@ Get the boundary levels.
 
 **Example command: 0x1F**
 
-**Example response:** 0x**1F**038405DC – when we separate the command code value we get 0x038405DC**,** which corresponds to Good-medium CO2 zone of 0x3840=900ppm and the Medium-bad CO2 zone of 0x05DC=1500ppm.
+**Example response:** 0x**1F**038405DC – when we separate the command code value we get 0x038405D&#x43;**,** which corresponds to Good-medium CO2 zone of 0x3840=900ppm and the Medium-bad CO2 zone of 0x05DC=1500ppm.
 {% endtab %}
 {% endtabs %}
 

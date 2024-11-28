@@ -24,7 +24,7 @@ _Table 7_
 
 **Decoding, \[Hex]**:
 
-04 – Read software and hardware version response_._
+04 – Read software and hardware version respons&#x65;_._
 
 13 - Device hardware version – version 1.3
 

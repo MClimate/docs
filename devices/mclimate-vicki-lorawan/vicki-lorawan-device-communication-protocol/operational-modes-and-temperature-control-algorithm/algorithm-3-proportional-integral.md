@@ -68,7 +68,7 @@ The error is set to its maximum allowed value of 100°C
 
 **Example downlink:** Setting Kp to 2.74688: 37 05 7E 67
 
-2.74688\*131072 = 360039 = 0x05 7E 6
+2.74688\*131072 = 360039 = 0x05 7E 67
 {% endtab %}
 
 {% tab title="GET" %}

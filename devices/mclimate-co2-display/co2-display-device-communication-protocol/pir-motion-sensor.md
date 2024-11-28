@@ -58,7 +58,7 @@ The shorter the Blind period, the more time-accurate detection of movement and m
 
 {% tabs %}
 {% tab title="SET" %}
-<table data-header-hidden><thead><tr><th width="140"></th><th></th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Hex value – Meaning</strong></td></tr><tr><td>0</td><td>4C – The command code.</td></tr><tr><td>1</td><td>XX –  PIR blind period data, bits 15:8;</td></tr><tr><td>2</td><td><p>XX – PIR blind period data, bits 7:0. </p><p>Minimum value = 15sec. </p><p><strong>Default value = 10min.</strong></p></td></tr></tbody></table>
+<table data-header-hidden><thead><tr><th width="140"></th><th></th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Hex value – Meaning</strong></td></tr><tr><td>0</td><td>4C – The command code.</td></tr><tr><td>1</td><td>XX –  PIR blind period data, bits 15:8;</td></tr><tr><td>2</td><td><p>XX – PIR blind period data, bits 7:0. </p><p>Minimum value = 15sec. </p><p><strong>Default value 0x0258 = 600s = 10min.</strong></p></td></tr></tbody></table>
 {% endtab %}
 
 {% tab title="GET" %}
@@ -76,7 +76,7 @@ When the value is 0, the PIR is constantly powered and checking for movements.
 
 {% tabs %}
 {% tab title="SET" %}
-<table data-header-hidden><thead><tr><th width="161"></th><th></th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Hex value – Meaning</strong></td></tr><tr><td>0</td><td>4A – The command code.</td></tr><tr><td>1</td><td>XX –  PIR check period data, bits 15:8;</td></tr><tr><td>2</td><td><p>XX – PIR check period data, bits 7:0. </p><p>Minimum value = 0sec. </p><p><strong>Default value = 54sec.</strong></p></td></tr></tbody></table>
+<table data-header-hidden><thead><tr><th width="161"></th><th></th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Hex value – Meaning</strong></td></tr><tr><td>0</td><td>4A – The command code.</td></tr><tr><td>1</td><td>XX –  PIR check period data, bits 15:8;</td></tr><tr><td>2</td><td><p>XX – PIR check period data, bits 7:0. </p><p>Minimum value = 0sec. </p><p><strong>Default value = 0x36 = 54sec.</strong></p></td></tr></tbody></table>
 
 **Example downlink:** 0x4A0006 – Set the PIR check period to 6sec.
 {% endtab %}
