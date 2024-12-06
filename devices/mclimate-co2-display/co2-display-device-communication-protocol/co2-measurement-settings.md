@@ -58,7 +58,7 @@ Get the boundary levels.
 In practice, you are not supposed to change the auto-zero value, as this would directly affect the internal self-calibration algorithm.&#x20;
 
 \
-You can get the CO2 auto-zero value in order to check whether normal calibration has worked correctly - e.g. expected values are in the range 0-1500ppm. If you see value of e.g. 20000, please use the SET function to set it back to 400ppm and leave the sensor at fresh air for at least 1.2xMeasurement intervals (if you are using default settings, expose the sensor to fresh air for at least 15 minutes).
+You can get the CO2 auto-zero value in order to check whether normal calibration has worked correctly - e.g. expected values are in the range 0-1500ppm. If you see value of e.g. 20000, please use the SET function to set it back to 0ppm and leave the sensor at fresh air for at least 1.2xMeasurement intervals (if you are using default settings, expose the sensor to fresh air for at least 15 minutes).
 {% endhint %}
 
 This command set is used by the device for CO2 measurements compensation in order to get 400ppm in fresh air.
@@ -67,7 +67,7 @@ This command set is used by the device for CO2 measurements compensation in orde
 {% tab title="SET" %}
 Set the auto-zero value.
 
-<table data-header-hidden><thead><tr><th width="139"></th><th width="101"></th><th></th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Bit index</strong></td><td><strong>Hex value – Meaning</strong></td></tr><tr><td>0</td><td>-</td><td>20 – The command code.</td></tr><tr><td>1</td><td>15:8</td><td>Auto-zero CO2 value in ppm [higher byte].</td></tr><tr><td>2</td><td>7:0</td><td>Auto-zero CO2 value in ppm [lower byte].<br><strong>Default</strong> <strong>value 0x0190=400ppm.</strong></td></tr></tbody></table>
+<table data-header-hidden><thead><tr><th width="139"></th><th width="101"></th><th></th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Bit index</strong></td><td><strong>Hex value – Meaning</strong></td></tr><tr><td>0</td><td>-</td><td>20 – The command code.</td></tr><tr><td>1</td><td>15:8</td><td>Auto-zero CO2 value in ppm [higher byte].</td></tr><tr><td>2</td><td>7:0</td><td>Auto-zero CO2 value in ppm [lower byte].<br><strong>Default</strong> <strong>value 0x0000=0ppm.</strong></td></tr></tbody></table>
 
 **Example command**: 0x200221 – Set the CO2 auto-zero value to 0x0221=545ppm.
 {% endtab %}
@@ -91,7 +91,7 @@ The commands configures the CO2 measurement period.
 {% tab title="SET" %}
 Set the measurement period.
 
-<table data-header-hidden><thead><tr><th width="139"></th><th width="101"></th><th></th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Bit index</strong></td><td><strong>Hex value – Meaning</strong></td></tr><tr><td>0</td><td>-</td><td>24 – The command code.</td></tr><tr><td>1</td><td>-</td><td>Measurement period in the Good-zone in minutes.<br><strong>Default</strong> <strong>value 0x0A=10min.</strong></td></tr><tr><td>2</td><td>-</td><td>Measurement period in the Medium-zone in minutes.<br><strong>Default</strong> <strong>value 0x0A=10min.</strong></td></tr><tr><td>3</td><td>-</td><td>Measurement period in the Bad-zone in minutes.<br><strong>Default</strong> <strong>value 0x0A=10min.</strong></td></tr></tbody></table>
+<table data-header-hidden><thead><tr><th width="139"></th><th width="101"></th><th></th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Bit index</strong></td><td><strong>Hex value – Meaning</strong></td></tr><tr><td>0</td><td>-</td><td>24 – The command code.</td></tr><tr><td>1</td><td>-</td><td>Measurement period in the Good-zone in minutes.<br><strong>Default</strong> <strong>value 0x0F=15min.</strong></td></tr><tr><td>2</td><td>-</td><td>Measurement period in the Medium-zone in minutes.<br><strong>Default</strong> <strong>value 0x0F=15min.</strong></td></tr><tr><td>3</td><td>-</td><td>Measurement period in the Bad-zone in minutes.<br><strong>Default</strong> <strong>value 0x0F=15min.</strong></td></tr></tbody></table>
 
 **Example command**: 0x240A0A0A – Set the measurement periods for all 3 zones to be the same 0x0A=10min.
 {% endtab %}
