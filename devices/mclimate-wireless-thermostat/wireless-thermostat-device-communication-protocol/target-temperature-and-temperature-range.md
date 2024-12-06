@@ -3,7 +3,7 @@
 ## Target temperature with resolution 0.1°C
 
 {% hint style="info" %}
-This command is available for devices with firmware version >= 1.4
+This command is available for devices with firmware version ≥ 1.4.
 {% endhint %}
 
 You can change the target temperature with the following command set.
@@ -73,7 +73,7 @@ The command is sent together with the keepalive of the device. The keepalive dat
 * _**Manual target temperature change with resolution 0.1°C.**_
 
 {% hint style="info" %}
-This command is available for devices with firmware version >= 1.4
+This command is available for devices with firmware version ≥ 1.4.
 {% endhint %}
 
 <table data-header-hidden><thead><tr><th width="143.99999999999997"></th><th></th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Received response</strong></td></tr><tr><td>0</td><td>54 – Command code</td></tr><tr><td>1</td><td>XX - T[15:8].</td></tr><tr><td>2</td><td>XX - T[7:0].</td></tr></tbody></table>
@@ -87,6 +87,10 @@ Tmanual\[°C] = T\[15:0] / 10;
 
 
 * _**Manual target temperature change with resolution 1.0°C.**_
+
+{% hint style="info" %}
+This command is available for devices with firmware version ≤ 1.3.
+{% endhint %}
 
 <table data-header-hidden><thead><tr><th width="143.99999999999997"></th><th></th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Received response</strong></td></tr><tr><td>0</td><td>30 – Command code</td></tr><tr><td>1</td><td>17 - Target temperature is manually set to 23°C.</td></tr></tbody></table>
 
@@ -137,7 +141,7 @@ Example uplink response: 0x360F – The delay for sending the target temperature
 ## Configuring the target temperature step
 
 {% hint style="info" %}
-This command is available for devices with firmware version >= 1.4
+This command is available for devices with firmware version ≥ 1.4.
 {% endhint %}
 
 You can change the target temperature step, when buttons are used. E.g. when the current target temperature is 22.0°C and the step is 0.5°C, if the user clicks the up button once, the target temperature will become 22.5°C
@@ -171,7 +175,7 @@ Sets the temperature step - 1.5°C \* 10 = 15 \[DEC] => 0x0F \[HEX].
 ## Temperature hysteresis
 
 {% hint style="info" %}
-This command is available for devices with firmware version >= 1.4
+This command is available for devices with firmware version ≥ 1.4.
 {% endhint %}
 
 {% tabs %}
@@ -197,7 +201,7 @@ This command is available for devices with firmware version >= 1.4
 ### Measured temperature sensor compensation
 
 {% hint style="info" %}
-This command is available for devices with firmware version >= 1.4
+This command is available for devices with firmware version ≥ 1.4.
 
 This is applies to the measured temperature.
 {% endhint %}

@@ -1,5 +1,13 @@
 # 🥳 Release notes
 
+### Firmware version 1.6
+
+**Release date:** \
+06 December 2024
+
+* NEW - radio command to remotely power cycle the device - [A5](network-related-settings-and-others.md#reset-device).
+* Fixed an issue related to temperature measurement and readings.
+
 ### Firmware version 1.5
 
 **Release date:** \

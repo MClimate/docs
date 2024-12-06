@@ -56,6 +56,10 @@ The command is described in the table below. The keep-alive in the response is o
 
 ## LoRaWAN Region
 
+{% hint style="info" %}
+This command is available for devices with firmware version ≥ 1.4.
+{% endhint %}
+
 This command reports the LoRaWAN Region your device is setup to work in. Make sure it matches you network as LoRaWAN regions/bands are country dependent. This region is hardcoded in the FW and the user can not change it, only report on it. The keep-alive in the command response is omitted for clarity.
 
 {% tabs %}
@@ -99,3 +103,20 @@ Example downlink: 0x330E - set the full display refresh period to 10 hours.
 **Example command response:** 0x340F - The full display refresh period is set to 15hours.
 {% endtab %}
 {% endtabs %}
+
+## Reset device
+
+{% hint style="info" %}
+This command is available for devices with firmware version ≥ 1.6.
+{% endhint %}
+
+{% hint style="danger" %}
+Performing a Reset IS NOT equal to factory reset.
+{% endhint %}
+
+Reset the device, causing it to power cycle, and initiate a new join procedure.
+
+<table data-header-hidden><thead><tr><th width="142"></th><th></th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Hex value – Meaning</strong></td></tr><tr><td>0</td><td>A5 – The command code.</td></tr></tbody></table>
+
+**Example downlink**: 0xA5
+
