@@ -41,7 +41,7 @@ Integral = I\[DEC] / 10 = 300 / 10 = 30
 The error is set to its maximum allowed value of 30°C
 
 **Default:**\
-**I\[15:0] = 01F4\[HEX] = 50\[DEC] = 50°C**
+**I\[15:0] = 01F4\[HEX] = 500\[DEC] = 50°C**
 {% endtab %}
 
 {% tab title="GET" %}
