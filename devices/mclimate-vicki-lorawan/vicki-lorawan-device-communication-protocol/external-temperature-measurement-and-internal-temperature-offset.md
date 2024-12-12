@@ -6,6 +6,10 @@ This mode is used when the measurements of Vicki's temperature sensor is not rel
 Keep in mind that this command is only available when the device is in operational mode "**Automatic temperature control with external temperature reading".** To set this operational mode, send downlink "0D02"
 {% endhint %}
 
+{% hint style="warning" %}
+If you are in "02 – Online automatic control mode with external temperature reading" mode the Vicki will use an external temperature reading. This will affect it Open window detection capabilities. It will still use its internal readings to determine whether or not the window has been opened, not the external temperature measurement.
+{% endhint %}
+
 {% hint style="success" %}
 Since firmware >= 4.2, when in Vicki is in "**Automatic temperature control with external temperature reading"**, Vicki reports the set ext. temp value in each keepalive message.
 {% endhint %}

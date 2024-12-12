@@ -41,6 +41,10 @@ Table 25
 {% endtab %}
 {% endtabs %}
 
+{% hint style="warning" %}
+If you are in "02 – Online automatic control mode with external temperature reading" mode the Vicki will use an external temperature reading. This will affect it Open window detection capabilities. It will still use its internal readings to determine whether or not the window has been opened, not the external temperature measurement.
+{% endhint %}
+
 ## Available temperature control algorithms
 
 There are two available temperature control algorithms:

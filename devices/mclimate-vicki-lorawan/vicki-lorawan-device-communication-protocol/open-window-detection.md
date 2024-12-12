@@ -8,6 +8,10 @@ The detection algorithm takes readings every 1 minute, if the temperature droppe
 Therefore, it's not 100% reliable and can be affected by outdoor temperature, position of the device on the radiator, position of the radiator in the room and more factors.
 {% endhint %}
 
+{% hint style="warning" %}
+If you are in "02 – Online automatic control mode with external temperature reading" mode the Vicki will use an external temperature reading. This will affect it Open window detection capabilities. It will still use its internal readings to determine whether or not the window has been opened, not the external temperature measurement.
+{% endhint %}
+
 ## Open window commands with delta t 0.1 accuracy
 
 {% hint style="warning" %}
