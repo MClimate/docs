@@ -3,7 +3,7 @@
 ## 1. A**utomatic temperature control mode with external temperature reading**
 
 {% hint style="warning" %}
-When enabling this mode you need to first set the External temperature sensor value with the 3B command below. If you don't the FCT will assume a target temperature of 0°C degrees and act accordingly.
+When enabling this mode you need to first set the External temperature sensor value with the 3B or 3C command below. If you don't the FCT will assume a target temperature of 0°C degrees and act accordingly.
 
 For example send the following command set (whichever of the two you use will have the same end result):
 

@@ -56,6 +56,10 @@ The command is described in the table below. The keep-alive in the response is o
 
 ## LoRaWAN Region
 
+{% hint style="info" %}
+This command is available for devices with firmware version ≥ 1.4.
+{% endhint %}
+
 This command reports the LoRaWAN Region your device is setup to work in. Make sure it matches you network as LoRaWAN regions/bands are country dependent. This region is hardcoded in the FW and the user can not change it, only report on it. The keep-alive in the command response is omitted for clarity.
 
 {% tabs %}
@@ -65,3 +69,4 @@ This command reports the LoRaWAN Region your device is setup to work in. Make su
 **Example command, \[Hex]:** A400 – extracting the 1st byte value we get 00\[HEX], thus the device operates in the EU868 LoRaWAN band.
 {% endtab %}
 {% endtabs %}
+

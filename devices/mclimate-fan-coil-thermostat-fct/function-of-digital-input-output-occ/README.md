@@ -37,7 +37,7 @@ There are 3 main logics for the IO1/IO2 input/output you can choose from:
 {% endhint %}
 
 {% hint style="success" %}
-The logic for all 3 options have their reversed counterpart in terms of the input to IO1 and IO2. E.g. 00 and 01 are the same, but the closed/opened logic is reversed. The logic is the same 02-03 and 04-05.
+The logic for all 3 options have their reversed counterpart in terms of the input to IO1 and IO2. E.g. 00 and 01 are the same, but the closed/opened logic is reversed. The logic is the same for 02-03 and 04-05.
 {% endhint %}
 
 ## Occupancy sensor
@@ -180,7 +180,7 @@ In those modes, **you cannot change the function of the OCC** unless you change 
 
 ### 08: 10k NTC for auto changeover
 
-Used case you want to use the auto changeover functionality. Read more about the settings of the automatic changeover [here](../mclimate-fan-coil-thermostat-device-communication-protocol/function-of-digital-input-output-io1-and-io2-ports/automatic-changeover.md).
+Used in case you want to use the auto changeover functionality. Read more about the settings of the automatic changeover [here](../mclimate-fan-coil-thermostat-device-communication-protocol/function-of-digital-input-output-io1-and-io2-ports/automatic-changeover.md).
 
 {% hint style="info" %}
 When the mode is changed from the changeover function, the command is sent together with the keepalive of the device. The keepalive data in the example below is omitted for clarity.

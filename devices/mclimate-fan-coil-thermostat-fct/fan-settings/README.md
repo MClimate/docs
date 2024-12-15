@@ -12,7 +12,7 @@ If the fan speed is set to auto, the actual speed is determined by an algorithm 
 {% tab title="SET" %}
 #### You can set the fan speed with the command:
 
-<table data-header-hidden><thead><tr><th width="138"></th><th></th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Hex value – Meaning</strong></td></tr><tr><td>0</td><td>44 – The command code.</td></tr><tr><td>1</td><td>00: Automatic.<br>01, 02: Low.<br>03, 04: Medium.<br>05, 06: High.</td></tr></tbody></table>
+<table data-header-hidden><thead><tr><th width="138"></th><th></th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Hex value – Meaning</strong></td></tr><tr><td>0</td><td>44 – The command code.</td></tr><tr><td>1</td><td>00: Automatic. <strong>Default</strong><br>01, 02: Low.<br>03, 04: Medium.<br>05, 06: High.</td></tr></tbody></table>
 
 **Example command**: 0x4402 – Sets fan speed to Low.
 {% endtab %}
@@ -36,7 +36,7 @@ You can change the fan speed with the following command set.
 {% tab title="SET" %}
 You can set the fan speed with the command:
 
-<table data-header-hidden><thead><tr><th width="138"></th><th></th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Hex value – Meaning</strong></td></tr><tr><td>0</td><td>44 – The command code.</td></tr><tr><td>1</td><td><p>00: Automatic.<br>01: Fan speed 1.<br>02: Fan speed 2.</p><p>...<br>06: Fan speed 6.</p></td></tr></tbody></table>
+<table data-header-hidden><thead><tr><th width="138"></th><th></th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Hex value – Meaning</strong></td></tr><tr><td>0</td><td>44 – The command code.</td></tr><tr><td>1</td><td><p>00: Automatic. <strong>Default</strong><br>01: Fan speed 1.<br>02: Fan speed 2.</p><p>...<br>06: Fan speed 6.</p></td></tr></tbody></table>
 
 **Example downlink**: 0x4404 – Sets the fan speed 4.
 {% endtab %}

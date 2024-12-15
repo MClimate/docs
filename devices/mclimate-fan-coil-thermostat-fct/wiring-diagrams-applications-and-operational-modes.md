@@ -75,7 +75,7 @@ You can set/get the current operational mode with the following commands:
 {% tab title="SET" %}
 #### You can set the operational mode with the command:
 
-<table data-header-hidden><thead><tr><th width="138"></th><th></th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Hex value – Meaning</strong></td></tr><tr><td>0</td><td>52 – The command code.</td></tr><tr><td>1</td><td><p>00: Ventilation.</p><p>01: Heating.<br>02: Cooling.</p></td></tr></tbody></table>
+<table data-header-hidden><thead><tr><th width="138"></th><th></th></tr></thead><tbody><tr><td><strong>Byte index</strong></td><td><strong>Hex value – Meaning</strong></td></tr><tr><td>0</td><td>52 – The command code.</td></tr><tr><td>1</td><td><p>00: Ventilation.</p><p>01: Heating. <strong>Default</strong><br>02: Cooling.</p></td></tr></tbody></table>
 
 **Example downlink**: 0x5201 –  Sets the operational mode heating.
 {% endtab %}

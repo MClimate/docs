@@ -1,5 +1,15 @@
 # 🥳 Release notes
 
+### Firmware version 1.8 <a href="#firmware-version-1.6" id="firmware-version-1.6"></a>
+
+**Release date:** \
+15 December 2024
+
+* NEW - radio command to remotely power cycle the device - [A5](mclimate-fan-coil-thermostat-device-communication-protocol/reset-device.md).
+* NEW - radio command to select [UI language](mclimate-fan-coil-thermostat-device-communication-protocol/general-display-and-power-recovery/user-interface-language.md).
+* In this firmware version, the [target temperature range](on-off-and-target-temperature/min-max-setpoint-adjustment.md#set-get-target-temperature-range) radio command has been returned.
+* Fixed an issue related to temperature measurement and readings.
+
 ### Firmware version 1.6
 
 **Release date:** \
