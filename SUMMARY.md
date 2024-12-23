@@ -41,7 +41,6 @@
 * [😲 MClimate Fan Coil Thermostat (FCT)](devices/mclimate-fan-coil-thermostat-fct/README.md)
   * [🥳 Release notes](devices/mclimate-fan-coil-thermostat-fct/release-notes.md)
   * [⭐ Getting started](devices/mclimate-fan-coil-thermostat-fct/getting-started.md)
-  * [Page](devices/mclimate-fan-coil-thermostat-fct/page.md)
   * [⚡ Wiring Diagrams (Applications) & Operational Modes](devices/mclimate-fan-coil-thermostat-fct/wiring-diagrams-applications-and-operational-modes.md)
   * [⬆️ MClimate Fan Coil Thermostat Uplink decoder](devices/mclimate-fan-coil-thermostat-fct/mclimate-fan-coil-thermostat-uplink-decoder.md)
   * [⬇️ MClimate Fan Coil Thermostat Downlink encoder](devices/mclimate-fan-coil-thermostat-fct/mclimate-fan-coil-thermostat-downlink-encoder.md)

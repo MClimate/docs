@@ -1,6 +1,6 @@
 # Target temperature ranges
 
-## SET/GET target temperature ranges
+## SET/GET target temperature ranges (reparate ranges for cooling and heating)
 
 {% hint style="info" %}
 These commands are available for devices with firmware version ≥ 1.6
@@ -32,7 +32,7 @@ The keepalive data is omitted from the response for clarity.
 
 The allowed temperature range is 5...30°C (1°C resolution) for both heating and cooling mode.
 
-## SET/GET target temperature range
+## SET/GET target temperature range (single range for cooling and heating)
 
 {% hint style="info" %}
 These commands are available for devices with firmware versions ≤ 1.5 and ≥ 1.8
