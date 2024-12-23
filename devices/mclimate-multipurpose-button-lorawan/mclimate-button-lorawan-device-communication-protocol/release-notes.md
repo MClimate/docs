@@ -7,6 +7,12 @@
 
 * Added functionality to control the green LED with a radio command.
 
+{% hint style="info" %}
+**Known issues:**&#x20;
+
+Battery voltage readings might be reported as lower than they actually are. Don't be alarmed - device will continue operating as normal.
+{% endhint %}
+
 ### Firmware version 1.1
 
 **Release date:** \

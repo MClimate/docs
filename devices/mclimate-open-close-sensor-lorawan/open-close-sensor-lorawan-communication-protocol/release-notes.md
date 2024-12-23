@@ -11,6 +11,14 @@
 * Fixed bug regarding conf. uplinks watch-dog period, when keep-alive period changed.
 * Removed the device reset functionality when you have not joined the LoRaWAN network for 5 attempts.
 
+{% hint style="info" %}
+**Known issues:**
+
+* Battery voltage readings might be reported as lower than they actually are. Don't be alarmed - device will continue operating as normal.
+{% endhint %}
+
+
+
 ### Firmware version 1.1
 
 **Release date:** \
